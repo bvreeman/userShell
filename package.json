@@ -1,0 +1,43 @@
+{
+  "name": "findaconsultantnow",
+  "version": "1.0.0",
+  "private": true,
+  "main": "server.js",
+  "homepage": "https://github.com/bvreeman/userShell#readme",
+  "engines": {
+    "node": "8.11.1"
+  },
+  "scripts": {
+    "dev": "node server.js",
+    "client": "node scripts/start-client.js",
+    "start": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "build": "node scripts/build.js",
+    "seed": "node scripts/seedDB.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installDeps": "yarn && cd client && yarn",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bvreeman/userShell.git"
+  },
+  "author": "Brandon Vreeman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bvreeman/userShell/issues"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "nodemailer": "^4.6.8",
+    "path": "^0.12.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.18.6"
+  }
+}
