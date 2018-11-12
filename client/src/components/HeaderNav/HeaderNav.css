@@ -1,0 +1,61 @@
+.sticky{
+    top: 0;
+    width: 100%;
+}
+
+.navbarCenter {
+    text-align: center;
+    line-height: 50px;
+}
+
+.navbarRight {
+    float: right;
+    line-height: 50px;
+}
+
+.navbar-header{
+    /* background-color: #451417; */
+    background-color: #9c182f;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 100%;
+    z-index: 1;
+}
+
+.navbarTitle {
+    text-decoration: none;
+    font-size: 30px;
+    width: 100%;
+    color: white;
+    text-align: center;
+    /* float: l
+    eft; */
+}
+
+.navbar-brand {
+    text-decoration: none;
+    color: white;
+    margin-right: 10px;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.headerContainer{
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+}
+  
+.navbar{
+    margin-bottom: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 991px) {
+    .navbarRight {
+        margin-right: 10px;
+    }
+}
