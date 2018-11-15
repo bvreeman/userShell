@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { auth } from '../../firebase';
+// import { Link } from 'react-router-dom';
+// import { auth } from '../../firebase';
 import './ProfileForm.css'
 
 const byPropKey = (propertyName, value) => () => ({
@@ -25,8 +25,6 @@ class ProfileForm extends Component {
       }
 
       render() {
-          {console.log(this.state)}
-
         return (
             <div>
                 <form onSubmit={this.onSubmit}>

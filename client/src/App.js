@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HeaderNav from './components/HeaderNav'
 
+// Pages
+import Home from './pages/Home'
 
 import firebase from 'firebase/app';
 import 'firebase/database';
 // import admin from 'firebase-admin';
+import FirebaseSignUp from './components/Firebase/FirebaseSignUp';
+import FirebaseSignIn from './components/Firebase/FirebaseSignIn';
+import FirebasePasswordForgetPage from './components/Firebase/FirebasePasswordForget';
+import FirebaseAccount from './components/Firebase/FirebaseAccount';
+import FirebaseWithAuthentication from './components/Firebase/FirebaseWithAuthentication';
+
+import * as routes from './constants/routes';
+
 
 
 class App extends Component {
@@ -30,24 +39,24 @@ class App extends Component {
       <Router>
         <div className="App">
           <HeaderNav />
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
+          <Switch>
+              <Route exact path='/' component={Home}/>
+              {/* <Route path='/Artist' component={ArtistLanding}/>
+              <Route path='/Gallery' component={GalleryComponent}/>
+              <Route path='/ArtistBio/:artistId' component={ArtistBio} /> */}
+              {/* Do not keep -- just for creating the page */}
+              {/* <Route path='*' component={ArtistBio}/> */}
+              {/* <Route exact path={routes.LANDING} component={() => <LandingPage />} /> */}
+              <Route exact path={routes.SIGN_UP} component={() => <FirebaseSignUp />} />
+              <Route exact path={routes.SIGN_IN} component={() => <FirebaseSignIn />} />
+              <Route exact path={routes.PASSWORD_FORGET} component={() => <FirebasePasswordForgetPage />} />
+              {/* <Route exact path={routes.HOME} component={() => <HomePage />} /> */}
+              <Route exact path={routes.ACCOUNT} component={() => <FirebaseAccount />} />
+            </Switch>
         </div>
       </Router>
     );
   }
 }
 
-export default App;
+export default FirebaseWithAuthentication(App);
