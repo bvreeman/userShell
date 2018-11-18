@@ -1,0 +1,45 @@
+.contactForQuoteHeading span {
+    color: #9C182F;
+}
+
+.contactForQuoteHeading {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contactUsForm {
+    width: 90%;
+    margin-left: 30px;
+    /* margin-right: 30px; */
+    background-color: #9C182F;
+    border-style: solid;
+    border-color: #333333;
+    padding: 20px;
+    padding-bottom: 60px;
+}
+
+.contactSubmitButton {
+    margin-top: 10px;
+    float: right;
+    border-radius: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.callUsHeading {
+    font-weight: bold;
+    text-align: center; 
+    display:block;
+    margin:auto;
+    position: relative;
+    top: 10%;
+    padding-top: 20px;
+}
+
+.contactFormReCaptcha {
+    margin-top: 10px;
+}

@@ -19,6 +19,8 @@
 /client/src/.env
 ./client/.env
 *.env
+/config
+
 
 npm-debug.log*
 yarn-debug.log*

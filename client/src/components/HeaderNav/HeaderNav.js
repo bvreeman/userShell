@@ -49,9 +49,9 @@ const NavigationNonAuth = () =>
                 <div className="navbarCenter">
                     <Link to="/" className="navbar-brand">Home</Link>
                     {/* <Link to="/Community" className="navbar-brand">Community</Link> */}
-                    <Link to="/About" className="navbar-brand">About</Link>
-                    <Link to="/Gallery" className="navbar-brand">Gallery</Link>
-                    <Link to="/DriversApplication" className="navbar-brand">Become a Driver</Link>
+                    <Link to="/About Us" className="navbar-brand">About</Link>
+                    {/* <Link to="/Gallery" className="navbar-brand">Gallery</Link> */}
+                    {/* <Link to="/DriversApplication" className="navbar-brand">Become a Driver</Link> */}
                     <Link to='/ContactUsPage' className="navbar-brand">Contact Us</Link>
                 </div>
                 <div className="rightside-Nav">
