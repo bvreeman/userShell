@@ -1,0 +1,39 @@
+.contactSubmitLogo{
+    max-width: 90%;
+}
+
+.ContactFormSubmit{
+    background-color: #DFDFDF;
+    text-align: center;
+    width: 75%;
+    margin:0 auto;
+    border: 1px;
+    border-color: #333333;
+    border-style: solid;
+    margin-top: 20px;
+    padding: 0px 30px 30px 30px;
+}
+
+.contactSubmitParagraph {
+    font-size: 20px;
+    display:block;
+    margin:auto;
+    position: relative;
+    top: 10%;
+}
+
+.contactSubmitHeader {
+    font-weight: bold;
+    text-align: center; 
+    display:block;
+    margin:auto;
+    position: relative;
+    top: 10%;
+}
+
+.contactSubmitLogo {
+    position: relative;
+    display:block;
+    margin:auto;
+    top: 10%;
+}

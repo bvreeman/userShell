@@ -6,6 +6,7 @@ import HeaderNav from './components/HeaderNav'
 // Pages
 import Home from './pages/Home'
 import About from './pages/About'
+import ContactUsPage from './pages/ContactUsPage'
 
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -43,7 +44,7 @@ class App extends Component {
           <Switch>
               <Route exact path='/' component={Home}/>
               <Route path='/About' component={About}/>
-              {/* <Route path='/Gallery' component={GalleryComponent}/> */}
+              <Route path='/ContactUsPage' component={ContactUsPage}/>
               {/* <Route path='/ArtistBio/:artistId' component={ArtistBio} /> */}
               {/* Do not keep -- just for creating the page */}
               {/* <Route path='*' component={ArtistBio}/> */}
