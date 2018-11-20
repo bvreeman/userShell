@@ -51,7 +51,8 @@ class UserProfilePhoto extends React.PureComponent {
                     <div className="container pageContentWidth">
                         <div className="profilePhotoHeader">
                             <h4>Profile Photo</h4>
-                            <p>{this.state.images[1]}</p>
+                            {console.log('state in profile photo', this.state)}
+                            {/* <p>{this.state.images[1]}</p> */}
                         </div>
                         <div key={this.state.images[0]} className="profileImageContainer">
                             <img alt={this.state.images[1]} className="profileImage" src={this.state.images[2]} />

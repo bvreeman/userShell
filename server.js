@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-// const contactRoutes = require("./routes/contactForm");
-// const applicationRoutes = require('./routes/applicationRoute')
+const contactRoutes = require("./routes/contactForm");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const path = require('path');
@@ -19,8 +18,7 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "client/build")));
   }
   // Add routes, both API and view
-//   app.use("/", contactRoutes)
-//   app.use('/', applicationRoutes)
+  app.use("/", contactRoutes)
 
 // app.post('/', (req, res) => {
 
