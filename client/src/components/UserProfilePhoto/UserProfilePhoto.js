@@ -20,7 +20,7 @@ class UserProfilePhoto extends React.PureComponent {
         const database = firebase.database();
         const images = [];
         // console.log('email here?', this.props.artistFirebaseIDfromParent)
-        database.ref(`users/${this.props.artistFirebaseIDfromParent}`).once('value').then((snapshot) => {
+        database.ref(`users/${this.props.artistFirebaseIDfromParent}/Images`).once('value').then((snapshot) => {
                 if (snapshot.val() !== null) {
                 const imageObject = snapshot.val();
                 const keys = Object.keys(imageObject);
