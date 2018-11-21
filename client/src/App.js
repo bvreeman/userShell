@@ -7,6 +7,7 @@ import HeaderNav from './components/HeaderNav'
 import Home from './pages/Home'
 import About from './pages/About'
 import ContactUsPage from './pages/ContactUsPage'
+import FindAConsultant from './pages/FindAConsultant'
 
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -45,7 +46,7 @@ class App extends Component {
               <Route exact path='/' component={Home}/>
               <Route path='/About' component={About}/>
               <Route path='/ContactUsPage' component={ContactUsPage}/>
-              {/* <Route path='/ArtistBio/:artistId' component={ArtistBio} /> */}
+              <Route path='/FindAConsultant' component={FindAConsultant} />
               {/* Do not keep -- just for creating the page */}
               {/* <Route path='*' component={ArtistBio}/> */}
               {/* <Route exact path={routes.LANDING} component={() => <LandingPage />} /> */}

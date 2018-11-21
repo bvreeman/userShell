@@ -19,8 +19,8 @@ class UserProfilePhoto extends React.PureComponent {
     getFirebaseData = () => {
         const database = firebase.database();
         const images = [];
-        console.log('email here?', this.props.artistFirebaseIDfromParent)
-        database.ref(`/${this.props.artistFirebaseIDfromParent}ProfilePhoto/`).once('value').then((snapshot) => {
+        // console.log('email here?', this.props.artistFirebaseIDfromParent)
+        database.ref(`users/${this.props.artistFirebaseIDfromParent}`).once('value').then((snapshot) => {
                 if (snapshot.val() !== null) {
                 const imageObject = snapshot.val();
                 const keys = Object.keys(imageObject);
@@ -51,7 +51,7 @@ class UserProfilePhoto extends React.PureComponent {
                     <div className="container pageContentWidth">
                         <div className="profilePhotoHeader">
                             <h4>Profile Photo</h4>
-                            {console.log('state in profile photo', this.state)}
+                            {/* {console.log('state in profile photo', this.state)} */}
                             {/* <p>{this.state.images[1]}</p> */}
                         </div>
                         <div key={this.state.images[0]} className="profileImageContainer">

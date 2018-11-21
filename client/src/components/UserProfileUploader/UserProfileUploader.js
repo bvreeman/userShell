@@ -39,7 +39,7 @@ class UserProfileUploader extends PureComponent {
         //Adding a piece tied to their login to the folder will allow for them to have
         // a unique folder for just them.
         // console.log('props', this.props)
-        let itemsRef = firebase.database().ref(`${this.props.passingID}ProfilePhoto/`)
+        let itemsRef = firebase.database().ref(`users/${this.props.passingID}`)
         // console.log(this.state.imageURL)
         
         let updates = {

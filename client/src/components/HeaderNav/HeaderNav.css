@@ -10,12 +10,12 @@
 
 .navbarRight {
     float: right;
-    line-height: 50px;
+    margin-right: 20px;
 }
 
 .navbar-header{
     /* background-color: #451417; */
-    background-color: #9c182f;
+    background-color: #0066cc;
     padding-bottom: 10px;
     padding-top: 10px;
     width: 100%;
@@ -30,11 +30,6 @@
     text-align: center;
     /* float: l
     eft; */
-}
-
-.rightside-Nav {
-    text-align: right;
-    margin-right: 20px;
 }
 
 .navbar-brand {
