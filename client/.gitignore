@@ -20,6 +20,7 @@
 ./client/.env
 *.env
 /config
+/serviceAccount
 
 
 npm-debug.log*

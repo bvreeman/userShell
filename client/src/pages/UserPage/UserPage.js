@@ -2,7 +2,6 @@ import React from 'react';
 import './UserPage.css';
 import { db } from '../../firebase';
 
-
 class UserPage extends React.PureComponent {
     constructor(props) {
         super(props);
