@@ -2,7 +2,7 @@ import React from 'react';
 import './FindAConsultant.css';
 
 import { db } from '../../firebase';
-import * as admin from 'firebase-admin';
+// import admin from 'firebase-admin';
 
 // import firebase from 'firebase/app';
 // import "firebase/database";

@@ -11,7 +11,7 @@ import FindAConsultant from './pages/FindAConsultant'
 
 import firebase from 'firebase/app';
 import 'firebase/database';
-import admin from 'firebase-admin';
+// import admin from 'firebase-admin';
 
 import FirebaseSignUp from './components/Firebase/FirebaseSignUp';
 import FirebaseSignIn from './components/Firebase/FirebaseSignIn';
@@ -25,14 +25,14 @@ import * as routes from './constants/routes';
 
 class App extends Component {
   render() {
-    admin.initializeApp({
-      credential: admin.credential.cert({
-        projectID: process.env.REACT_APP_PROJECT_ID,
-        clientEmail: process.env.REACT_APP_CLIENT_EMAIL,
-        privateKey: process.env.REACT_APP_PRIVATE_KEY
-      }),
-      databaseURL: process.env.REACT_APP_URL
-    });
+    // admin.initializeApp({
+    //   credential: admin.credential.cert({
+    //     projectID: process.env.REACT_APP_PROJECT_ID,
+    //     clientEmail: process.env.REACT_APP_CLIENT_EMAIL,
+    //     privateKey: process.env.REACT_APP_PRIVATE_KEY
+    //   }),
+    //   databaseURL: process.env.REACT_APP_URL
+    // });
     
     const config = {
       apiKey: process.env.REACT_APP_APIKEY,
