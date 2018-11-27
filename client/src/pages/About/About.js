@@ -2,7 +2,7 @@ import React from "react"
 import './About.css';
 
 const About = () => (
-    <div className="container pageContentWidth">
+    <div className="pageContentWidth">
         <div className="row">
             <div className="col-lg-12">
                 <h3>ABOUT US</h3>

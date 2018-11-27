@@ -10,7 +10,7 @@
 
 .navbarRight {
     float: right;
-    margin-right: 20px;
+    /* margin-right: 20px; */
 }
 
 .navbar-header{
@@ -35,19 +35,19 @@
 .navbar-brand {
     text-decoration: none;
     color: white;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     line-height: 50px;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 20px;
 }
 
-.headerContainer{
+/* .headerContainer{
     padding: 0px;
     margin-left: auto;
     margin-right: auto;
     background-color: white;
-}
+} */
   
 .navbar{
     margin-bottom: 0px;

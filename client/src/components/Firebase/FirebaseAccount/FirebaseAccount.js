@@ -10,7 +10,7 @@ import "./FirebaseAccount.css";
 const FirebaseAccount = () =>
 <AuthUserContext.Consumer>
 {authUser =>
-  <div className='container-fluid'>
+  <div>
     <h1>Account: {authUser.email}</h1>
     <div className='row'>
       <div className='col-md-6 col-xs-12'>

@@ -36,7 +36,7 @@ const NavigationAuth = () =>
     </div>
 
 const NavigationNonAuth = () =>
-    <div className="container-fluid sticky headerContainer">
+    <div className="sticky headerContainer">
         <nav className="navbar">
             <div className="row navbar-header">
                 <div className='col-md-3 col-xs-12 navbarLeft'>

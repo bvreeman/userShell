@@ -48,7 +48,7 @@ class UserProfilePhoto extends React.PureComponent {
             // pics = this.state.images.map((image, i) => {
                 // console.log('what is here', this.state.images[2])
                 return (
-                    <div className="container pageContentWidth">
+                    <div className="pageContentWidth">
                         <div className="profilePhotoHeader">
                             <h4>Profile Photo</h4>
                             {/* {console.log('state in profile photo', this.state)} */}
@@ -57,10 +57,8 @@ class UserProfilePhoto extends React.PureComponent {
                         <div key={this.state.images[0]} className="profileImageContainer">
                             <img alt={this.state.images[1]} className="profileImage" src={this.state.images[2]} />
                         </div>
-                        <div className="container-fluid">
-                            <div className="imageUploader">
-                                <UserProfileUploader fetchNewImages={this.getFirebaseData} passingID={this.state.userId} />
-                            </div>
+                        <div className="imageUploader">
+                            <UserProfileUploader fetchNewImages={this.getFirebaseData} passingID={this.state.userId} />
                         </div>
                     </div>
                 )
