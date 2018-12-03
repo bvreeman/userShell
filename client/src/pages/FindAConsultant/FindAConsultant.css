@@ -1,4 +1,10 @@
 .findAConsultantPageImages {
     width: 20%;
     margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+}
+
+.consultantsDiv {
+    width: 100%;
 }

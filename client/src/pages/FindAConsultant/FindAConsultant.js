@@ -40,6 +40,7 @@ class FindAConsultant extends React.PureComponent {
   
       this.state = {
         users: null,
+        title: '',
       };
     }
   
@@ -49,11 +50,21 @@ class FindAConsultant extends React.PureComponent {
     );
   }
 
+  mouseEnterDisplayTitle() {
+    console.log('mouse enter')
+    return(
+      <div>
+        {/* {item.Images.title} */}
+      </div>
+    )
+  }
+
+  mouseLeaveDisplayTitle(props) {
+    console.log('props leaving', props)
+  }
+
   render() {
     const { users } = this.state;
-    console.log(users, 'users')
-              // console.log('users', users)
-    // console.log('state', this.state)
     let consultants; 
 
     if (users === null) {
@@ -61,27 +72,20 @@ class FindAConsultant extends React.PureComponent {
         <p>No users Found</p>
         )
     } else {
-      console.log('is it here', this.state)
-      consultants = Object.entries(users).map((item, i) => {
-        console.log('heres item', item)
+      // console.log('is it here', this.state)
+      consultants = Object.values(users).map((item, i) => {
+        // console.log('heres item', item)
           return(
-            <div key={item[0]} >
-              <img alt={item[1].Images.title} className="findAConsultantPageImages" src={item[1].Images.url} />
+            <div key={item.Images.name}>
+              <img alt={item.Images.title} title={item.Images.title} className="findAConsultantPageImages" src={item.Images.url} />
             </div>
           )
         })
         return (
           <div>
-            <div>
-              <p>does this exist</p>
-              {console.log('consultants', consultants)}
-            </div>
-            {/* <div key={info.name} className="art col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12"  onClick={() => this.handleOpenModal(i)}>
-                <img alt={info.Images.title} className="art-img" src={info.Images.url} /> */}
-              <div >
+              <div>
                 {consultants}
               </div>
-            {/* </div> */}
           </div>
         )
       }
