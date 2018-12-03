@@ -55,7 +55,6 @@ class FindAConsultant extends React.PureComponent {
               // console.log('users', users)
     // console.log('state', this.state)
     let consultants; 
-    let consultantsDisplay;
 
     if (users === null) {
       return (
@@ -71,15 +70,6 @@ class FindAConsultant extends React.PureComponent {
             </div>
           )
         })
-        consultantsDisplay = consultants.forEach((item, i) => {
-          console.log('what about this forEach item', item)
-          return(
-            <div key={item.key} >
-              <img alt={item.props.children.props.alt} className="findAConsultantPageImages" src={item.props.children.props.url} />
-            </div>
-          )
-        })
-        console.log(consultantsDisplay, 'this is the first consultants')
         return (
           <div>
             <div>
@@ -88,7 +78,9 @@ class FindAConsultant extends React.PureComponent {
             </div>
             {/* <div key={info.name} className="art col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12"  onClick={() => this.handleOpenModal(i)}>
                 <img alt={info.Images.title} className="art-img" src={info.Images.url} /> */}
+              <div >
                 {consultants}
+              </div>
             {/* </div> */}
           </div>
         )
