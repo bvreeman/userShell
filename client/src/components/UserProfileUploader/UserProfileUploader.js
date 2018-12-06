@@ -26,14 +26,7 @@ class UserProfileUploader extends PureComponent {
         document.getElementById('titleInput').value=''
     }
 
-    handleUploadStart = () => {
-        const x = document.forms["myForm"]["companyName"].value;
-        if (x !== '') {
-            this.setState({ isUploading: true, progress: 0 })
-        } else {
-            alert("Company Name must be filled out");
-        }
-    }
+    handleUploadStart = () => this.setState({ isUploading: true, progress: 0 })
     
     handleProgress = progress => this.setState({ progress });
     
@@ -58,25 +51,32 @@ class UserProfileUploader extends PureComponent {
     }
 
     handleUploadSuccess = filename => {
-        this.setState({ generatedName: filename, progress: 100, isUploading: false });
-        firebase
-            .storage()
-            .ref("images")
-            .child(filename)
-            .getDownloadURL()
-            .then(url => {
-                this.setState({ 
-                    imageURL: url,
-                    generatedName: filename,
+        const x = document.forms["myForm"]["companyName"].value;
+        if (x !== '') {
+            this.handleUploadStart()
+            this.setState({ generatedName: filename, progress: 100, isUploading: false });
+            firebase
+                .storage()
+                .ref("images")
+                .child(filename)
+                .getDownloadURL()
+                .then(url => {
+                    this.setState({ 
+                        imageURL: url,
+                        generatedName: filename,
+                    })
+                }).then(() => {
+                    this.databasePush()
+                    this.setState({
+                        imageTitle: ''
+                    })
+                    this.props.fetchNewImages()
                 })
-            }).then(() => {
-                this.databasePush()
-                this.setState({
-                    imageTitle: ''
-                })
-                this.props.fetchNewImages()
-            })
-            // console.log(firebase.storage().ref("images").child(filename).getDownloadURL())
+                // console.log(firebase.storage().ref("images").child(filename).getDownloadURL())
+        } else {
+            alert("Company Name must be filled out");
+            return false
+        }
     };    
 
     validateForm = () => {
@@ -106,7 +106,7 @@ class UserProfileUploader extends PureComponent {
                     randomizeFilename
                     // onSubmit={this.validateForm()}
                     storageRef={firebase.storage().ref("images")}
-                    onUploadStart={this.handleUploadStart}
+                    // onUploadStart={this.handleUploadStart}
                     onUploadError={this.handleUploadError}
                     onUploadSuccess={this.handleUploadSuccess}
                     onProgress={this.handleProgress}
