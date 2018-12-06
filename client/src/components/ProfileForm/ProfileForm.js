@@ -55,7 +55,7 @@ class ProfileForm extends Component {
                             <input
                             className='profileFormInput'
                             value={this.state.facebook}
-                            onChange={event => this.setState(byPropKey('Facebook', event.target.value))}
+                            onChange={event => this.setState(byPropKey('facebook', event.target.value))}
                             type="text"
                             placeholder={this.state.facebook}
                             />
@@ -65,7 +65,7 @@ class ProfileForm extends Component {
                             <input
                             className='profileFormInput'
                             value={this.state.businessName}
-                            onChange={event => this.setState(byPropKey('Business Name', event.target.value))}
+                            onChange={event => this.setState(byPropKey('businessName', event.target.value))}
                             type="text"
                             placeholder={this.state.businessName}
                             />
@@ -73,10 +73,10 @@ class ProfileForm extends Component {
                         <div>
                             <p>Description of your business</p>
                             <textarea
-                            cols="50" rows="3" maxlength="10" 
+                            cols="50" rows="6" 
                             className='profileFormInput'
                             value={this.state.businessDescription}
-                            onChange={event => this.setState(byPropKey('Business Description', event.target.value))}
+                            onChange={event => this.setState(byPropKey('businessDescription', event.target.value))}
                             type="textarea"
                             placeholder={this.state.businessDescription}
                             />

@@ -26,7 +26,14 @@ class UserProfileUploader extends PureComponent {
         document.getElementById('titleInput').value=''
     }
 
-    handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
+    handleUploadStart = () => {
+        const x = document.forms["myForm"]["companyName"].value;
+        if (x !== '') {
+            this.setState({ isUploading: true, progress: 0 })
+        } else {
+            alert("Company Name must be filled out");
+        }
+    }
     
     handleProgress = progress => this.setState({ progress });
     
@@ -72,13 +79,9 @@ class UserProfileUploader extends PureComponent {
             // console.log(firebase.storage().ref("images").child(filename).getDownloadURL())
     };    
 
-    // validateForm = () => {
-    //     const x = document.forms["myForm"]["imageTitle"].value;
-    //     if (x === "") {
-    //         alert("Image Title must be filled out");
-    //         return false;
-    //     }
-    // }
+    validateForm = () => {
+        
+    }
 
   render() {
     // console.log('props here?', this.props)
@@ -88,12 +91,12 @@ class UserProfileUploader extends PureComponent {
             <label>Upload an Image:</label>
                 {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
                 <br/>
-                <label>Add an Image Title</label>
+                <label>Company Name</label>
                 <input
                     type="text"
                     id="titleInput"
                     value={this.state.imageTitle}
-                    name="imageTitle"
+                    name="companyName"
                     onChange={this.handleChangeImageTitle}
                 />
                 {/* {this.state.imageURL && <img alt={this.state.filename} src={this.state.imageURL} />} */}

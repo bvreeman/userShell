@@ -8,6 +8,8 @@ import Home from './pages/Home'
 import About from './pages/About'
 import ContactUsPage from './pages/ContactUsPage'
 import FindAConsultant from './pages/FindAConsultant'
+import UserPage from './pages/UserPage';
+
 
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -47,6 +49,8 @@ class App extends Component {
               <Route path='/About' component={About}/>
               <Route path='/ContactUsPage' component={ContactUsPage}/>
               <Route path='/FindAConsultant' component={FindAConsultant} />
+              <Route path='/UserPage' component={UserPage} />
+
               {/* Do not keep -- just for creating the page */}
               {/* <Route path='*' component={ArtistBio}/> */}
               {/* <Route exact path={routes.LANDING} component={() => <LandingPage />} /> */}
