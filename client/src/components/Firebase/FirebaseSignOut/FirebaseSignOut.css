@@ -1,14 +1,14 @@
-/* #userSignOutButton {
-    background-color: #007C50;
+#userSignOutButton {
+    /* background-color: #007C50; */
     border: solid;
     border-color: white;
     border-width: 1px;
-    color: white;
-    padding: 10px;
+    /* color: white; */
+    padding: 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     margin: 4px 2px;
     border-radius: 12px;
-} */
+}
