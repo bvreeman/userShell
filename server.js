@@ -29,10 +29,10 @@ if (process.env.NODE_ENV === "production") {
 
 // })
 
-// app.post('/contactForm/send', (req, res) => {
-//     console.log('does this happen?', req.body)
-//     res.send();
-//   })
+app.post('/contactForm/send', (req, res) => {
+    console.log('does this happen?', req.body)
+    res.send();
+  })
   
 //   app.post('/applicationRoute/send', (req, res) => {
 //     // console.log('does this happen application route?', req.body)
