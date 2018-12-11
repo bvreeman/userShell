@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 // import { auth } from '../../firebase';
 import './ProfileForm.css'
 
+import firebase from "firebase/app";
+import 'firebase/storage';
+import 'firebase/database'
+
 const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
   });
@@ -13,7 +17,6 @@ const INITIAL_STATE = {
     website: '',
     businessName: '',
     businessDescription: '',
-    preferredArt: '',
     email: '',
     error: null,
   };
@@ -24,6 +27,28 @@ class ProfileForm extends Component {
     
         this.state = { ...INITIAL_STATE };
       }
+
+      databasePush = (props) => {
+          console.log(this.props.artistFirebaseIDfromParent, 'is it here')
+        //Adding a piece tied to their login to the folder will allow for them to have
+        // a unique folder for just them.
+        // console.log('props', this.props)
+        let itemsRef = firebase.database().ref(`users/${this.props.artistFirebaseIDfromParent}/UserInfo`)
+        // console.log(this.state.imageURL)
+        
+        let updates = {
+            twitter: this.state.twitter,
+            facebook: this.state.facebook,
+            website: this.state.website,
+            businessName: this.state.businessName,
+            businessDescription: this.state.businessDescription,
+        }
+        itemsRef.set(updates);
+    }
+
+    onSubmit = () => {
+        this.databasePush()
+    }
 
       render() {
         return (
@@ -82,7 +107,7 @@ class ProfileForm extends Component {
                             />
                         </div>
                     </form>
-                    <button type="submit" className='profileFormSubmit'>
+                    <button type="submit" onClick={this.databasePush} className='profileFormSubmit'>
                         Submit
                     </button>
                 </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import './UserPage.css';
 import { db } from '../../firebase';
 
+
 class UserPage extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -17,6 +18,14 @@ class UserPage extends React.PureComponent {
       );
     }
 
+    render() {
+      return(
+        <div>
+          {console.log(this.state.users)}
+          <p>User Page</p>
+        </div>
+      )
+    }
 }
 
 export default UserPage;

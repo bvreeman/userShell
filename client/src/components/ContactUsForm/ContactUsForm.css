@@ -2,6 +2,12 @@
     color: #0066cc;
 }
 
+.contactForm {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+}
+
 .contactForQuoteHeading {
     margin-top: 20px;
     font-weight: bold;
@@ -11,7 +17,6 @@
 
 .contactUsForm {
     width: 90%;
-    margin-left: 30px;
     /* margin-right: 30px; */
     background-color: #0066cc;
     border-style: solid;

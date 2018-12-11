@@ -82,7 +82,6 @@ class ContactForQuote extends React.PureComponent {
             return(
                 <div className='contactForQuote'>
                     <h3 className='contactForQuoteHeading'><span>Contact Us</span> for a Quote</h3>
-                    <div className='row'>
                         <form id="contact-form" className='contactForm col-md-5 col-xs-12' onSubmit={this.handleSubmit.bind(this)} method="POST">
                             <div className='col-md-12 col-xs-12 contactUsForm'>
                                 <div className="form-group">
@@ -104,9 +103,7 @@ class ContactForQuote extends React.PureComponent {
                                 <input type='submit' className='contactSubmitButton' onClick={this.handleSubmit} value='Submit' />
                             </div>
                         </form>
-                    </div>
-                </div>
-                
+                </div>                
             )
         }
     }

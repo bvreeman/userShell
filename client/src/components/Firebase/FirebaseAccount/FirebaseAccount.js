@@ -24,7 +24,7 @@ const FirebaseAccount = () =>
           <PasswordChangeForm />
         </div>
         <div className='row'>
-          <ProfileForm />
+          <ProfileForm artistFirebaseIDfromParent={authUser.uid}/>
         </div>
       </div>
     </div>
