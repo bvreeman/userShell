@@ -31,13 +31,6 @@ class FirebaseSignInForm extends PureComponent {
     super(props);
 
     this.state = { ...INITIAL_STATE };
-
-    // //Modal
-    // this.handleOpenModal = this.handleOpenModal.bind(this);
-    // this.handleCloseModal = this.handleCloseModal.bind(this);
-    // this.handleSignUp = this.handleSignUp.bind(this);
-    // this.handleSignIn = this.handleSignIn.bind(this);
-
   }
 
   handleSignIn = () => {
@@ -50,9 +43,7 @@ class FirebaseSignInForm extends PureComponent {
       password,
     } = this.state;
 
-    const {
-      history,
-    } = this.props;
+    const { history } = this.props;
 
     auth.doSignInWithEmailAndPassword(email, password)
       .then(() => {
@@ -96,7 +87,11 @@ class FirebaseSignInForm extends PureComponent {
           type="password"
           placeholder="Password"
         />
-        <button disabled={isInvalid} type="submit" className='signInSubmit'>
+        <button 
+          disabled={isInvalid} 
+          type="submit" 
+          className='signInSubmit'
+        >
           Sign In
         </button>
 
@@ -108,6 +103,4 @@ class FirebaseSignInForm extends PureComponent {
 
 export default withRouter(FirebaseSignIn);
 
-export {
-  FirebaseSignInForm,
-};
+export { FirebaseSignInForm };

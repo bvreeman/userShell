@@ -22,11 +22,8 @@ import FirebaseWithAuthentication from './components/Firebase/FirebaseWithAuthen
 
 import * as routes from './constants/routes';
 
-
-
 class App extends Component {
   render() {
-    
     const config = {
       apiKey: process.env.REACT_APP_APIKEY,
       authDomain: process.env.REACT_APP_AUTH_DOMAIN,

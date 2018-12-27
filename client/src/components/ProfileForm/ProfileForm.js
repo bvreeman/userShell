@@ -28,6 +28,10 @@ class ProfileForm extends Component {
         this.state = { ...INITIAL_STATE };
       }
 
+      componentDidMount = () => {
+        this.getFirebaseData()
+    }
+
       databasePush = (props) => {
           console.log(this.props.artistFirebaseIDfromParent, 'is it here')
         //Adding a piece tied to their login to the folder will allow for them to have
@@ -43,7 +47,31 @@ class ProfileForm extends Component {
             businessName: this.state.businessName,
             businessDescription: this.state.businessDescription,
         }
-        itemsRef.set(updates);
+        itemsRef.update(updates);
+    }
+
+    getFirebaseData = () => {
+        const database = firebase.database();
+        const userInfo = [];
+        // console.log('email here?', this.props.artistFirebaseIDfromParent)
+        database.ref(`users/${this.props.artistFirebaseIDfromParent}/UserInfo`)
+            .once('value').then((snapshot) => {
+                if (snapshot.val() !== null) {
+                const infoObject = snapshot.val();
+                const keys = Object.keys(infoObject);
+                keys.forEach(key => userInfo.push(infoObject[key]))
+                } else {
+                    console.log("No Info to display")
+                }
+        }).then(() => {
+            // console.log('is the id still here?', this.props.artistFirebaseIDfromParent)
+                this.setState({ 
+                    userInfo,
+                    userId: this.props.artistFirebaseIDfromParent
+                 })
+                 console.log(this.state.userInfo, 'firebase data loaded')
+        })
+       
     }
 
     onSubmit = () => {
@@ -51,6 +79,7 @@ class ProfileForm extends Component {
     }
 
       render() {
+          console.log(this.state,' heres state when the app loads')
         return (
             <div>
                 <div>

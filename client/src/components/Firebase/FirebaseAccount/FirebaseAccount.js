@@ -8,27 +8,27 @@ import ProfileForm from '../../ProfileForm';
 import "./FirebaseAccount.css";
 
 const FirebaseAccount = () =>
-<AuthUserContext.Consumer>
-{authUser =>
-  <div>
-    <h1>Account: {authUser.email}</h1>
-    <div className='row'>
-      <div className='col-md-6 col-xs-12'>
-        <UserProfilePhoto artistFirebaseIDfromParent={authUser.uid}/>
-      </div>
-      <div className='col-md-6 col-xs-12 accountForms'>
-        <div className='row'>
-            <PasswordForgetForm />
+  <AuthUserContext.Consumer>
+  {authUser =>
+    <div>
+      <h1>Account: {authUser.email}</h1>
+      <div className='row'>
+        <div className='col-md-6 col-xs-12'>
+          <UserProfilePhoto artistFirebaseIDfromParent={authUser.uid}/>
         </div>
-        <div className='row'>
-          <PasswordChangeForm />
-        </div>
-        <div className='row'>
-          <ProfileForm artistFirebaseIDfromParent={authUser.uid}/>
+        <div className='col-md-6 col-xs-12 accountForms'>
+          <div className='row'>
+              <PasswordForgetForm />
+          </div>
+          <div className='row'>
+            <PasswordChangeForm />
+          </div>
+          <div className='row'>
+            <ProfileForm artistFirebaseIDfromParent={authUser.uid}/>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 }
 </AuthUserContext.Consumer>
 
