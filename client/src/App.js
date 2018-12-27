@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HeaderNav from './components/HeaderNav'
+import { connect } from 'react-redux';
 
 // Pages
 import Home from './pages/Home'
@@ -63,4 +64,4 @@ class App extends Component {
   }
 }
 
-export default FirebaseWithAuthentication(App);
+export default FirebaseWithAuthentication(connect() (App));
