@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HeaderNav from './components/HeaderNav'
 import { connect } from 'react-redux';
+import { userAction } from './actions/userAction'
 
 // Pages
 import Home from './pages/Home'
@@ -23,6 +24,14 @@ import FirebaseWithAuthentication from './components/Firebase/FirebaseWithAuthen
 
 import * as routes from './constants/routes';
 
+const mapStateToProps = state => ({
+  ...state
+ })
+
+ const mapDispatchToProps = dispatch => ({
+  userAction: () => dispatch(userAction())
+ })
+
 class App extends Component {
   render() {
     const config = {
@@ -33,6 +42,11 @@ class App extends Component {
       storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
       messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
     };
+
+    let userAction = (event) => {
+      this.props.userAction();
+      console.log('this.state', this.state)
+     }
   
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
@@ -41,6 +55,12 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <button onClick={userAction}>Test redux action</button>
+          <pre>
+            {
+              JSON.stringify(this.props)
+            }
+          </pre>
           <HeaderNav />
           <Switch>
               <Route exact path='/' component={Home}/>
@@ -64,4 +84,4 @@ class App extends Component {
   }
 }
 
-export default FirebaseWithAuthentication(connect() (App));
+export default FirebaseWithAuthentication(connect(mapStateToProps, mapDispatchToProps) (App));
