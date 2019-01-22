@@ -11,22 +11,12 @@ const byPropKey = (propertyName, value) => () => ({
     [propertyName]: value,
   });
 
-const INITIAL_STATE = {
-    twitter: '',
-    facebook: '',
-    website: '',
-    businessName: '',
-    businessDescription: '',
-    email: '',
-    error: null,
-  };
-
 class ProfileForm extends Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
     
-        this.state = { ...INITIAL_STATE };
-      }
+    //     this.state = { ...INITIAL_STATE };
+    //   }
 
       componentDidMount = () => {
         this.getFirebaseData()

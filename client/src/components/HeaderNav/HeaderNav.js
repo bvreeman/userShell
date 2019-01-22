@@ -1,18 +1,22 @@
 import React from "react";
 import './HeaderNav.css';
 import {Link} from 'react-router-dom';
-import FirebaseAuthUserContext from '../Firebase/FirebaseAuthUserContext';
+// import FirebaseAuthUserContext from '../Firebase/FirebaseAuthUserContext';
 import FirebaseSignOut from '../Firebase/FirebaseSignOut'
 import * as routes from '../../constants/routes';
+import { connect } from 'react-redux'
 
 
-const HeaderNav = () => 
-    <FirebaseAuthUserContext.Consumer>
-        {authUser => authUser
-            ? <NavigationAuth />
-            : <NavigationNonAuth />
-        }
-    </FirebaseAuthUserContext.Consumer>
+const HeaderNav = (props) => {
+    const { auth, businessProfile } = props;
+    const links = auth.uid ? <NavigationAuth businessProfile={businessProfile} /> : <NavigationNonAuth />
+    return (
+        <nav className = 'headerNav'>
+            <Link to='/' className='brand-logo'>Find A Consultant Now</Link>
+            { links }
+        </nav>
+    )
+}
 
 const NavigationAuth = () =>
     <div className="sticky headerContainer">
@@ -54,4 +58,12 @@ const NavigationNonAuth = () =>
         </nav>
     </div>
 
-export default HeaderNav;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        businessProfile: state.firebase.businessProfile
+    }
+}
+
+export default connect(mapStateToProps)(HeaderNav)
+

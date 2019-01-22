@@ -3,13 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { createStore, applyMiddleware, compose } from 'redux'
+import rootReducer from './store/reducer/rootReducer'
 import { Provider } from 'react-redux'
-import configureStore from './store';
+import thunk from 'redux-thunk'
+import { reduxFirestore, getFirestore } from 'redux-firestore'
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
+import fbConfig from './config/config'
+// import configureStore from './store';
 
-ReactDOM.render(
-<Provider store={configureStore()}>
-  <App />
- </Provider>,
-  document.getElementById('root')
-);
-serviceWorker.unregister();
+const store = createStore(rootReducer, 
+  compose(
+      applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+      reduxFirestore(fbConfig),
+      reactReduxFirebase(fbConfig, {useFirestoreForProfile: true, userProfile: 'users', attachAuthIsReady: true})
+  )
+)
+
+store.firebaseAuthIsReady.then(() => {
+  ReactDOM.render(<Provider store={ store }><App /></Provider>, document.getElementById('root'));
+  serviceWorker.unregister();
+})
+
+// ReactDOM.render(
+// <Provider store={configureStore()}>
+//   <App />
+//  </Provider>,
+//   document.getElementById('root')
+// );
+// serviceWorker.unregister();
