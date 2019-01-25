@@ -11,8 +11,8 @@ const HeaderNav = (props) => {
     const { auth, businessProfile } = props;
     const links = auth.uid ? <NavigationAuth businessProfile={businessProfile} /> : <NavigationNonAuth />
     return (
-        <nav className = 'headerNav'>
-            <Link to='/' className='brand-logo'>Find A Consultant Now</Link>
+        <nav>
+            {console.log('logged in?', auth.uid)}
             { links }
         </nav>
     )
@@ -32,7 +32,8 @@ const NavigationAuth = () =>
                     {/* <Link to="/DriversApplication" className="navbar-brand">Become a Driver</Link> */}
                     <Link to='/ContactUsPage' className="navbar-brand">Contact Us</Link>
                     <a className="navbarRight socialItems fb-ic ml-0" rel="noopener noreferrer" href="https://www.facebook.com/mnvalleytransport/" target="_blank" style={{color: '#ffffff'}}><i className="fa fa-facebook white-text mr-lg-4"></i></a>
-                    <Link to={routes.ACCOUNT} className="navbar-brand">Account</Link>
+                    <Link to='/ProfileForm' className="navbar-brand">Profile</Link>
+                    {/* <Link to={routes.ACCOUNT} className="navbar-brand">Account</Link> */}
                     <FirebaseSignOut className='navbarRight' />
                 </div>
             </div>
