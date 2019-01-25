@@ -9,14 +9,8 @@ import About from './pages/About'
 import ContactUsPage from './pages/ContactUsPage'
 import FindAConsultant from './pages/FindAConsultant'
 import UserPage from './pages/UserPage';
-
-import FirebaseSignUp from './components/Firebase/FirebaseSignUp';
-import FirebaseSignIn from './components/Firebase/FirebaseSignIn';
-import FirebasePasswordForgetPage from './components/Firebase/FirebasePasswordForget';
-import FirebaseAccount from './components/Firebase/FirebaseAccount';
-// import FirebaseWithAuthentication from './components/Firebase/FirebaseWithAuthentication';
-
-import * as routes from './constants/routes';
+import SignIn from './components/Auth/SignIn'
+import SignUp from './components/Auth/SignUp'
 import ProfileForm from './components/ProfileForm';
 
 class App extends Component {
@@ -32,10 +26,8 @@ class App extends Component {
               <Route path='/FindAConsultant' component={FindAConsultant} />
               <Route path='/UserPage' component={UserPage} />
               <Route path='/ProfileForm' component={ProfileForm} />
-              <Route exact path={routes.SIGN_UP} component={() => <FirebaseSignUp />} />
-              <Route exact path={routes.SIGN_IN} component={() => <FirebaseSignIn />} />
-              <Route exact path={routes.PASSWORD_FORGET} component={() => <FirebasePasswordForgetPage />} />
-              <Route exact path={routes.ACCOUNT} component={() => <FirebaseAccount />} />
+              <Route path='/signin' component={SignIn} />
+              <Route path='/signup' component={SignUp} />
             </Switch>
         </div>
       </BrowserRouter>

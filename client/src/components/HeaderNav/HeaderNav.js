@@ -1,63 +1,33 @@
 import React from "react";
 import './HeaderNav.css';
-import {Link} from 'react-router-dom';
-// import FirebaseAuthUserContext from '../Firebase/FirebaseAuthUserContext';
-import FirebaseSignOut from '../Firebase/FirebaseSignOut'
-import * as routes from '../../constants/routes';
+import {NavLink} from 'react-router-dom';
 import { connect } from 'react-redux'
+import SignedInLinks from './SignedInLinks'
+import SignedOutLinks from './SignedOutLinks'
 
 
 const HeaderNav = (props) => {
     const { auth, businessProfile } = props;
-    const links = auth.uid ? <NavigationAuth businessProfile={businessProfile} /> : <NavigationNonAuth />
+    const links = auth.uid ? <SignedInLinks businessProfile={businessProfile} /> : <SignedOutLinks />
     return (
-        <nav>
-            {console.log('logged in?', auth.uid)}
-            { links }
-        </nav>
+        <div className="sticky headerContainer">
+            <nav className="navbar">
+                <div className="row navbar-header">
+                    <div className='col-md-3 col-xs-12 navbarLeft'>
+                        <NavLink to="/" className='navbarTitle'>Find A Consultant Now</NavLink>
+                    </div>
+                    <NavLink to="/FindAConsultant" className="navbar-brand">Find A Consultant</NavLink>
+                    <NavLink to="/About" className="navbar-brand">About</NavLink>
+                    <NavLink to='/ContactUsPage' className="navbar-brand">Contact Us</NavLink>
+                    <a className="navbarRight socialItems fb-ic ml-0" rel="noopener noreferrer" href="https://www.facebook.com/mnvalleytransport/" target="_blank" style={{color: '#ffffff'}}><i className="fa fa-facebook white-text mr-lg-4"></i></a>
+                    
+                    {console.log('logged in?', auth.uid)}
+                    { links }
+                </div>
+            </nav>
+        </div>
     )
 }
-
-const NavigationAuth = () =>
-    <div className="sticky headerContainer">
-        <nav className="navbar">
-            <div className="row navbar-header">
-                <div className='col-md-3 col-xs-12 navbarLeft'>
-                    <Link to="/" className='navbarTitle'>Find A Consultant Now</Link>
-                </div>
-                <div className="col-md-9 col-xs-12 navbarCenter">
-                    <Link to="/FindAConsultant" className="navbar-brand">Find A Consultant</Link>
-                    <Link to="/About" className="navbar-brand">About</Link>
-                    {/* <Link to="/Gallery" className="navbar-brand">Gallery</Link> */}
-                    {/* <Link to="/DriversApplication" className="navbar-brand">Become a Driver</Link> */}
-                    <Link to='/ContactUsPage' className="navbar-brand">Contact Us</Link>
-                    <a className="navbarRight socialItems fb-ic ml-0" rel="noopener noreferrer" href="https://www.facebook.com/mnvalleytransport/" target="_blank" style={{color: '#ffffff'}}><i className="fa fa-facebook white-text mr-lg-4"></i></a>
-                    <Link to='/ProfileForm' className="navbar-brand">Profile</Link>
-                    {/* <Link to={routes.ACCOUNT} className="navbar-brand">Account</Link> */}
-                    <FirebaseSignOut className='navbarRight' />
-                </div>
-            </div>
-        </nav>
-    </div>
-
-const NavigationNonAuth = () =>
-    <div className="sticky headerContainer">
-        <nav className="navbar">
-            <div className="row navbar-header">
-                <div className='col-md-3 col-xs-12 navbarLeft'>
-                    <Link to="/" className='navbarTitle'>Find A Consultant Now</Link>
-                </div>
-                <div className="col-md-6 col-xs-12 navbarCenter">
-                    <Link to="/FindAConsultant" className="navbar-brand">Find A Consultant</Link>
-                    <Link to="/AboutUs" className="navbar-brand">About</Link>
-                    {/* <Link to="/Gallery" className="navbar-brand">Gallery</Link> */}
-                    {/* <Link to="/DriversApplication" className="navbar-brand">Become a Driver</Link> */}
-                    <Link to='/ContactUsPage' className="navbar-brand">Contact Us</Link>
-                    <Link to={routes.SIGN_IN} className="navbar-brand navbarRight">Sign In</Link>
-                </div>
-            </div>
-        </nav>
-    </div>
 
 const mapStateToProps = (state) => {
     return {

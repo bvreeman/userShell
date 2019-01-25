@@ -8,7 +8,7 @@ import ProfilesList from '../../components/ProfilesList'
   
 class FindAConsultant extends React.PureComponent {
   render() {
-    const { profiles, auth, notifications } = this.props
+    const { profiles, auth } = this.props
     if (!auth.uid) return <Redirect to='/signin' />
     console.log(profiles, 'profiles inside find a consultant page')
     return (

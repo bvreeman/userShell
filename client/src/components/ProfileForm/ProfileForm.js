@@ -6,10 +6,6 @@ import './ProfileForm.css'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import firebase from "firebase/app";
-import 'firebase/storage';
-import 'firebase/database'
-
 class ProfileForm extends Component {
 
     handleChange = (e) => {
