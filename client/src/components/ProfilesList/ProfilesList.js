@@ -3,12 +3,12 @@ import ProfileSummary from '../ProfileSummary'
 import { Link } from 'react-router-dom'
 import './ProfilesList.css';
 
-const ProfilesList = ({profiles}) => {
+const ProfilesList = ({businessProfiles}) => {
     return (
         <div className="project-list section">
-            { profiles && profiles.map(profile => {
+            { businessProfiles && businessProfiles.map(profile => {
                 return (
-                    <Link to={'/project/' + profile.id} key={profile.id}>
+                    <Link to={'/businessProfile/' + profile.id} key={profile.id}>
                         <ProfileSummary profile={profile} />
                     </Link>
                 )

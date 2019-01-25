@@ -20,7 +20,6 @@ const HeaderNav = (props) => {
                     <NavLink to="/About" className="navbar-brand">About</NavLink>
                     <NavLink to='/ContactUsPage' className="navbar-brand">Contact Us</NavLink>
                     <a className="navbarRight socialItems fb-ic ml-0" rel="noopener noreferrer" href="https://www.facebook.com/mnvalleytransport/" target="_blank" style={{color: '#ffffff'}}><i className="fa fa-facebook white-text mr-lg-4"></i></a>
-                    
                     {console.log('logged in?', auth.uid)}
                     { links }
                 </div>

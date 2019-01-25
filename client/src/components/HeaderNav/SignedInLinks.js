@@ -10,7 +10,6 @@ const SignedInLinks = (props) => {
     return (
         <div className="col-md-9 col-xs-12 navbarCenter">
             <NavLink to='/ProfileForm' className="navbar-brand">Profile</NavLink>
-            {/* <Link to={routes.ACCOUNT} className="navbar-brand">Account</Link> */}
             <li><a href='/' onClick={props.signOut} className='navbar-brand'>Log Out</a></li> 
         </div>
     )

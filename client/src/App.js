@@ -12,6 +12,7 @@ import UserPage from './pages/UserPage';
 import SignIn from './components/Auth/SignIn'
 import SignUp from './components/Auth/SignUp'
 import ProfileForm from './components/ProfileForm';
+import ProfileDetails from './components/ProfileDetails';
 
 class App extends Component {
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
               <Route path='/ProfileForm' component={ProfileForm} />
               <Route path='/signin' component={SignIn} />
               <Route path='/signup' component={SignUp} />
+              <Route path='/businessProfile/:id' component={ProfileDetails} />
             </Switch>
         </div>
       </BrowserRouter>

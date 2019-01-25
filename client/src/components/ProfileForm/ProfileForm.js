@@ -7,6 +7,13 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 class ProfileForm extends Component {
+    state = {
+        twitter: '',
+        facebook: '',
+        businessName: '',
+        businessDescription: '',
+        website: '',
+    }
 
     handleChange = (e) => {
         this.setState({
@@ -17,8 +24,8 @@ class ProfileForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
-        // this.props.createProject(this.state)
-        // this.props.history.push('/')
+        this.props.createProfile(this.state)
+        this.props.history.push('/')
     }
 
       render() {
@@ -26,56 +33,54 @@ class ProfileForm extends Component {
         if (!auth.uid) return <Redirect to='/signin' />
         return (
             <div>
-                <div>
-                    <form onSubmit={this.onSubmit}>
-                        <div className="input-field">
-                            <label htmlFor="twitter">Twitter</label>
-                            <input 
-                                type="text" 
-                                id='twitter' 
-                                onChange={this.handleChange} 
-                            />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="website">Website</label>
-                            <input 
-                                type="text" 
-                                id='website' 
-                                onChange={this.handleChange} 
-                            />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="facebook">Facebook</label>
-                            <input 
-                                type="text" 
-                                id='facebook' 
-                                onChange={this.handleChange} 
-                            />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="businessName">Business Name</label>
-                            <input 
-                                type="text" 
-                                id='businessName' 
-                                onChange={this.handleChange} 
-                            />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="businessDescription">Business Description</label>
-                            <textarea 
-                                type="text" 
-                                id='businessDescription' 
-                                onChange={this.handleChange} 
-                            />
-                        </div>
-                        <div className="input-field">
-                            <button className='profileFormSubmit'>
-                                Submit
-                            </button>
-                        </div>
-                    </form>
+                <form onSubmit={this.onSubmit}>
+                    <div className="input-field">
+                        <label htmlFor="twitter">Twitter</label>
+                        <input 
+                            type="text" 
+                            id='twitter' 
+                            onChange={this.handleChange} 
+                        />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="website">Website</label>
+                        <input 
+                            type="text" 
+                            id='website' 
+                            onChange={this.handleChange} 
+                        />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="facebook">Facebook</label>
+                        <input 
+                            type="text" 
+                            id='facebook' 
+                            onChange={this.handleChange} 
+                        />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="businessName">Business Name</label>
+                        <input 
+                            type="text" 
+                            id='businessName' 
+                            onChange={this.handleChange} 
+                        />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="businessDescription">Business Description</label>
+                        <textarea 
+                            type="text" 
+                            id='businessDescription' 
+                            onChange={this.handleChange} 
+                        />
+                    </div>
+                    <div className="input-field">
+                        <button className='profileFormSubmit'>
+                            Submit
+                        </button>
+                    </div>
+                </form>
 
-                </div>
             </div>
         )
       }
@@ -90,7 +95,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createProfile: (profile) => dispatch(createProfile(profile))
+        createProfile: (businessProfile) => dispatch(createProfile(businessProfile))
     }
 }
 

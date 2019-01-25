@@ -4,19 +4,11 @@ export const createProfile = (businessProfile) => {
         const firestore = getFirestore();
         const profile = getState().firebase.profile
         const userID = getState().firebase.auth.uid;
-        firestore.collection('businessProfile').add({
+        firestore.collection('businessProfiles').add({
             ...businessProfile,
-            userFirstName: profile.firstName,
-            userLastName: profile.lastName,
+            firstName: profile.firstName,
+            lastName: profile.lastName,
             userID: userID,
-            // businessName: profile.businessName,
-            // businessDescription: profile.businessDescription,
-            // website: profile.website,
-            // facebookPage: profile.facebookPage,
-            // twitterHandle: profile.twitterHandle,
-            // instagramHandle: profile.instagramHandle,
-            // consultingType: profile.consultingType,
-            // businessExperience: profile.businessExperience,
             createdAt: new Date()
         }).then(() => {
             dispatch({ type: 'CREATE_PROFILE', businessProfile });
