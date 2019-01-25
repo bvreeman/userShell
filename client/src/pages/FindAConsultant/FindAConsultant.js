@@ -4,22 +4,23 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
+import ProfilesList from '../../components/ProfilesList'
   
 class FindAConsultant extends React.PureComponent {
   render() {
-    const { projects, auth, notifications } = this.props
+    const { profiles, auth, notifications } = this.props
     if (!auth.uid) return <Redirect to='/signin' />
-
+    console.log(profiles, 'profiles inside find a consultant page')
     return (
       <div>
-
+        < ProfilesList profiles={ profiles } />
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  console.log('here', state);
   return {
       profiles: state.firestore.ordered.profiles,
       auth: state.firebase.auth,
