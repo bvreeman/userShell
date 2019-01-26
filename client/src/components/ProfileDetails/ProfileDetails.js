@@ -32,6 +32,7 @@ const ProfileDetails = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
     // console.log(state)
+    console.log(ownProps.match.params, 'test')
     const id = ownProps.match.params.id
     const businessProfiles = state.firestore.data.businessProfiles
     const profile = businessProfiles ? businessProfiles[id] : null

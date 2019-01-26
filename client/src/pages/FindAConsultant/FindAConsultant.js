@@ -8,10 +8,9 @@ import ProfilesList from '../../components/ProfilesList'
   
 class FindAConsultant extends React.PureComponent {
   render() {
-    console.log('this.props', this.props)
+    // console.log('this.props', this.props)
     const { businessProfiles, auth } = this.props
     if (!auth.uid) return <Redirect to='/signin' />
-    console.log(businessProfiles, 'businessProfiles inside find a consultant page')
     return (
       <div>
         < ProfilesList businessProfiles={ businessProfiles } />
@@ -21,7 +20,6 @@ class FindAConsultant extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  console.log('here', state);
   return {
       businessProfiles: state.firestore.ordered.businessProfiles,
       auth: state.firebase.auth,

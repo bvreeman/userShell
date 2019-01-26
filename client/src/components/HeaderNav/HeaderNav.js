@@ -16,7 +16,6 @@ const HeaderNav = (props) => {
                     <div className='col-md-3 col-xs-12 navbarLeft'>
                         <NavLink to="/" className='navbarTitle'>Find A Consultant Now</NavLink>
                     </div>
-                    <NavLink to="/FindAConsultant" className="navbar-brand">Find A Consultant</NavLink>
                     <NavLink to="/About" className="navbar-brand">About</NavLink>
                     <NavLink to='/ContactUsPage' className="navbar-brand">Contact Us</NavLink>
                     <a className="navbarRight socialItems fb-ic ml-0" rel="noopener noreferrer" href="https://www.facebook.com/mnvalleytransport/" target="_blank" style={{color: '#ffffff'}}><i className="fa fa-facebook white-text mr-lg-4"></i></a>

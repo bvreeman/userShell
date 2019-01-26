@@ -5,6 +5,7 @@ import {createProfile} from '../../store/actions/businessProfileActions'
 import './ProfileForm.css'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+// import FileUploader from "react-firebase-file-uploader";
 
 class ProfileForm extends Component {
     state = {
@@ -13,7 +14,27 @@ class ProfileForm extends Component {
         businessName: '',
         businessDescription: '',
         website: '',
+        // imageName: '',
+        // imageTitle: "",
+        // generatedName: "",
+        // isUploading: false,
+        // progress: 0,
+        // imageURL: ""
     }
+    
+    // handleChangeImageTitle = event => {
+    //     this.setState({ imageTitle: event.target.value });
+    //     document.getElementById('titleInput').value=''
+    // }
+
+    // handleUploadStart = () => this.setState({ isUploading: true, progress: 0 })
+    
+    // handleProgress = progress => this.setState({ progress });
+    
+    // handleUploadError = error => {
+    //     this.setState({ isUploading: false });
+    //     console.error(error);
+    // };
 
     handleChange = (e) => {
         this.setState({
@@ -31,11 +52,12 @@ class ProfileForm extends Component {
       render() {
         const { auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
+        console.log('this?', )
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
                     <div className="input-field">
-                        <label htmlFor="twitter">Twitter</label>
+                        <label htmlFor="twitter">Twitter </label>
                         <input 
                             type="text" 
                             id='twitter' 
@@ -43,7 +65,7 @@ class ProfileForm extends Component {
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="website">Website</label>
+                        <label htmlFor="website">Website </label>
                         <input 
                             type="text" 
                             id='website' 
@@ -51,7 +73,7 @@ class ProfileForm extends Component {
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="facebook">Facebook</label>
+                        <label htmlFor="facebook">Facebook </label>
                         <input 
                             type="text" 
                             id='facebook' 
@@ -59,7 +81,7 @@ class ProfileForm extends Component {
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="businessName">Business Name</label>
+                        <label htmlFor="businessName">Business Name </label>
                         <input 
                             type="text" 
                             id='businessName' 
@@ -67,13 +89,25 @@ class ProfileForm extends Component {
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="businessDescription">Business Description</label>
+                        <label htmlFor="businessDescription">Business Description </label>
                         <textarea 
                             type="text" 
                             id='businessDescription' 
                             onChange={this.handleChange} 
                         />
                     </div>
+                    {/* <FileUploader
+                        accept="image/*"
+                        name="generatedName"
+                        randomizeFilename
+                        // onSubmit={this.validateForm()}
+                        // storageRef={firebase.storage().ref("images")}
+                        // onUploadStart={this.handleUploadStart}
+                        onUploadError={this.handleUploadError}
+                        onUploadSuccess={this.handleUploadSuccess}
+                        onProgress={this.handleProgress}
+                        // onPushtoDatabase={this.handlePushToDatabase}
+                    /> */}
                     <div className="input-field">
                         <button className='profileFormSubmit'>
                             Submit
