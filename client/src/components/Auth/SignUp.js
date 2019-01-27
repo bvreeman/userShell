@@ -8,6 +8,11 @@ class SignUp extends Component {
         password: '',
         firstName: '',
         lastName: '',
+        businessName: '',
+        website: '',
+        businessDescription: '',
+        facebook: '',
+        twitter: '',
     }
 
     handleChange = (e) => {
@@ -30,19 +35,39 @@ class SignUp extends Component {
             <h5 className="grey-text text-darken-3">Sign Up</h5>
             <div className="input-field">
                 <label htmlFor="email">Email</label>
-                <input type="email" id='email' onChange={this.handleChange} />
+                <input type="email" id='email' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
                 <label htmlFor="password">Password</label>
-                <input type="password" id='password' onChange={this.handleChange} />
+                <input type="password" id='password' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
                 <label htmlFor="firstName">First Name</label>
-                <input type="text" id='firstName' onChange={this.handleChange} />
+                <input type="text" id='firstName' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
                 <label htmlFor="lastName">Last Name</label>
-                <input type="text" id='lastName' onChange={this.handleChange} />
+                <input type="text" id='lastName' required onChange={this.handleChange} />
+            </div>
+            <div className="input-field">
+                <label htmlFor="businessName">Business Name</label>
+                <input type="text" id='businessName' required onChange={this.handleChange} />
+            </div>
+            <div className="input-field">
+                <label htmlFor="businessDescription">Business Description</label>
+                <input type="text" id='businessDescription' required onChange={this.handleChange} />
+            </div>
+            <div className="input-field">
+                <label htmlFor="website">Website</label>
+                <input type="text" id='website' required onChange={this.handleChange} />
+            </div>
+            <div className="input-field">
+                <label htmlFor="facebook">Facebook Page</label>
+                <input type="text" id='facebook' onChange={this.handleChange} />
+            </div>
+            <div className="input-field">
+                <label htmlFor="twitter">Twitter Page</label>
+                <input type="text" id='twitter' onChange={this.handleChange} />
             </div>
             <div className="input-field">
                 <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
