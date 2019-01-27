@@ -5,7 +5,10 @@ import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 
 const ProfileDetails = (props) => {
-    const { profile, auth } = props;
+    const { profile, auth, users } = props;
+    console.log(profile, 'profile')
+    console.log('auth', auth)
+    console.log('users', users)
     if (!auth.uid) return <Redirect to='/signin' />
     
     if (profile) {
@@ -31,7 +34,7 @@ const ProfileDetails = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    // console.log(state)
+    console.log(state)
     console.log(ownProps.match.params, 'test')
     const id = ownProps.match.params.id
     const businessProfiles = state.firestore.data.businessProfiles

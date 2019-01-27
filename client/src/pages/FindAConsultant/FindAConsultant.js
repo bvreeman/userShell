@@ -9,11 +9,11 @@ import ProfilesList from '../../components/ProfilesList'
 class FindAConsultant extends React.PureComponent {
   render() {
     // console.log('this.props', this.props)
-    const { businessProfiles, auth } = this.props
+    const { users, auth } = this.props
     if (!auth.uid) return <Redirect to='/signin' />
     return (
       <div>
-        < ProfilesList businessProfiles={ businessProfiles } />
+        < ProfilesList users={ users } auth={ auth } />
       </div>
     )
   }
@@ -21,7 +21,7 @@ class FindAConsultant extends React.PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-      businessProfiles: state.firestore.ordered.businessProfiles,
+      users: state.firestore.ordered.users,
       auth: state.firebase.auth,
       // notifications: state.firestore.ordered.notifications
   }
@@ -30,7 +30,7 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-      { collection: 'businessProfiles'}
+      { collection: 'users'},
       // { collection: 'businessProfiles', orderBy: ['createdAt', 'desc'] },
   ])
 )(FindAConsultant)

@@ -3,12 +3,15 @@ import ProfileSummary from '../ProfileSummary'
 import { Link } from 'react-router-dom'
 import './ProfilesList.css';
 
-const ProfilesList = ({businessProfiles}) => {
+const ProfilesList = ({users, auth}) => {
+    console.log(users, 'profile')
+    console.log(auth, 'auth in profile')
+
     return (
         <div className="project-list section">
-            { businessProfiles && businessProfiles.map(profile => {
+            { users && users.map(profile => {
                 return (
-                    <Link to={'/businessProfile/' + profile.id} key={profile.id}>
+                    <Link to={'/' + profile.businessName.replace(/ +/g, "") + '/' + profile.id} key={profile.id}>
                         <ProfileSummary profile={profile} />
                     </Link>
                 )
