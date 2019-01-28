@@ -11,7 +11,7 @@ const ProfilesList = ({users, auth}) => {
         <div className="project-list section">
             { users && users.map(profile => {
                 return (
-                    <Link to={'/' + profile.businessName.replace(/ +/g, "") + '/' + profile.id} key={profile.id}>
+                    <Link to={'/businessProfile/' + profile.id} key={profile.id}>
                         <ProfileSummary profile={profile} />
                     </Link>
                 )

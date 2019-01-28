@@ -5,14 +5,10 @@ import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 
 const ProfileDetails = (props) => {
-    const { profile, auth, users } = props;
-    console.log(profile, 'profile')
-    console.log('auth', auth)
-    console.log('users', users)
+    const { profile, auth } = props;
     if (!auth.uid) return <Redirect to='/signin' />
     
     if (profile) {
-        console.log(profile, 'profile detail')
         return(
             <div className='card' style={{width: "75%"}}>
                 <div className='card-body'>
@@ -34,10 +30,8 @@ const ProfileDetails = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state)
-    console.log(ownProps.match.params, 'test')
     const id = ownProps.match.params.id
-    const businessProfiles = state.firestore.data.businessProfiles
+    const businessProfiles = state.firestore.data.users
     const profile = businessProfiles ? businessProfiles[id] : null
     
     return{
@@ -48,6 +42,6 @@ const mapStateToProps = (state, ownProps) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([
-        { collection: 'businessProfiles'}
+        { collection: 'users'}
     ])
 )(ProfileDetails)

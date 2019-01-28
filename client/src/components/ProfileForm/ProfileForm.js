@@ -5,6 +5,10 @@ import {createProfile} from '../../store/actions/businessProfileActions'
 import './ProfileForm.css'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { compose } from 'redux'
+import { firestoreConnect } from 'react-redux-firebase'
+
+
 // import FileUploader from "react-firebase-file-uploader";
 
 class ProfileForm extends Component {
@@ -50,38 +54,13 @@ class ProfileForm extends Component {
     }
 
       render() {
-        const { auth } = this.props;
+        const { auth, profile } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
-        console.log('this?', )
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
                     <div className="input-field">
-                        <label htmlFor="twitter">Twitter </label>
-                        <input 
-                            type="text" 
-                            id='twitter' 
-                            onChange={this.handleChange} 
-                        />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="website">Website </label>
-                        <input 
-                            type="text" 
-                            id='website' 
-                            onChange={this.handleChange} 
-                        />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="facebook">Facebook </label>
-                        <input 
-                            type="text" 
-                            id='facebook' 
-                            onChange={this.handleChange} 
-                        />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="businessName">Business Name </label>
+                        <label htmlFor="businessName">{profile.businessName} </label>
                         <input 
                             type="text" 
                             id='businessName' 
@@ -89,10 +68,34 @@ class ProfileForm extends Component {
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="businessDescription">Business Description </label>
+                        <label htmlFor="businessDescription">{profile.businessDescription} </label>
                         <textarea 
                             type="text" 
                             id='businessDescription' 
+                            onChange={this.handleChange} 
+                        />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="website">{profile.website} </label>
+                        <input 
+                            type="text" 
+                            id='website' 
+                            onChange={this.handleChange} 
+                        />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="facebook">{profile.facebook} </label>
+                        <input 
+                            type="text" 
+                            id='facebook' 
+                            onChange={this.handleChange} 
+                        />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="twitter">{profile.twitter} </label>
+                        <input 
+                            type="text" 
+                            id='twitter' 
                             onChange={this.handleChange} 
                         />
                     </div>
@@ -110,7 +113,7 @@ class ProfileForm extends Component {
                     /> */}
                     <div className="input-field">
                         <button className='profileFormSubmit'>
-                            Submit
+                            Update
                         </button>
                     </div>
                 </form>
@@ -121,8 +124,15 @@ class ProfileForm extends Component {
 
 }
 
-const mapStateToProps = (state) => {
-    return {
+const mapStateToProps = (state, ownProps) => {
+    console.log(state, 'state')
+    // const id = ownProps.match.params.id
+    const profile = state.firebase.profile
+    console.log(profile)
+    // const profile = businessProfiles ? businessProfiles[id] : null
+    // .console.log(profile, 'profile in mapstatetoprops')
+    return{
+        profile: profile,
         auth: state.firebase.auth
     }
 }
@@ -133,5 +143,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm)
-
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([{ collection: 'users'}]))(
+ProfileForm)
