@@ -18,22 +18,25 @@ export const createProfile = (businessProfile) => {
     }
 }
 
-export const updateProfile = (businessProfile) => {
+export const updateProfile = (users) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         // make async call to database
         const firestore = getFirestore();
         const profile = getState().firebase.profile
         const userID = getState().firebase.auth.uid;
-        firestore.collection('businessProfiles').add({
-            ...businessProfile,
+        firestore.collection('users').doc(userID).update({
+            ...users,
             firstName: profile.firstName,
             lastName: profile.lastName,
-            userID: userID,
-            createdAt: new Date()
+            businessName: profile.businessName,
+            businessDescription: profile.businessDescription,
+            website: profile.website,
+            facebook: profile.facebook,
+            twitter: profile.twitter,
         }).then(() => {
-            dispatch({ type: 'CREATE_PROFILE', businessProfile });
+            dispatch({ type: 'UPDATED_PROFILE', users });
         }).catch((err) => {
-            dispatch({ type: 'CREATE_PROFILE_ERROR', err });
+            dispatch({ type: 'UPDATE_PROFILE_ERROR', err });
         })
     }
 }

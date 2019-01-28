@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
 // import { auth } from '../../firebase';
-import {createProfile} from '../../store/actions/businessProfileActions'
+import {updateProfile} from '../../store/actions/businessProfileActions'
 import './ProfileForm.css'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
@@ -49,8 +49,9 @@ class ProfileForm extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
-        this.props.createProfile(this.state)
-        this.props.history.push('/')
+        this.props.updateProfile(this.state)
+        document.getElementById("profileForm").reset();
+        // this.props.history.push('/ProfileForm')
     }
 
       render() {
@@ -58,7 +59,23 @@ class ProfileForm extends Component {
         if (!auth.uid) return <Redirect to='/signin' />
         return (
             <div>
-                <form onSubmit={this.onSubmit}>
+                <form id='profileForm' onSubmit={this.onSubmit}>
+                    <div className="input-field">
+                        <label htmlFor="firstName">{profile.firstName} </label>
+                        <input 
+                            type="text" 
+                            id='firstName' 
+                            onChange={this.handleChange} 
+                        />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="lastName">{profile.lastName} </label>
+                        <input 
+                            type="text" 
+                            id='lastName' 
+                            onChange={this.handleChange} 
+                        />
+                    </div>
                     <div className="input-field">
                         <label htmlFor="businessName">{profile.businessName} </label>
                         <input 
@@ -139,7 +156,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createProfile: (businessProfile) => dispatch(createProfile(businessProfile))
+        updateProfile: (users) => dispatch(updateProfile(users))
     }
 }
 
