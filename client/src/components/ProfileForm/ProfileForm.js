@@ -13,6 +13,8 @@ import { firestoreConnect } from 'react-redux-firebase'
 
 class ProfileForm extends Component {
     state = {
+        firstName: '',
+        lastName: '',
         twitter: '',
         facebook: '',
         businessName: '',
@@ -65,6 +67,7 @@ class ProfileForm extends Component {
                         <input 
                             type="text" 
                             id='firstName' 
+                            defaultValue={profile.firstName}
                             onChange={this.handleChange} 
                         />
                     </div>
@@ -72,7 +75,8 @@ class ProfileForm extends Component {
                         <label htmlFor="lastName">{profile.lastName} </label>
                         <input 
                             type="text" 
-                            id='lastName' 
+                            id='lastName'
+                            defaultValue={profile.lastName}
                             onChange={this.handleChange} 
                         />
                     </div>
@@ -80,7 +84,8 @@ class ProfileForm extends Component {
                         <label htmlFor="businessName">{profile.businessName} </label>
                         <input 
                             type="text" 
-                            id='businessName' 
+                            id='businessName'
+                            defaultValue={profile.businessName}
                             onChange={this.handleChange} 
                         />
                     </div>
@@ -88,7 +93,8 @@ class ProfileForm extends Component {
                         <label htmlFor="businessDescription">{profile.businessDescription} </label>
                         <textarea 
                             type="text" 
-                            id='businessDescription' 
+                            id='businessDescription'
+                            defaultValue={profile.businessDescription} 
                             onChange={this.handleChange} 
                         />
                     </div>
@@ -97,6 +103,7 @@ class ProfileForm extends Component {
                         <input 
                             type="text" 
                             id='website' 
+                            defaultValue={profile.website}
                             onChange={this.handleChange} 
                         />
                     </div>
@@ -104,7 +111,8 @@ class ProfileForm extends Component {
                         <label htmlFor="facebook">{profile.facebook} </label>
                         <input 
                             type="text" 
-                            id='facebook' 
+                            id='facebook'
+                            defaultValue={profile.facebook}
                             onChange={this.handleChange} 
                         />
                     </div>
@@ -113,6 +121,7 @@ class ProfileForm extends Component {
                         <input 
                             type="text" 
                             id='twitter' 
+                            defaultValue={profile.twitter}
                             onChange={this.handleChange} 
                         />
                     </div>

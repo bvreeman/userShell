@@ -14,7 +14,7 @@ const HeaderNav = (props) => {
             <nav className="navbar">
                 <div className="row navbar-header">
                     <div className='col-md-3 col-xs-12 navbarLeft'>
-                        <NavLink to="/" className='navbarTitle'>Find A Consultant Now</NavLink>
+                        <NavLink to="/" className='navbarTitle'>CarSit</NavLink>
                     </div>
                     <NavLink to="/About" className="navbar-brand">About</NavLink>
                     <NavLink to='/ContactUsPage' className="navbar-brand">Contact Us</NavLink>

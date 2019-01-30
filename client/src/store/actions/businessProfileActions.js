@@ -25,18 +25,20 @@ export const updateProfile = (users) => {
         const profile = getState().firebase.profile
         const userID = getState().firebase.auth.uid;
         firestore.collection('users').doc(userID).update({
-            ...users,
-            firstName: profile.firstName,
-            lastName: profile.lastName,
-            businessName: profile.businessName,
-            businessDescription: profile.businessDescription,
-            website: profile.website,
-            facebook: profile.facebook,
-            twitter: profile.twitter,
+            ...profile,
+            firstName: users.firstName,
+            lastName: users.lastName,
+            businessName: users.businessName,
+            businessDescription: users.businessDescription,
+            website: users.website,
+            facebook: users.facebook,
+            twitter: users.twitter,
         }).then(() => {
-            dispatch({ type: 'UPDATED_PROFILE', users });
+            dispatch({ type: 'UPDATED_PROFILE', profile });
+            console.log('update successful')
         }).catch((err) => {
             dispatch({ type: 'UPDATE_PROFILE_ERROR', err });
+            console.log('There was an error', err)
         })
     }
 }
