@@ -13,6 +13,7 @@
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-firebase-file-uploader": "^2.4.2",
+    "react-inline-editing": "^1.0.10",
     "react-redux": "^5.1.1",
     "react-redux-firebase": "^2.2.6",
     "react-router-dom": "^4.3.1",
