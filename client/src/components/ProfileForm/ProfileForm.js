@@ -8,24 +8,27 @@ import { Redirect } from 'react-router-dom'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 
-
 // import FileUploader from "react-firebase-file-uploader";
 
 class ProfileForm extends Component {
-    state = {
-        firstName: '',
-        lastName: '',
-        twitter: '',
-        facebook: '',
-        businessName: '',
-        businessDescription: '',
-        website: '',
-        // imageName: '',
-        // imageTitle: "",
-        // generatedName: "",
-        // isUploading: false,
-        // progress: 0,
-        // imageURL: ""
+    constructor(props) {
+        super(props)
+        console.log(props, 'this is props in the super area')
+        this.state = {
+            firstName: props.profile.firstName,
+            lastName: props.profile.lastName,
+            twitter: props.profile.twitter,
+            facebook: props.profile.facebook,
+            businessName: props.profile.businessName,
+            businessDescription: props.profile.businessDescription,
+            website: props.profile.website,
+            // imageName: '',
+            // imageTitle: "",
+            // generatedName: "",
+            // isUploading: false,
+            // progress: 0,
+            // imageURL: ""
+        }
     }
     
     // handleChangeImageTitle = event => {
@@ -42,7 +45,15 @@ class ProfileForm extends Component {
     //     console.error(error);
     // };
 
+    // componentDidMount = () => {
+    //     console.log()
+    //     this.setState({
+           
+    //     })
+    // }
+
     handleChange = (e) => {
+        // console.log(e.target.value, 'e in handle change')
         this.setState({
             [e.target.id]: e.target.value
         })
@@ -57,71 +68,72 @@ class ProfileForm extends Component {
     }
 
       render() {
-        const { auth, profile } = this.props;
+        const { auth } = this.props;
+        // const { auth, profile } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
         return (
-            <div>
+            <div >
                 <form id='profileForm' onSubmit={this.onSubmit}>
                     <div className="input-field">
-                        <label htmlFor="firstName">{profile.firstName} </label>
+                        <label htmlFor="firstName">First Name </label>
                         <input 
                             type="text" 
                             id='firstName' 
-                            defaultValue={profile.firstName}
+                            value={this.state.firstName}
                             onChange={this.handleChange} 
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="lastName">{profile.lastName} </label>
+                        <label htmlFor="lastName">Last Name </label>
                         <input 
                             type="text" 
                             id='lastName'
-                            defaultValue={profile.lastName}
+                            value={this.state.lastName}
                             onChange={this.handleChange} 
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="businessName">{profile.businessName} </label>
+                        <label htmlFor="businessName">Business Name </label>
                         <input 
                             type="text" 
                             id='businessName'
-                            defaultValue={profile.businessName}
+                            value={this.state.businessName}
                             onChange={this.handleChange} 
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="businessDescription">{profile.businessDescription} </label>
+                        <label htmlFor="businessDescription">Business Description </label>
                         <textarea 
                             type="text" 
                             id='businessDescription'
-                            defaultValue={profile.businessDescription} 
+                            value={this.state.businessDescription} 
                             onChange={this.handleChange} 
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="website">{profile.website} </label>
+                        <label htmlFor="website">Website </label>
                         <input 
                             type="text" 
                             id='website' 
-                            defaultValue={profile.website}
+                            value={this.state.website}
                             onChange={this.handleChange} 
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="facebook">{profile.facebook} </label>
+                        <label htmlFor="facebook">Facebook </label>
                         <input 
                             type="text" 
                             id='facebook'
-                            defaultValue={profile.facebook}
+                            value={this.state.facebook}
                             onChange={this.handleChange} 
                         />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="twitter">{profile.twitter} </label>
+                        <label htmlFor="twitter">Twitter </label>
                         <input 
                             type="text" 
                             id='twitter' 
-                            defaultValue={profile.twitter}
+                            value={this.state.twitter}
                             onChange={this.handleChange} 
                         />
                     </div>
@@ -151,10 +163,10 @@ class ProfileForm extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state, 'state')
+    // console.log(state, 'state')
     // const id = ownProps.match.params.id
     const profile = state.firebase.profile
-    console.log(profile)
+    // console.log(profile)
     // const profile = businessProfiles ? businessProfiles[id] : null
     // .console.log(profile, 'profile in mapstatetoprops')
     return{
