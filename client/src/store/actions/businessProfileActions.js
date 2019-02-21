@@ -33,6 +33,7 @@ export const updateProfile = (users) => {
             website: users.website,
             facebook: users.facebook,
             twitter: users.twitter,
+            imageURL: users.imageURL,
         }).then(() => {
             dispatch({ type: 'UPDATED_PROFILE', profile });
             console.log('update successful')

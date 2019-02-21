@@ -8,12 +8,15 @@ import { Redirect } from 'react-router-dom'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 
-// import FileUploader from "react-firebase-file-uploader";
+import firebase from "firebase/app";
+import 'firebase/storage';
+
+import FileUploader from "react-firebase-file-uploader";
 
 class ProfileForm extends Component {
     constructor(props) {
         super(props)
-        console.log(props, 'this is props in the super area')
+        console.log(props.profile, 'this is props in the super area')
         this.state = {
             firstName: props.profile.firstName,
             lastName: props.profile.lastName,
@@ -22,28 +25,41 @@ class ProfileForm extends Component {
             businessName: props.profile.businessName,
             businessDescription: props.profile.businessDescription,
             website: props.profile.website,
-            // imageName: '',
-            // imageTitle: "",
-            // generatedName: "",
-            // isUploading: false,
-            // progress: 0,
-            // imageURL: ""
+            generatedName: '',
+            isUploading: false,
+            progress: 0,
+            imageURL: props.profile.imagURL,
         }
     }
-    
-    // handleChangeImageTitle = event => {
-    //     this.setState({ imageTitle: event.target.value });
-    //     document.getElementById('titleInput').value=''
-    // }
 
-    // handleUploadStart = () => this.setState({ isUploading: true, progress: 0 })
+    handleUploadStart = () => this.setState({ isUploading: true, progress: 0 })
     
-    // handleProgress = progress => this.setState({ progress });
+    handleProgress = progress => this.setState({ progress });
     
-    // handleUploadError = error => {
-    //     this.setState({ isUploading: false });
-    //     console.error(error);
-    // };
+    handleUploadError = error => {
+        this.setState({ isUploading: false });
+        console.error(error);
+    };
+
+    handleUploadSuccess = filename => {
+        this.setState({ generatedName: filename, progress: 100, isUploading: false });
+        firebase
+            .storage()
+            .ref("users")
+            .child(filename)
+            .getDownloadURL()
+            .then(url => {
+                this.setState({ 
+                    imageURL: url,
+                    generatedName: filename,
+                })
+            }).then(() => {
+                // this.databasePush()
+                console.log(this.props, 'checking props inside of upload success')
+                this.props.fetchNewImages()
+            })
+            // console.log(firebase.storage().ref("images").child(filename).getDownloadURL())
+    };  
 
     // componentDidMount = () => {
     //     console.log()
@@ -67,95 +83,120 @@ class ProfileForm extends Component {
         // this.props.history.push('/ProfileForm')
     }
 
+    onPhotoSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state)
+        this.props.updateProfile(this.state)
+        document.getElementById("pictureForm").reset();
+        // this.props.history.push('/ProfileForm')
+    }
+
       render() {
         const { auth } = this.props;
         // const { auth, profile } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
         return (
-            <div >
-                <form id='profileForm' onSubmit={this.onSubmit}>
-                    <div className="input-field">
-                        <label htmlFor="firstName">First Name </label>
-                        <input 
-                            type="text" 
-                            id='firstName' 
-                            value={this.state.firstName}
-                            onChange={this.handleChange} 
+            <div className='row'>
+                <div className='col-md-6 col-xs-12'>
+                    <form id='pictureForm' onSubmit ={this.onPhotoSubmit}>
+                        <FileUploader
+                            accept="users/*"
+                            name="generatedName"
+                            randomizeFilename
+                            // onSubmit={this.validateForm()}
+                            // storageRef={firebase.storage().ref("images")}
+                            // onUploadStart={this.handleUploadStart}
+                            onUploadError={this.handleUploadError}
+                            onUploadSuccess={this.handleUploadSuccess}
+                            onProgress={this.handleProgress}
+                            // onPushtoDatabase={this.handlePushToDatabase}
                         />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="lastName">Last Name </label>
-                        <input 
-                            type="text" 
-                            id='lastName'
-                            value={this.state.lastName}
-                            onChange={this.handleChange} 
-                        />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="businessName">Business Name </label>
-                        <input 
-                            type="text" 
-                            id='businessName'
-                            value={this.state.businessName}
-                            onChange={this.handleChange} 
-                        />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="businessDescription">Business Description </label>
-                        <textarea 
-                            type="text" 
-                            id='businessDescription'
-                            value={this.state.businessDescription} 
-                            onChange={this.handleChange} 
-                        />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="website">Website </label>
-                        <input 
-                            type="text" 
-                            id='website' 
-                            value={this.state.website}
-                            onChange={this.handleChange} 
-                        />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="facebook">Facebook </label>
-                        <input 
-                            type="text" 
-                            id='facebook'
-                            value={this.state.facebook}
-                            onChange={this.handleChange} 
-                        />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="twitter">Twitter </label>
-                        <input 
-                            type="text" 
-                            id='twitter' 
-                            value={this.state.twitter}
-                            onChange={this.handleChange} 
-                        />
-                    </div>
-                    {/* <FileUploader
-                        accept="image/*"
-                        name="generatedName"
-                        randomizeFilename
-                        // onSubmit={this.validateForm()}
-                        // storageRef={firebase.storage().ref("images")}
-                        // onUploadStart={this.handleUploadStart}
-                        onUploadError={this.handleUploadError}
-                        onUploadSuccess={this.handleUploadSuccess}
-                        onProgress={this.handleProgress}
-                        // onPushtoDatabase={this.handlePushToDatabase}
-                    /> */}
-                    <div className="input-field">
-                        <button className='profileFormSubmit'>
-                            Update
-                        </button>
-                    </div>
-                </form>
-
+                    </form>
+                </div>
+                <div className='col-md-6 col-xs-12'>
+                    <form id='profileForm' onSubmit={this.onSubmit}>
+                        <div className="input-field">
+                            <label htmlFor="firstName">First Name </label>
+                            <input 
+                                type="text" 
+                                id='firstName' 
+                                value={this.state.firstName}
+                                onChange={this.handleChange} 
+                            />
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor="lastName">Last Name </label>
+                            <input 
+                                type="text" 
+                                id='lastName'
+                                value={this.state.lastName}
+                                onChange={this.handleChange} 
+                            />
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor="businessName">Business Name </label>
+                            <input 
+                                type="text" 
+                                id='businessName'
+                                value={this.state.businessName}
+                                onChange={this.handleChange} 
+                            />
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor="businessDescription">Business Description </label>
+                            <textarea 
+                                type="text" 
+                                id='businessDescription'
+                                value={this.state.businessDescription} 
+                                onChange={this.handleChange} 
+                            />
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor="website">Website </label>
+                            <input 
+                                type="text" 
+                                id='website' 
+                                value={this.state.website}
+                                onChange={this.handleChange} 
+                            />
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor="facebook">Facebook </label>
+                            <input 
+                                type="text" 
+                                id='facebook'
+                                value={this.state.facebook}
+                                onChange={this.handleChange} 
+                            />
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor="twitter">Twitter </label>
+                            <input 
+                                type="text" 
+                                id='twitter' 
+                                value={this.state.twitter}
+                                onChange={this.handleChange} 
+                            />
+                        </div>
+                        {/* <FileUploader
+                            accept="image/*"
+                            name="generatedName"
+                            randomizeFilename
+                            // onSubmit={this.validateForm()}
+                            // storageRef={firebase.storage().ref("images")}
+                            // onUploadStart={this.handleUploadStart}
+                            onUploadError={this.handleUploadError}
+                            onUploadSuccess={this.handleUploadSuccess}
+                            onProgress={this.handleProgress}
+                            // onPushtoDatabase={this.handlePushToDatabase}
+                        /> */}
+                        <div className="input-field">
+                            <button className='profileFormSubmit'>
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         )
       }
