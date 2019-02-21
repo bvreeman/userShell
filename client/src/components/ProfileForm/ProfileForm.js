@@ -16,7 +16,6 @@ import FileUploader from "react-firebase-file-uploader";
 class ProfileForm extends Component {
     constructor(props) {
         super(props)
-        console.log(props.profile, 'this is props in the super area')
         this.state = {
             firstName: props.profile.firstName,
             lastName: props.profile.lastName,
@@ -32,8 +31,9 @@ class ProfileForm extends Component {
         }
     }
 
-    handleUploadStart = () => this.setState({ isUploading: true, progress: 0 })
-    
+    handleUploadStart = () => {
+        this.setState({ isUploading: true, progress: 0 })
+    }
     handleProgress = progress => this.setState({ progress });
     
     handleUploadError = error => {
@@ -54,11 +54,12 @@ class ProfileForm extends Component {
                     generatedName: filename,
                 })
             }).then(() => {
+                
                 // this.databasePush()
                 console.log(this.props, 'checking props inside of upload success')
-                this.props.fetchNewImages()
+                console.log(this.state, 'state after upload success')
+                // this.props.fetchNewImages()
             })
-            // console.log(firebase.storage().ref("images").child(filename).getDownloadURL())
     };  
 
     // componentDidMount = () => {
@@ -104,7 +105,7 @@ class ProfileForm extends Component {
                             name="generatedName"
                             randomizeFilename
                             // onSubmit={this.validateForm()}
-                            // storageRef={firebase.storage().ref("images")}
+                            storageRef={firebase.storage().ref("users")}
                             // onUploadStart={this.handleUploadStart}
                             onUploadError={this.handleUploadError}
                             onUploadSuccess={this.handleUploadSuccess}
