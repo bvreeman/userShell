@@ -10,20 +10,24 @@ const HeaderNav = (props) => {
     const { auth, businessProfile } = props;
     const links = auth.uid ? <SignedInLinks businessProfile={businessProfile} /> : <SignedOutLinks />
     return (
-        <div className="sticky headerContainer">
-            <nav className="navbar">
-                <div className="row navbar-header">
-                    <div className='col-md-3 col-xs-12 navbarLeft'>
-                        <NavLink to="/" className='navbarTitle'>CarSit</NavLink>
-                    </div>
-                    <NavLink to="/About" className="navbar-brand">About</NavLink>
-                    <NavLink to='/ContactUsPage' className="navbar-brand">Contact Us</NavLink>
-                    <a className="navbarRight socialItems fb-ic ml-0" rel="noopener noreferrer" href="https://www.facebook.com/mnvalleytransport/" target="_blank" style={{color: '#ffffff'}}><i className="fa fa-facebook white-text mr-lg-4"></i></a>
-                    {console.log('logged in?', auth.uid)}
-                    { links }
+        <nav className="sticky navbar">
+            <div className="row navbar-header">
+                <div className='col-md-2 col-xs-12 navbarLeft'>
+                    <NavLink to="/" className='navbarTitle'>CarSit</NavLink>
                 </div>
-            </nav>
-        </div>
+                <div className='col-md-8 col-xs-12 navbarCenter'>
+                    <div className='row allMenuItems'>
+                        <NavLink to="/About" className="navbar-brand">About</NavLink>
+                        <NavLink to='/ContactUsPage' className="navbar-brand">Contact Us</NavLink>
+                        { links }
+                        {console.log('logged in?', auth.uid)}
+                    </div>
+                </div>
+                <div className='col-md-1 col-xs-12 navbarRight'>
+                    <a className="socialItems" rel="noopener noreferrer" href="https://www.facebook.com/mnvalleytransport/" target="_blank"><i className="fa fa-facebook white-text mr-lg-4"></i></a>
+                </div>
+            </div>
+        </nav>
     )
 }
 

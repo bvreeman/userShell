@@ -10,6 +10,7 @@
 
 .navbarRight {
     float: right;
+    padding-top: 5px;
     /* margin-right: 20px; */
 }
 
@@ -53,6 +54,16 @@
     margin-bottom: 0px;
     padding: 0px;
     width: 100%;
+}
+
+.authMenuItems {
+    float: left;
+}
+
+.socialItems {
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 50px;
 }
 
 @media only screen and (max-width: 991px) {
