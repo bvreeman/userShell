@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
+import './ProfileDetails.css';
+
 
 const ProfileDetails = (props) => {
     const { profile, auth } = props;
@@ -10,13 +12,57 @@ const ProfileDetails = (props) => {
     
     if (profile) {
         return(
-            <div className='card' style={{width: "75%"}}>
-                <div className='card-body'>
-                    <h5 className='card-title'>{profile.businessName}</h5>
-                    <p className='card-text'>{profile.businessDescription}</p>
-                    <p className='card-text'>{profile.website}</p>
-                    <p className='card-text'>{profile.facebook}</p>
-                    <p className='card-text'>{profile.twitter}</p>
+            <div className='businessProfile' >
+                <h5 className='businessProfileName'>{profile.businessName}</h5>
+                <div className='row'>
+                    <div className='col-md-4 col-xs-12'>
+                        <img className='businessProfileImage' src={profile.imageURL} alt={profile.businessName} />
+                    </div>
+                    <div className='col-md-7 col-xs-12 businessProfileInfoBox'>
+                        <div className='row'>
+                            <div className='col-md-4 col-xs-12'>
+                                <h5 className='businessProfileLabel'>
+                                    What We Do:
+                                </h5>
+                            </div>
+                            <div className='col-md-8 col-xs-12'>
+                                <p className='businessProfileInfo'>{profile.businessDescription}</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className='row'>
+                            <div className='col-md-4 col-xs-12'>
+                                <h5 className='businessProfileLabel'>
+                                    Our Website:
+                                </h5>
+                            </div>
+                            <div className='col-md-8 col-xs-12'>
+                                    <p className='businessProfileInfo'>{profile.website}</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className='row'>
+                            <div className='col-md-4 col-xs-12'>
+                                <h5 className='businessProfileLabel'>
+                                    Our Facebook Page:
+                                </h5>
+                            </div>
+                            <div className='col-md-8 col-xs-12'>
+                                <p className='businessProfileInfo'>{profile.facebook}</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className='row'>
+                            <div className='col-md-4 col-xs-12'>
+                                <h5 className='businessProfileLabel'>
+                                    Our Twitter Handle:
+                                </h5>
+                            </div>
+                            <div className='col-md-8 col-xs-12'>
+                                <p className='businessProfileInfo'>{profile.twitter}</p>
+                            </div>
+                        </div>
+                    </div>  
                 </div>
             </div>
         )

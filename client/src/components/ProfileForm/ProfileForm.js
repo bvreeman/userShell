@@ -54,7 +54,7 @@ class ProfileForm extends Component {
                     generatedName: filename,
                 })
             }).then(() => {
-                
+
                 // this.databasePush()
                 console.log(this.props, 'checking props inside of upload success')
                 console.log(this.state, 'state after upload success')
@@ -63,14 +63,14 @@ class ProfileForm extends Component {
     };  
 
     // componentDidMount = () => {
-    //     console.log()
+    //     console.log(this.state, 'compDM props')
     //     this.setState({
-           
+
     //     })
     // }
 
     handleChange = (e) => {
-        // console.log(e.target.value, 'e in handle change')
+        console.log(e.target.value, 'e in handle change')
         this.setState({
             [e.target.id]: e.target.value
         })
@@ -86,7 +86,7 @@ class ProfileForm extends Component {
 
     onPhotoSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
+        console.log(this.state, 'state in photo submit')
         this.props.updateProfile(this.state)
         document.getElementById("pictureForm").reset();
         // this.props.history.push('/ProfileForm')
