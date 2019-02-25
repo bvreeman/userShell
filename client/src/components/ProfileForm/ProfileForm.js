@@ -93,12 +93,13 @@ class ProfileForm extends Component {
     }
 
       render() {
-        const { auth } = this.props;
+        const { profile, auth } = this.props;
         // const { auth, profile } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
         return (
             <div className='row'>
                 <div className='col-md-6 col-xs-12'>
+                    <img className='profileFormImage' src={profile.imageURL} alt={profile.businessName} />
                     <form id='pictureForm' onSubmit ={this.onPhotoSubmit}>
                         <FileUploader
                             accept="users/*"
