@@ -28,8 +28,20 @@ class ProfileForm extends Component {
             isUploading: false,
             progress: 0,
             imageURL: props.profile.imagURL,
-        }
-    }
+        }, () => {
+            localStorage.setItem(
+                'firstName', JSON.stringify(this.state.firstName),
+                'lastName', JSON.stringify(this.state.lastName),
+                'twitter', JSON.stringify(this.state.twitter),
+                'facebook', JSON.stringify(this.state.facebook),
+                'businessName', JSON.stringify(this.state.businessName),
+                'businessDescription', JSON.stringify(this.state.businessDescription),
+                'website', JSON.stringify(this.state.website),
+                'generatedName', JSON.stringify(this.state.generatedName),
+                'imageURL', JSON.stringify(this.state.imageURL)
+                )
+          }
+        };
 
     handleUploadStart = () => {
         this.setState({ isUploading: true, progress: 0 })
@@ -42,6 +54,8 @@ class ProfileForm extends Component {
     };
 
     handleUploadSuccess = filename => {
+        console.log(this.props.auth.uid,'props')
+        console.log('here', firebase.storage())
         this.setState({ generatedName: filename, progress: 100, isUploading: false });
         firebase
             .storage()
@@ -63,7 +77,7 @@ class ProfileForm extends Component {
     };  
 
     // componentDidMount = () => {
-    //     console.log(this.state, 'compDM props')
+    //     console.log(this.state, 'compDM')
     //     this.setState({
 
     //     })
