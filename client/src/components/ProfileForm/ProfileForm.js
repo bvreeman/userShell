@@ -72,7 +72,6 @@ class ProfileForm extends Component {
     // }
 
     handleChange = (e) => {
-        console.log(e.target.value, 'e in handle change')
         this.setState({
             [e.target.id]: e.target.value
         })
@@ -80,7 +79,6 @@ class ProfileForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
         this.props.updateProfile(this.state)
         document.getElementById("profileForm").reset();
         // this.props.history.push('/ProfileForm')
@@ -106,6 +104,20 @@ class ProfileForm extends Component {
         // console.log(cachedProfile, 'cached profile')
     }
 
+    // onSetResult = (result, key) => {
+    //     localStorage.setItem(key, JSON.stringify(result.hits));
+    //     this.setState({ 
+    //         firstName: result.firstName,
+    //         lastName: result.lastName,
+    //         twitter: result.twitter,
+    //         facebook: result.facebook,
+    //         businessName: result.businessName,
+    //         businessDescription: result.businessDescription,
+    //         website: result.website,
+    //      });
+    //      console.log(this.state, 'local storage work?')
+    //   }
+
     onPhotoSubmit = (e) => {
         e.preventDefault();
         console.log(this.state, 'state in photo submit')
@@ -113,20 +125,6 @@ class ProfileForm extends Component {
         document.getElementById("pictureForm").reset();
         // this.props.history.push('/ProfileForm')
     }
-    
-      onSetResult = (result, key) => {
-        localStorage.setItem(key, JSON.stringify(result.hits));
-        this.setState({ 
-            firstName: result.firstName,
-            lastName: result.lastName,
-            twitter: result.twitter,
-            facebook: result.facebook,
-            businessName: result.businessName,
-            businessDescription: result.businessDescription,
-            website: result.website,
-         });
-         console.log(this.state, 'local storage work?')
-      }
 
       render() {
         const { profile, auth } = this.props;
@@ -148,6 +146,7 @@ class ProfileForm extends Component {
                             onUploadSuccess={this.handleUploadSuccess}
                             onProgress={this.handleProgress}
                             onChange={this.handleChange} 
+                            value={this.state.imageURL}
                             // onPushtoDatabase={this.handlePushToDatabase}
                         />
                     </form>
