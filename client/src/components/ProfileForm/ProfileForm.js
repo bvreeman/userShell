@@ -28,20 +28,8 @@ class ProfileForm extends Component {
             isUploading: false,
             progress: 0,
             imageURL: props.profile.imagURL,
-        }, () => {
-            localStorage.setItem(
-                'firstName', JSON.stringify(this.state.firstName),
-                'lastName', JSON.stringify(this.state.lastName),
-                'twitter', JSON.stringify(this.state.twitter),
-                'facebook', JSON.stringify(this.state.facebook),
-                'businessName', JSON.stringify(this.state.businessName),
-                'businessDescription', JSON.stringify(this.state.businessDescription),
-                'website', JSON.stringify(this.state.website),
-                'generatedName', JSON.stringify(this.state.generatedName),
-                'imageURL', JSON.stringify(this.state.imageURL)
-                )
-          }
-        };
+        }
+    };
 
     handleUploadStart = () => {
         this.setState({ isUploading: true, progress: 0 })
@@ -96,6 +84,26 @@ class ProfileForm extends Component {
         this.props.updateProfile(this.state)
         document.getElementById("profileForm").reset();
         // this.props.history.push('/ProfileForm')
+        // const { value } = this.input;
+    
+        // if (value === '') {
+        //   return;
+        // }
+    
+        // const cachedProfile = localStorage.getItem(value);
+        // if (cachedProfile) {
+        //   this.setState({ 
+        //     firstName: JSON.parse(cachedProfile),
+        //     lastName: JSON.parse(cachedProfile),
+        //     twitter: JSON.parse(cachedProfile),
+        //     facebook: JSON.parse(cachedProfile),
+        //     businessName: JSON.parse(cachedProfile),
+        //     businessDescription:JSON.parse(cachedProfile),
+        //     website: JSON.parse(cachedProfile),
+        //  });
+        //   return;
+        // }
+        // console.log(cachedProfile, 'cached profile')
     }
 
     onPhotoSubmit = (e) => {
@@ -105,6 +113,20 @@ class ProfileForm extends Component {
         document.getElementById("pictureForm").reset();
         // this.props.history.push('/ProfileForm')
     }
+    
+      onSetResult = (result, key) => {
+        localStorage.setItem(key, JSON.stringify(result.hits));
+        this.setState({ 
+            firstName: result.firstName,
+            lastName: result.lastName,
+            twitter: result.twitter,
+            facebook: result.facebook,
+            businessName: result.businessName,
+            businessDescription: result.businessDescription,
+            website: result.website,
+         });
+         console.log(this.state, 'local storage work?')
+      }
 
       render() {
         const { profile, auth } = this.props;
@@ -125,6 +147,7 @@ class ProfileForm extends Component {
                             onUploadError={this.handleUploadError}
                             onUploadSuccess={this.handleUploadSuccess}
                             onProgress={this.handleProgress}
+                            onChange={this.handleChange} 
                             // onPushtoDatabase={this.handlePushToDatabase}
                         />
                     </form>
