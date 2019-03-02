@@ -33,12 +33,30 @@ export const updateProfile = (users) => {
             website: users.website,
             facebook: users.facebook,
             twitter: users.twitter,
-            imageURL: users.imageURL,
         }).then(() => {
             dispatch({ type: 'UPDATED_PROFILE', profile });
             console.log('update successful')
         }).catch((err) => {
             dispatch({ type: 'UPDATE_PROFILE_ERROR', err });
+            console.log('There was an error', err)
+        })
+    }
+}
+
+export const updatePhoto = (users) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        // make async call to database
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile
+        const userID = getState().firebase.auth.uid;
+        firestore.collection('users').doc(userID).update({
+            ...profile,
+            imageURL: users.imageURL,
+        }).then(() => {
+            dispatch({ type: 'UPDATED_PHOTO', profile });
+            console.log('store action update successful')
+        }).catch((err) => {
+            dispatch({ type: 'UPDATE_PHOTO_ERROR', err });
             console.log('There was an error', err)
         })
     }

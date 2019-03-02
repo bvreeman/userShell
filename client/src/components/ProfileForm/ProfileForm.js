@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
 // import { auth } from '../../firebase';
-import {updateProfile} from '../../store/actions/businessProfileActions'
+import {updateProfile, updatePhoto} from '../../store/actions/businessProfileActions'
 import './ProfileForm.css'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
@@ -32,6 +32,7 @@ class ProfileForm extends Component {
     };
 
     handleUploadStart = () => {
+        console.log('started upload')
         this.setState({ isUploading: true, progress: 0 })
     }
     handleProgress = progress => this.setState({ progress });
@@ -42,8 +43,7 @@ class ProfileForm extends Component {
     };
 
     handleUploadSuccess = filename => {
-        console.log(this.props.auth.uid,'props')
-        console.log('here', firebase.storage())
+        console.log('success')
         this.setState({ generatedName: filename, progress: 100, isUploading: false });
         firebase
             .storage()
@@ -55,21 +55,13 @@ class ProfileForm extends Component {
                     imageURL: url,
                     generatedName: filename,
                 })
-            }).then(() => {
-
-                // this.databasePush()
-                console.log(this.props, 'checking props inside of upload success')
-                console.log(this.state, 'state after upload success')
-                // this.props.fetchNewImages()
+                console.log(this.state, 'state inside of upload')
+                this.props.updatePhoto(this.state)
+                document.getElementById("pictureForm").reset();
             })
+
+            
     };  
-
-    // componentDidMount = () => {
-    //     console.log(this.state, 'compDM')
-    //     this.setState({
-
-    //     })
-    // }
 
     handleChange = (e) => {
         this.setState({
@@ -78,51 +70,19 @@ class ProfileForm extends Component {
     }
 
     onSubmit = (e) => {
+        console.log(this.props, 'props onSubmit')
+        console.log(this.state, 'state onSubmit')
         e.preventDefault();
         this.props.updateProfile(this.state)
         document.getElementById("profileForm").reset();
         // this.props.history.push('/ProfileForm')
-        // const { value } = this.input;
-    
-        // if (value === '') {
-        //   return;
-        // }
-    
-        // const cachedProfile = localStorage.getItem(value);
-        // if (cachedProfile) {
-        //   this.setState({ 
-        //     firstName: JSON.parse(cachedProfile),
-        //     lastName: JSON.parse(cachedProfile),
-        //     twitter: JSON.parse(cachedProfile),
-        //     facebook: JSON.parse(cachedProfile),
-        //     businessName: JSON.parse(cachedProfile),
-        //     businessDescription:JSON.parse(cachedProfile),
-        //     website: JSON.parse(cachedProfile),
-        //  });
-        //   return;
-        // }
-        // console.log(cachedProfile, 'cached profile')
     }
-
-    // onSetResult = (result, key) => {
-    //     localStorage.setItem(key, JSON.stringify(result.hits));
-    //     this.setState({ 
-    //         firstName: result.firstName,
-    //         lastName: result.lastName,
-    //         twitter: result.twitter,
-    //         facebook: result.facebook,
-    //         businessName: result.businessName,
-    //         businessDescription: result.businessDescription,
-    //         website: result.website,
-    //      });
-    //      console.log(this.state, 'local storage work?')
-    //   }
 
     onPhotoSubmit = (e) => {
         e.preventDefault();
         console.log(this.state, 'state in photo submit')
-        this.props.updateProfile(this.state)
-        document.getElementById("pictureForm").reset();
+        console.log(this.props, 'props in photo submit')
+
         // this.props.history.push('/ProfileForm')
     }
 
@@ -134,19 +94,18 @@ class ProfileForm extends Component {
             <div className='row'>
                 <div className='col-md-6 col-xs-12'>
                     <img className='profileFormImage' src={profile.imageURL} alt={profile.businessName} />
-                    <form id='pictureForm' onSubmit ={this.onPhotoSubmit}>
+                    <form id='pictureForm' >
+                        {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
                         <FileUploader
                             accept="users/*"
                             name="generatedName"
                             randomizeFilename
                             // onSubmit={this.validateForm()}
                             storageRef={firebase.storage().ref("users")}
-                            // onUploadStart={this.handleUploadStart}
+                            onUploadStart={this.handleUploadStart}
                             onUploadError={this.handleUploadError}
                             onUploadSuccess={this.handleUploadSuccess}
                             onProgress={this.handleProgress}
-                            onChange={this.handleChange} 
-                            value={this.state.imageURL}
                             // onPushtoDatabase={this.handlePushToDatabase}
                         />
                     </form>
@@ -256,7 +215,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateProfile: (users) => dispatch(updateProfile(users))
+        updateProfile: (users) => dispatch(updateProfile(users)),
+        updatePhoto: (users) => dispatch(updatePhoto(users))
     }
 }
 
