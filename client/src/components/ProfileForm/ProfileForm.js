@@ -63,6 +63,20 @@ class ProfileForm extends Component {
             
     };  
 
+    componentDidMount = (prevProps, prevState) => {
+        console.log(this.state, 'compDidUpdate state here?')
+        localStorage.setItem("firstName", JSON.stringify(this.state.firstName));
+        localStorage.setItem("lastName", JSON.stringify(this.state.lastName));
+        localStorage.setItem("twitter", JSON.stringify(this.state.twitter));
+        localStorage.setItem("facebook", JSON.stringify(this.state.facebook));
+        localStorage.setItem("businessName", JSON.stringify(this.state.businessName));
+        localStorage.setItem("businessDescription", JSON.stringify(this.state.businessDescription));
+        localStorage.setItem("website", JSON.stringify(this.state.website));
+        localStorage.setItem("imageURL", JSON.stringify(this.state.imageURL));
+        // localStorage.state = JSON.stringify(this.state);
+        console.log(localStorage.firstName, 'state in componentDidUpdate')
+    }
+
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
@@ -78,15 +92,8 @@ class ProfileForm extends Component {
         // this.props.history.push('/ProfileForm')
     }
 
-    onPhotoSubmit = (e) => {
-        e.preventDefault();
-        console.log(this.state, 'state in photo submit')
-        console.log(this.props, 'props in photo submit')
-
-        // this.props.history.push('/ProfileForm')
-    }
-
       render() {
+          console.log(localStorage, 'localStorage in app')
         const { profile, auth } = this.props;
         // const { auth, profile } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
@@ -117,7 +124,7 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='firstName' 
-                                value={this.state.firstName}
+                                value={localStorage.firstName}
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -126,7 +133,7 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='lastName'
-                                value={this.state.lastName}
+                                value={localStorage.lastName}
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -135,7 +142,7 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='businessName'
-                                value={this.state.businessName}
+                                value={localStorage.businessName}
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -144,7 +151,7 @@ class ProfileForm extends Component {
                             <textarea 
                                 type="text" 
                                 id='businessDescription'
-                                value={this.state.businessDescription} 
+                                value={localStorage.businessDescription} 
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -153,7 +160,7 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='website' 
-                                value={this.state.website}
+                                value={localStorage.website}
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -162,7 +169,7 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='facebook'
-                                value={this.state.facebook}
+                                value={localStorage.facebook}
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -171,7 +178,7 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='twitter' 
-                                value={this.state.twitter}
+                                value={localStorage.twitter}
                                 onChange={this.handleChange} 
                             />
                         </div>
