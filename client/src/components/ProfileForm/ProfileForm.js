@@ -4,11 +4,14 @@ import React, { Component } from 'react';
 import {updateProfile, updatePhoto} from '../../store/actions/businessProfileActions'
 import './ProfileForm.css'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router-dom'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 // import ls from 'local-storage';
 import Select from 'react-select';
+// import CreatableSelect from 'react-select/lib/Creatable';
+
 
 
 
@@ -44,17 +47,18 @@ class ProfileForm extends Component {
             businessName: '',
             businessDescription: '',
             website: '',
-            typeOfConsulting: [],
+            typeOfConsulting: null,
             generatedName: '',
             isUploading: false,
             progress: 0,
             imageURL: '',
+            isEditing: true
         }
     };
 
     static getDerivedStateFromProps(props, state) {
         if ((props.profile.firstName !== state.firstName) && ( state.firstName === undefined ||  state.firstName === "")   ) {
-          return {
+            return {
             firstName: props.profile.firstName,
             lastName: props.profile.lastName,
             twitter: props.profile.twitter,
@@ -107,10 +111,16 @@ class ProfileForm extends Component {
     }
 
     handleMultiSelectChange = (typeOfConsulting) => {
-        this.setState({ typeOfConsulting });
         console.log(`Option selected:`, typeOfConsulting);
+        this.setState({ typeOfConsulting });
         console.log(this.state, 'state after multiselectchange')
       }
+
+      toggleEditing = () => {
+        this.setState((prevState, props) => ({
+            isEditing: !prevState.isEditing
+          }));
+    }
 
     onSubmit = (e) => {
         console.log(this.props, 'props onSubmit')
@@ -119,6 +129,7 @@ class ProfileForm extends Component {
         this.props.updateProfile(this.state)
         document.getElementById("profileForm").reset();
         // this.props.history.push('/ProfileForm')
+        this.toggleEditing()
     }
 
       render() {
@@ -127,117 +138,123 @@ class ProfileForm extends Component {
         if (!auth.uid) return <Redirect to='/signin' />
         return (
             <div className='row'>
-                <div className='col-md-6 col-xs-12'>
+                <div className=' profile-image-container'>               
                     <img className='profileFormImage' src={profile.imageURL} alt={profile.businessName} />
-                    <form id='pictureForm' >
-                        {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-                        <FileUploader
-                            accept="users/*"
-                            name="generatedName"
-                            randomizeFilename
-                            // onSubmit={this.validateForm()}
-                            storageRef={firebase.storage().ref("users")}
-                            onUploadStart={this.handleUploadStart}
-                            onUploadError={this.handleUploadError}
-                            onUploadSuccess={this.handleUploadSuccess}
-                            onProgress={this.handleProgress}
-                            // onPushtoDatabase={this.handlePushToDatabase}
-                        />
-                    </form>
-                </div>
-                <div className='col-md-6 col-xs-12'>
-                    <form id='profileForm' onSubmit={this.onSubmit}>
-                        <div className="input-field">
-                            <label htmlFor="firstName">First Name </label>
-                            <input 
-                                type="text" 
-                                id='firstName' 
-                                value={this.state.firstName}
-                                onChange={this.handleChange} 
+                    { this.state.isEditing ? 
+                    <div className="profile-static-container">
+                        <h1> {this.state.firstName}  {this.state.lastName} </h1>
+                        <p> Business Name: {this.state.businessName}</p>
+                        <p> Business Description: {this.state.businessDescription}</p>
+                        <p> Website: {this.state.website}</p>
+                        <p> Twitter: {this.state.twitter}</p>
+                        <p> Facebook: {this.state.facebook} </p>
+                        {/* <p> Type Of Consulting: {this.state.typeOfConsulting}</p> */}
+                    </div>
+                        :
+                    <div className='col-md-6 col-xs-12'>
+                        <form id='pictureForm' >
+                            {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
+                            <FileUploader
+                                accept="users/*"
+                                name="generatedName"
+                                randomizeFilename
+                                // onSubmit={this.validateForm()}
+                                storageRef={firebase.storage().ref("users")}
+                                onUploadStart={this.handleUploadStart}
+                                onUploadError={this.handleUploadError}
+                                onUploadSuccess={this.handleUploadSuccess}
+                                onProgress={this.handleProgress}
+                                // onPushtoDatabase={this.handlePushToDatabase}
                             />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="lastName">Last Name </label>
-                            <input 
-                                type="text" 
-                                id='lastName'
-                                value={this.state.lastName}
-                                onChange={this.handleChange} 
+                        </form>
+                        <form id='profileForm' onSubmit={this.onSubmit}>
+                            <div className="input-field">
+                                <label htmlFor="firstName">First Name </label>
+                                <input 
+                                    type="text" 
+                                    id='firstName' 
+                                    value={this.state.firstName}
+                                    onChange={this.handleChange} 
+                                />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="lastName">Last Name </label>
+                                <input 
+                                    type="text" 
+                                    id='lastName'
+                                    value={this.state.lastName}
+                                    onChange={this.handleChange} 
+                                />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="businessName">Business Name </label>
+                                <input 
+                                    type="text" 
+                                    id='businessName'
+                                    value={this.state.businessName}
+                                    onChange={this.handleChange} 
+                                />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="businessDescription">Business Description </label>
+                                <textarea 
+                                    type="text" 
+                                    id='businessDescription'
+                                    value={this.state.businessDescription} 
+                                    onChange={this.handleChange} 
+                                />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="website">Website </label>
+                                <input 
+                                    type="text" 
+                                    id='website' 
+                                    value={this.state.website}
+                                    onChange={this.handleChange} 
+                                />
+                            </div>
+                            <div className='input-field'>
+                                <label htmlFor="typeOfConsulting">Type of Consulting</label>
+                            </div>
+                            {/* <CreatableSelect */}
+                            < Select
+                                id='typeOfConsulting'
+                                value={this.state.typeOfConsulting}
+                                onChange={this.handleMultiSelectChange}
+                                options={consultingOptions}
+                                isMulti='true'
+                                isSearchable='true'
                             />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="businessName">Business Name </label>
-                            <input 
-                                type="text" 
-                                id='businessName'
-                                value={this.state.businessName}
-                                onChange={this.handleChange} 
-                            />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="businessDescription">Business Description </label>
-                            <textarea 
-                                type="text" 
-                                id='businessDescription'
-                                value={this.state.businessDescription} 
-                                onChange={this.handleChange} 
-                            />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="website">Website </label>
-                            <input 
-                                type="text" 
-                                id='website' 
-                                value={this.state.website}
-                                onChange={this.handleChange} 
-                            />
-                        </div>
-                        <div className='input-field'>
-                            <label htmlFor="typeOfConsulting">Type of Consulting</label>
-                        </div>
-                        <Select
-                            id='typeOfConsulting'
-                            value={this.state.typeOfConsulting}
-                            onChange={this.handleMultiSelectChange}
-                            options={consultingOptions}
-                            isMulti='true'
-                        />
-                        <div className="input-field">
-                            <label htmlFor="facebook">Facebook </label>
-                            <input 
-                                type="text" 
-                                id='facebook'
-                                value={this.state.facebook}
-                                onChange={this.handleChange} 
-                            />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="twitter">Twitter </label>
-                            <input 
-                                type="text" 
-                                id='twitter' 
-                                value={this.state.twitter}
-                                onChange={this.handleChange} 
-                            />
-                        </div>
-                        {/* <FileUploader
-                            accept="image/*"
-                            name="generatedName"
-                            randomizeFilename
-                            // onSubmit={this.validateForm()}
-                            // storageRef={firebase.storage().ref("images")}
-                            // onUploadStart={this.handleUploadStart}
-                            onUploadError={this.handleUploadError}
-                            onUploadSuccess={this.handleUploadSuccess}
-                            onProgress={this.handleProgress}
-                            // onPushtoDatabase={this.handlePushToDatabase}
-                        /> */}
-                        <div className="input-field">
-                            <button className='profileFormSubmit'>
-                                Update
-                            </button>
-                        </div>
-                    </form>
+                            <div className="input-field">
+                                <label htmlFor="facebook">Facebook </label>
+                                <input 
+                                    type="text" 
+                                    id='facebook'
+                                    value={this.state.facebook}
+                                    onChange={this.handleChange} 
+                                />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="twitter">Twitter </label>
+                                <input 
+                                    type="text" 
+                                    id='twitter' 
+                                    value={this.state.twitter}
+                                    onChange={this.handleChange} 
+                                />
+                            </div>
+                            <div className="input-field">
+                                <button className='profileFormSubmit'>
+                                    Update
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    }
+                    <button className={this.state.isEditing ? "btn btn-edit " :"btn btn-edit btn-edit-active"}  onClick={() => this.toggleEditing()} > Edit </button>
+                    <div className='col-md-12 col-xs-12 profileFormButtonsContainer'>
+                        <NavLink to='/' className='btn   btn-edit ProfileFormPageButton'>Home</NavLink>
+                    </div>
                 </div>
             </div>
         )
