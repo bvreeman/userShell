@@ -12,10 +12,10 @@ const HeaderNav = (props) => {
     return (
         <nav className="sticky navbar">
             <div className="row navbar-header">
-                <div className='col-md-2 col-xs-12 navbarLeft'>
-                    <NavLink to="/" className='navbarTitle'>CarSit</NavLink>
+                <div className='col-md-3 col-xs-12 navbarLeft'>
+                    <NavLink to="/" className='navbarTitle'>Find A Consultant Now</NavLink>
                 </div>
-                <div className='col-md-8 col-xs-12 navbarCenter'>
+                <div className='col-md-7 col-xs-12 navbarCenter'>
                     <div className='row allMenuItems'>
                         <NavLink to="/About" className="navbar-brand">About</NavLink>
                         <NavLink to='/ContactUsPage' className="navbar-brand">Contact Us</NavLink>

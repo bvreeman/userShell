@@ -7,16 +7,54 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
+// import ls from 'local-storage';
+import Select from 'react-select';
+
+
 
 import firebase from "firebase/app";
 import 'firebase/storage';
 
 import FileUploader from "react-firebase-file-uploader";
 
+const consultingOptions = [
+    { value: 'Organizational Change Management', label: 'Organizational Change Management' },
+    { value: 'Leadership Development', label: 'Leadership Development' },
+    { value: 'Culture Change', label: 'Culture Change' },
+    { value: 'Business Analysis', label: 'Business Analysis' },
+    { value: 'Financial Advisory', label: 'Financial Advisory' },
+    { value: 'Risk and Compliance', label: 'Risk and Compliance' },
+    { value: 'Management', label: 'Management' },
+    { value: 'Strategy', label: 'Strategy' },
+    { value: 'Operations', label: 'Operations' },
+    { value: 'Human Resources', label: 'Human Resources' },
+    { value: 'IT', label: 'IT' },
+    { value: 'Environment', label: 'Environment' },
+    { value: 'Change Management', label: 'Change Management' }
+  ];
+
 class ProfileForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            firstName: '',
+            lastName: '',
+            twitter: '',
+            facebook: '',
+            businessName: '',
+            businessDescription: '',
+            website: '',
+            typeOfConsulting: [],
+            generatedName: '',
+            isUploading: false,
+            progress: 0,
+            imageURL: '',
+        }
+    };
+
+    static getDerivedStateFromProps(props, state) {
+        if ((props.profile.firstName !== state.firstName) && ( state.firstName === undefined ||  state.firstName === "")   ) {
+          return {
             firstName: props.profile.firstName,
             lastName: props.profile.lastName,
             twitter: props.profile.twitter,
@@ -24,12 +62,12 @@ class ProfileForm extends Component {
             businessName: props.profile.businessName,
             businessDescription: props.profile.businessDescription,
             website: props.profile.website,
-            generatedName: '',
-            isUploading: false,
-            progress: 0,
+            typeOfConsulting: props.profile.typeOfConsulting,
             imageURL: props.profile.imagURL,
+          };
         }
-    };
+        return null;
+      }
 
     handleUploadStart = () => {
         console.log('started upload')
@@ -59,29 +97,20 @@ class ProfileForm extends Component {
                 this.props.updatePhoto(this.state)
                 document.getElementById("pictureForm").reset();
             })
-
-            
     };  
 
-    componentDidMount = (prevProps, prevState) => {
-        console.log(this.state, 'compDidUpdate state here?')
-        localStorage.setItem("firstName", JSON.stringify(this.state.firstName));
-        localStorage.setItem("lastName", JSON.stringify(this.state.lastName));
-        localStorage.setItem("twitter", JSON.stringify(this.state.twitter));
-        localStorage.setItem("facebook", JSON.stringify(this.state.facebook));
-        localStorage.setItem("businessName", JSON.stringify(this.state.businessName));
-        localStorage.setItem("businessDescription", JSON.stringify(this.state.businessDescription));
-        localStorage.setItem("website", JSON.stringify(this.state.website));
-        localStorage.setItem("imageURL", JSON.stringify(this.state.imageURL));
-        // localStorage.state = JSON.stringify(this.state);
-        console.log(localStorage.firstName, 'state in componentDidUpdate')
-    }
-
     handleChange = (e) => {
+        console.log(e.target, 'e.target in handle change')
         this.setState({
             [e.target.id]: e.target.value
         })
     }
+
+    handleMultiSelectChange = (typeOfConsulting) => {
+        this.setState({ typeOfConsulting });
+        console.log(`Option selected:`, typeOfConsulting);
+        console.log(this.state, 'state after multiselectchange')
+      }
 
     onSubmit = (e) => {
         console.log(this.props, 'props onSubmit')
@@ -93,7 +122,6 @@ class ProfileForm extends Component {
     }
 
       render() {
-          console.log(localStorage, 'localStorage in app')
         const { profile, auth } = this.props;
         // const { auth, profile } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
@@ -124,7 +152,7 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='firstName' 
-                                value={localStorage.firstName}
+                                value={this.state.firstName}
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -133,7 +161,7 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='lastName'
-                                value={localStorage.lastName}
+                                value={this.state.lastName}
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -142,7 +170,7 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='businessName'
-                                value={localStorage.businessName}
+                                value={this.state.businessName}
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -151,7 +179,7 @@ class ProfileForm extends Component {
                             <textarea 
                                 type="text" 
                                 id='businessDescription'
-                                value={localStorage.businessDescription} 
+                                value={this.state.businessDescription} 
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -160,16 +188,26 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='website' 
-                                value={localStorage.website}
+                                value={this.state.website}
                                 onChange={this.handleChange} 
                             />
                         </div>
+                        <div className='input-field'>
+                            <label htmlFor="typeOfConsulting">Type of Consulting</label>
+                        </div>
+                        <Select
+                            id='typeOfConsulting'
+                            value={this.state.typeOfConsulting}
+                            onChange={this.handleMultiSelectChange}
+                            options={consultingOptions}
+                            isMulti='true'
+                        />
                         <div className="input-field">
                             <label htmlFor="facebook">Facebook </label>
                             <input 
                                 type="text" 
                                 id='facebook'
-                                value={localStorage.facebook}
+                                value={this.state.facebook}
                                 onChange={this.handleChange} 
                             />
                         </div>
@@ -178,7 +216,7 @@ class ProfileForm extends Component {
                             <input 
                                 type="text" 
                                 id='twitter' 
-                                value={localStorage.twitter}
+                                value={this.state.twitter}
                                 onChange={this.handleChange} 
                             />
                         </div>

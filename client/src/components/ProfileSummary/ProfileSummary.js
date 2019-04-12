@@ -3,7 +3,7 @@ import React from 'react'
 import './ProfileSummary.css'
 
 const ProfileSummary = ({profile}) => {
-    console.log('profile inside of profileSummary', profile)
+    // console.log('profile inside of profileSummary', profile)
     return (
         <div className='profileCard' style={{width: "18rem"}}>
             <h5 className='profileSummaryBusinessName'>{profile.businessName}</h5>
