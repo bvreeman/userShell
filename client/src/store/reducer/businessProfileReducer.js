@@ -3,11 +3,11 @@ const initState = {
         { id: '1', businessName: 'Sunshine Consulting', 
         businessDescription: 'We perform solar panel consulting',
         website: 'www.sunshinesolarconsulting.com',
-        facebookPage: 'www.facebook.com',
-        twitterHandle: 'www.twitter.com',
+        facebook: 'www.facebook.com',
+        twitter: 'www.twitter.com',
         instagramHandle: 'www.instagram.com',
         consultingType: 'Construction, Solar, Environmental',
-        businessExperience: 'I put solar panels on the Spanish Palace' }
+        typeOfConsultant: []}
     ]
 }
 

@@ -36,6 +36,8 @@ const consultingOptions = [
     { value: 'Change Management', label: 'Change Management' }
   ];
 
+  let consultingChoices;
+
 class ProfileForm extends Component {
     constructor(props) {
         super(props)
@@ -47,17 +49,19 @@ class ProfileForm extends Component {
             businessName: '',
             businessDescription: '',
             website: '',
-            typeOfConsulting: null,
+            typeOfConsulting: [],
             generatedName: '',
             isUploading: false,
             progress: 0,
             imageURL: '',
-            isEditing: true
+            isEditing: true,
         }
     };
 
     static getDerivedStateFromProps(props, state) {
-        if ((props.profile.firstName !== state.firstName) && ( state.firstName === undefined ||  state.firstName === "")   ) {
+        if ((props.profile.firstName !== state.firstName)) {
+            // props.profile.typeOfConsulting.map((consulting) => 
+            // console.log(consulting.value))
             return {
             firstName: props.profile.firstName,
             lastName: props.profile.lastName,
@@ -69,9 +73,27 @@ class ProfileForm extends Component {
             typeOfConsulting: props.profile.typeOfConsulting,
             imageURL: props.profile.imagURL,
           };
+
         }
         return null;
       }
+
+    // static getDerivedStateFromProps(props, state) {
+    //     if ((props.profile.firstName !== state.firstName) && ( state.firstName === undefined ||  state.firstName === "")   ) {
+    //         return {
+    //         firstName: props.profile.firstName,
+    //         lastName: props.profile.lastName,
+    //         twitter: props.profile.twitter,
+    //         facebook: props.profile.facebook,
+    //         businessName: props.profile.businessName,
+    //         businessDescription: props.profile.businessDescription,
+    //         website: props.profile.website,
+    //         typeOfConsulting: props.profile.typeOfConsulting,
+    //         imageURL: props.profile.imagURL,
+    //       };
+    //     }
+    //     return null;
+    //   }
 
     handleUploadStart = () => {
         console.log('started upload')
@@ -110,6 +132,11 @@ class ProfileForm extends Component {
         })
     }
 
+    componentDidUpdate = () => {
+        consultingChoices = this.state.typeOfConsulting.map((consulting) =>  consulting.value)
+        // console.log(consultingChoices.join(', '), 'consulting choices')
+    }
+
     handleMultiSelectChange = (typeOfConsulting) => {
         console.log(`Option selected:`, typeOfConsulting);
         this.setState({ typeOfConsulting });
@@ -136,6 +163,10 @@ class ProfileForm extends Component {
         const { profile, auth } = this.props;
         // const { auth, profile } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
+        // this.state.typeOfConsulting.map((consulting) => 
+        //     console.log(consulting.value))
+        // console.log(this.state.typeOfConsulting, 'typeOfConsulting')
+        console.log(this.state.userConsultingChoices, 'consultingChoices')
         return (
             <div className='row'>
                 <div className=' profile-image-container'>               
@@ -148,7 +179,8 @@ class ProfileForm extends Component {
                         <p> Website: {this.state.website}</p>
                         <p> Twitter: {this.state.twitter}</p>
                         <p> Facebook: {this.state.facebook} </p>
-                        {/* <p> Type Of Consulting: {this.state.typeOfConsulting}</p> */}
+                        {/* {console.log(this.state.typeOfConsulting, 'typeOfConsulting inside of return')} */}
+                        {/* <p> Type Of Consulting: {consultingChoices.join(', ')}</p> */}
                     </div>
                         :
                     <div className='col-md-6 col-xs-12'>
