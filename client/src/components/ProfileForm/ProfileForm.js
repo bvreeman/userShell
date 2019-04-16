@@ -55,6 +55,7 @@ class ProfileForm extends Component {
             progress: 0,
             imageURL: '',
             isEditing: true,
+            consultingStuff: '',
         }
     };
 
@@ -76,6 +77,7 @@ class ProfileForm extends Component {
 
         }
         return null;
+        
       }
 
     // static getDerivedStateFromProps(props, state) {
@@ -134,7 +136,10 @@ class ProfileForm extends Component {
 
     componentDidUpdate = () => {
         consultingChoices = this.state.typeOfConsulting.map((consulting) =>  consulting.value)
-        // console.log(consultingChoices.join(', '), 'consulting choices')
+        console.log(consultingChoices.join(', '), 'consulting choices')
+        // this.setState ({
+        //     consultingStuff: consultingChoices
+        // })
     }
 
     handleMultiSelectChange = (typeOfConsulting) => {
@@ -166,7 +171,6 @@ class ProfileForm extends Component {
         // this.state.typeOfConsulting.map((consulting) => 
         //     console.log(consulting.value))
         // console.log(this.state.typeOfConsulting, 'typeOfConsulting')
-        console.log(this.state.userConsultingChoices, 'consultingChoices')
         return (
             <div className='row'>
                 <div className=' profile-image-container'>               
@@ -180,7 +184,7 @@ class ProfileForm extends Component {
                         <p> Twitter: {this.state.twitter}</p>
                         <p> Facebook: {this.state.facebook} </p>
                         {/* {console.log(this.state.typeOfConsulting, 'typeOfConsulting inside of return')} */}
-                        {/* <p> Type Of Consulting: {consultingChoices.join(', ')}</p> */}
+                        <p> Type Of Consulting: {this.state.consultingStuff}</p>
                     </div>
                         :
                     <div className='col-md-6 col-xs-12'>
