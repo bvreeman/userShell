@@ -63,6 +63,10 @@ class ProfileForm extends Component {
         if ((props.profile.firstName !== state.firstName)) {
             // props.profile.typeOfConsulting.map((consulting) => 
             // console.log(consulting.value))
+            // props.profile.typeOfConsulting.map((consulting) => {
+            //     console.log(consulting.value)
+            // })
+            console.log(props.profile.typeOfConsulting)
             return {
             firstName: props.profile.firstName,
             lastName: props.profile.lastName,
