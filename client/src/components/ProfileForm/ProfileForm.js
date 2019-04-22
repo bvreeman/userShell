@@ -12,9 +12,6 @@ import { firestoreConnect } from 'react-redux-firebase'
 import Select from 'react-select';
 // import CreatableSelect from 'react-select/lib/Creatable';
 
-
-
-
 import firebase from "firebase/app";
 import 'firebase/storage';
 
@@ -61,12 +58,7 @@ class ProfileForm extends Component {
 
     static getDerivedStateFromProps(props, state) {
         if ((props.profile.firstName !== state.firstName)) {
-            // props.profile.typeOfConsulting.map((consulting) => 
-            // console.log(consulting.value))
-            // props.profile.typeOfConsulting.map((consulting) => {
-            //     console.log(consulting.value)
-            // })
-            console.log(props.profile.typeOfConsulting)
+            // console.log(props.profile.typeOfConsulting)
             return {
             firstName: props.profile.firstName,
             lastName: props.profile.lastName,
@@ -80,26 +72,8 @@ class ProfileForm extends Component {
           };
 
         }
-        return null;
-        
+        return null; 
       }
-
-    // static getDerivedStateFromProps(props, state) {
-    //     if ((props.profile.firstName !== state.firstName) && ( state.firstName === undefined ||  state.firstName === "")   ) {
-    //         return {
-    //         firstName: props.profile.firstName,
-    //         lastName: props.profile.lastName,
-    //         twitter: props.profile.twitter,
-    //         facebook: props.profile.facebook,
-    //         businessName: props.profile.businessName,
-    //         businessDescription: props.profile.businessDescription,
-    //         website: props.profile.website,
-    //         typeOfConsulting: props.profile.typeOfConsulting,
-    //         imageURL: props.profile.imagURL,
-    //       };
-    //     }
-    //     return null;
-    //   }
 
     handleUploadStart = () => {
         console.log('started upload')
