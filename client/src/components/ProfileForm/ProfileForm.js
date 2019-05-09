@@ -11,6 +11,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 // import ls from 'local-storage';
 import Select from 'react-select';
 // import CreatableSelect from 'react-select/lib/Creatable';
+import noPhoto from '../../images/noPhoto.png'
 
 import firebase from "firebase/app";
 import 'firebase/storage';
@@ -113,11 +114,10 @@ class ProfileForm extends Component {
     }
 
     componentDidUpdate = () => {
-        consultingChoices = this.state.typeOfConsulting.map((consulting) =>  consulting.value)
-        console.log(consultingChoices.join(', '), 'consulting choices')
-        // this.setState ({
-        //     consultingStuff: consultingChoices
-        // })
+        if (consultingChoices !==undefined) {
+            consultingChoices = this.state.typeOfConsulting.map((consulting) =>  consulting.value)
+            console.log(consultingChoices.join(', '), 'consulting choices')
+        }
     }
 
     handleMultiSelectChange = (typeOfConsulting) => {
@@ -152,17 +152,21 @@ class ProfileForm extends Component {
         return (
             <div className='row'>
                 <div className=' profile-image-container'>               
-                    <img className='profileFormImage' src={profile.imageURL} alt={profile.businessName} />
-                    { this.state.isEditing ? 
+                    {profile.imageURL ?
+                        <img className='profileFormImage' src={profile.imageURL} alt={profile.businessName} />
+                        :
+                        <img className='profileFormImage' src={noPhoto} alt={profile.businessName} />
+                    }                        { this.state.isEditing ? 
                     <div className="profile-static-container">
                         <h1> {this.state.firstName}  {this.state.lastName} </h1>
                         <p> Business Name: {this.state.businessName}</p>
                         <p> Business Description: {this.state.businessDescription}</p>
-                        <p> Website: {this.state.website}</p>
-                        <p> Twitter: {this.state.twitter}</p>
-                        <p> Facebook: {this.state.facebook} </p>
+                        <p> Website: <a href={`http://${this.state.website}`} target="_blank" rel="noopener noreferrer">{this.state.website}</a></p>
+                        <p> Twitter: <a href={`http://${this.state.twitter}`} target="_blank" rel="noopener noreferrer">{this.state.twitter}</a></p>
+                        <p> Facebook: <a href={`http://${this.state.facebook}`} target="_blank" rel="noopener noreferrer">{this.state.facebook}</a> </p>
                         {/* {console.log(this.state.typeOfConsulting, 'typeOfConsulting inside of return')} */}
                         <p> Type Of Consulting: {this.state.consultingStuff}</p>
+                        <button className={this.state.isEditing ? "btn btn-edit " :"btn btn-edit btn-edit-active"}  onClick={() => this.toggleEditing()} > Edit </button>
                     </div>
                         :
                     <div className='col-md-6 col-xs-12'>
@@ -263,9 +267,9 @@ class ProfileForm extends Component {
                                 </button>
                             </div>
                         </form>
+                        <button className={this.state.isEditing ? "btn btn-edit " :"btn btn-edit btn-edit-active"}  onClick={() => this.toggleEditing()} > Cancel </button>
                     </div>
                     }
-                    <button className={this.state.isEditing ? "btn btn-edit " :"btn btn-edit btn-edit-active"}  onClick={() => this.toggleEditing()} > Edit </button>
                     <div className='col-md-12 col-xs-12 profileFormButtonsContainer'>
                         <NavLink to='/' className='btn   btn-edit ProfileFormPageButton'>Home</NavLink>
                     </div>
