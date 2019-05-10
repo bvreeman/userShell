@@ -24,7 +24,7 @@ const HeaderNav = (props) => {
                     </div>
                 </div>
                 <div className='col-md-1 col-xs-12 navbarRight'>
-                    <a className="socialItems" rel="noopener noreferrer" href="https://www.facebook.com/mnvalleytransport/" target="_blank"><i className="fa fa-facebook white-text mr-lg-4"></i></a>
+                    <a className="socialItems" rel="noopener noreferrer" href="https://www.facebook.com/" target="_blank"><i className="fa fa-facebook white-text mr-lg-4"></i></a>
                 </div>
             </div>
         </nav>

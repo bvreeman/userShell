@@ -10,7 +10,7 @@ import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 // import ls from 'local-storage';
 import Select from 'react-select';
-// import CreatableSelect from 'react-select/lib/Creatable';
+import CreatableSelect from 'react-select/lib/Creatable';
 import noPhoto from '../../images/noPhoto.png'
 
 import firebase from "firebase/app";
@@ -54,6 +54,7 @@ class ProfileForm extends Component {
             imageURL: '',
             isEditing: true,
             consultingStuff: '',
+            interimTypeOfConsulting: [],
         }
     };
 
@@ -100,14 +101,13 @@ class ProfileForm extends Component {
                     imageURL: url,
                     generatedName: filename,
                 })
-                console.log(this.state, 'state inside of upload')
+                // console.log(this.state, 'state inside of upload')
                 this.props.updatePhoto(this.state)
                 document.getElementById("pictureForm").reset();
             })
     };  
 
     handleChange = (e) => {
-        console.log(e.target, 'e.target in handle change')
         this.setState({
             [e.target.id]: e.target.value
         })
@@ -120,10 +120,10 @@ class ProfileForm extends Component {
         }
     }
 
-    handleMultiSelectChange = (typeOfConsulting) => {
-        console.log(`Option selected:`, typeOfConsulting);
-        this.setState({ typeOfConsulting });
-        console.log(this.state, 'state after multiselectchange')
+    handleMultiSelectChange = (interimTypeOfConsulting) => {
+        // console.log(`Option selected:`, typeOfConsulting);
+        this.setState({ interimTypeOfConsulting });
+        // console.log(this.state, 'state after multiselectchange')
       }
 
       toggleEditing = () => {
@@ -133,9 +133,14 @@ class ProfileForm extends Component {
     }
 
     onSubmit = (e) => {
-        console.log(this.props, 'props onSubmit')
-        console.log(this.state, 'state onSubmit')
         e.preventDefault();
+        console.log(this.state.typeOfConsulting, 'typeOfConsulting after Submit')
+        this.setState({
+            typeOfConsulting: []
+        })
+        Object.values(this.state.interimTypeOfConsulting).map((consultingType) => {
+            this.state.typeOfConsulting.push(consultingType.value)
+        })
         this.props.updateProfile(this.state)
         document.getElementById("profileForm").reset();
         // this.props.history.push('/ProfileForm')
@@ -144,15 +149,18 @@ class ProfileForm extends Component {
 
       render() {
         const { profile, auth } = this.props;
-        // const { auth, profile } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
-        // this.state.typeOfConsulting.map((consulting) => 
-        //     console.log(consulting.value))
-        // console.log(this.state.typeOfConsulting, 'typeOfConsulting')
+        // console.log(profile.typeOfConsulting, 'profile.typeOfConsulting')
+        // Object.values(profile.typeOfConsulting).map((consultingType) => console.log(consultingType.value))
+        // Object.entries(profile.typeOfConsulting).map((consultingType) => console.log(consultingType.value))
+        // Object.keys(profile.typeOfConsulting).map(() => console.log(consulting[id].value))
+        // profile.typeOfConsulting.map((consulting) => 
+        console.log(profile.typeOfConsulting, 'typeofConsulting in render')
         return (
             <div className='row'>
-                <div className=' profile-image-container'>               
+                <div className=' profile-image-container'>  
                     {profile.imageURL ?
+
                         <img className='profileFormImage' src={profile.imageURL} alt={profile.businessName} />
                         :
                         <img className='profileFormImage' src={noPhoto} alt={profile.businessName} />
@@ -165,7 +173,11 @@ class ProfileForm extends Component {
                         <p> Twitter: <a href={`http://${this.state.twitter}`} target="_blank" rel="noopener noreferrer">{this.state.twitter}</a></p>
                         <p> Facebook: <a href={`http://${this.state.facebook}`} target="_blank" rel="noopener noreferrer">{this.state.facebook}</a> </p>
                         {/* {console.log(this.state.typeOfConsulting, 'typeOfConsulting inside of return')} */}
-                        <p> Type Of Consulting: {this.state.consultingStuff}</p>
+                        {profile.typeOfConsulting ?
+                            <p> Type Of Consulting: {profile.typeOfConsulting.join(', ')}</p>
+                            :
+                            <p></p>
+                        }
                         <button className={this.state.isEditing ? "btn btn-edit " :"btn btn-edit btn-edit-active"}  onClick={() => this.toggleEditing()} > Edit </button>
                     </div>
                         :
@@ -232,12 +244,14 @@ class ProfileForm extends Component {
                                 />
                             </div>
                             <div className='input-field'>
-                                <label htmlFor="typeOfConsulting">Type of Consulting</label>
+                                <label htmlFor="interimTypeOfConsulting">Type of Consulting</label>
                             </div>
-                            {/* <CreatableSelect */}
+                            {/* <CreatableSelect could work here, but it sends an underscore
+                            which doesn't work sending through DocumentTreference.update()
+                            for firebase. Document fields cannot begin and end with _*/}
                             < Select
-                                id='typeOfConsulting'
-                                value={this.state.typeOfConsulting}
+                                id='interimTypeOfConsulting'
+                                value={this.state.interimTypeOfConsulting}
                                 onChange={this.handleMultiSelectChange}
                                 options={consultingOptions}
                                 isMulti='true'
