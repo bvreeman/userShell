@@ -10,7 +10,7 @@ import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 // import ls from 'local-storage';
 import Select from 'react-select';
-import CreatableSelect from 'react-select/lib/Creatable';
+// import CreatableSelect from 'react-select/lib/Creatable';
 import noPhoto from '../../images/noPhoto.png'
 
 import firebase from "firebase/app";
@@ -61,17 +61,20 @@ class ProfileForm extends Component {
     static getDerivedStateFromProps(props, state) {
         if ((props.profile.firstName !== state.firstName)) {
             // console.log(props.profile.typeOfConsulting)
+            console.log(props.profile, 'props profile')
             return {
-            firstName: props.profile.firstName,
-            lastName: props.profile.lastName,
-            twitter: props.profile.twitter,
-            facebook: props.profile.facebook,
-            businessName: props.profile.businessName,
-            businessDescription: props.profile.businessDescription,
-            website: props.profile.website,
-            typeOfConsulting: props.profile.typeOfConsulting,
-            imageURL: props.profile.imagURL,
-          };
+                firstName: props.profile.firstName,
+                lastName: props.profile.lastName,
+                twitter: props.profile.twitter,
+                facebook: props.profile.facebook,
+                businessName: props.profile.businessName,
+                businessDescription: props.profile.businessDescription,
+                website: props.profile.website,
+                // typeOfConsulting: props.profile.typeOfConsulting,
+                imageURL: props.profile.imagURL,
+                // interimTypeOfConsulting: state.interimTypeOfConsulting,
+                // interimTypeOfConsulting: props.profile.typeOfConsulting,
+            };
 
         }
         return null; 
@@ -121,9 +124,8 @@ class ProfileForm extends Component {
     }
 
     handleMultiSelectChange = (interimTypeOfConsulting) => {
-        // console.log(`Option selected:`, typeOfConsulting);
         this.setState({ interimTypeOfConsulting });
-        // console.log(this.state, 'state after multiselectchange')
+        console.log(this.state.interimTypeOfConsulting)
       }
 
       toggleEditing = () => {
@@ -133,14 +135,17 @@ class ProfileForm extends Component {
     }
 
     onSubmit = (e) => {
+        // let choices = [];
         e.preventDefault();
-        console.log(this.state.typeOfConsulting, 'typeOfConsulting after Submit')
+        // console.log(this.state.typeOfConsulting, 'typeOfConsulting after Submit')
         this.setState({
             typeOfConsulting: []
         })
         Object.values(this.state.interimTypeOfConsulting).map((consultingType) => {
-            this.state.typeOfConsulting.push(consultingType.value)
+            this.state.typeOfConsulting.push(consultingType.value);
         })
+        console.log(this.state, 'state after setstate of typeOfConsulting: choices')
+        // this.state.typeOfConsulting.push(choices)
         this.props.updateProfile(this.state)
         document.getElementById("profileForm").reset();
         // this.props.history.push('/ProfileForm')
@@ -151,11 +156,7 @@ class ProfileForm extends Component {
         const { profile, auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
         // console.log(profile.typeOfConsulting, 'profile.typeOfConsulting')
-        // Object.values(profile.typeOfConsulting).map((consultingType) => console.log(consultingType.value))
-        // Object.entries(profile.typeOfConsulting).map((consultingType) => console.log(consultingType.value))
-        // Object.keys(profile.typeOfConsulting).map(() => console.log(consulting[id].value))
-        // profile.typeOfConsulting.map((consulting) => 
-        console.log(profile.typeOfConsulting, 'typeofConsulting in render')
+        // console.log(profile.typeOfConsulting, 'typeofConsulting in render')
         return (
             <div className='row'>
                 <div className=' profile-image-container'>  
@@ -194,7 +195,6 @@ class ProfileForm extends Component {
                                 onUploadError={this.handleUploadError}
                                 onUploadSuccess={this.handleUploadSuccess}
                                 onProgress={this.handleProgress}
-                                // onPushtoDatabase={this.handlePushToDatabase}
                             />
                         </form>
                         <form id='profileForm' onSubmit={this.onSubmit}>
