@@ -34,6 +34,31 @@ const consultingOptions = [
     { value: 'Change Management', label: 'Change Management' }
   ];
 
+// const consultingOptions = [
+//         'Organizational Change Management',
+//         'Leadership Development',
+//         'Culture Change',
+//         'Business Analysis',
+//         'Financial Advisory',
+//         'Risk and Compliance',
+//         'Management',
+//         'Strategy',
+//         'Operations',
+//         'Human Resources',
+//         'IT',
+//         'Environment',
+//         'Change Management',
+//       ];
+
+    //   function getStyles(typeOfConsulting, that) {
+    //     return {
+    //       fontWeight:
+    //         that.state.typeOfConsulting.indexOf(typeOfConsulting) === -1
+    //           ? that.props.theme.typography.fontWeightRegular
+    //           : that.props.theme.typography.fontWeightMedium,
+    //     };
+    //   }
+
   let consultingChoices;
 
 class ProfileForm extends Component {
@@ -73,9 +98,8 @@ class ProfileForm extends Component {
                 // typeOfConsulting: props.profile.typeOfConsulting,
                 imageURL: props.profile.imagURL,
                 // interimTypeOfConsulting: state.interimTypeOfConsulting,
-                // interimTypeOfConsulting: props.profile.typeOfConsulting,
+                interimTypeOfConsulting: props.profile.typeOfConsulting,
             };
-
         }
         return null; 
       }
@@ -116,6 +140,19 @@ class ProfileForm extends Component {
         })
     }
 
+    // handleChangeMultiple = e => {
+    //     const { options } = e.target;
+    //     const value = [];
+    //     for (let i = 0, l = options.length; i < l; i += 1) {
+    //       if (options[i].selected) {
+    //         value.push(options[i].value);
+    //       }
+    //     }
+    //     this.setState({
+    //         [e.target.id]: value,
+    //     });
+    //   };
+
     componentDidUpdate = () => {
         if (consultingChoices !==undefined) {
             consultingChoices = this.state.typeOfConsulting.map((consulting) =>  consulting.value)
@@ -123,9 +160,14 @@ class ProfileForm extends Component {
         }
     }
 
-    handleMultiSelectChange = (interimTypeOfConsulting) => {
-        this.setState({ interimTypeOfConsulting });
-        console.log(this.state.interimTypeOfConsulting)
+    // handleMultiSelectChange = (interimTypeOfConsulting) => {
+    //     this.setState({ interimTypeOfConsulting });
+    //     console.log(this.state.interimTypeOfConsulting)
+    //   }
+
+    handleMultiSelectChange = (typeOfConsulting) => {
+        this.setState({ typeOfConsulting });
+        console.log(this.state.typeOfConsulting)
       }
 
       toggleEditing = () => {
@@ -156,7 +198,7 @@ class ProfileForm extends Component {
         const { profile, auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
         // console.log(profile.typeOfConsulting, 'profile.typeOfConsulting')
-        // console.log(profile.typeOfConsulting, 'typeofConsulting in render')
+        // console.log(profile.typeOfConsulting, 'typeOfConsulting in render')
         return (
             <div className='row'>
                 <div className=' profile-image-container'>  
@@ -249,9 +291,11 @@ class ProfileForm extends Component {
                             {/* <CreatableSelect could work here, but it sends an underscore
                             which doesn't work sending through DocumentTreference.update()
                             for firebase. Document fields cannot begin and end with _*/}
+                            {/* {console.log(this.state.interimTypeOfConsulting, 'interimTypeOfConsulting in the html')}
+                            {console.log(Object.keys(this.state.interimTypeOfConsulting), 'keys?')} */}
                             < Select
                                 id='interimTypeOfConsulting'
-                                value={this.state.interimTypeOfConsulting}
+                                defaultValue={this.state.interimTypeOfConsulting}
                                 onChange={this.handleMultiSelectChange}
                                 options={consultingOptions}
                                 isMulti='true'
