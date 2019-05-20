@@ -13,10 +13,20 @@ class SearchBar extends Component {
           query: this.search.value
         })
       }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        this.firebaseSearch();
+        document.getElementById("queryForm").reset();
+
+    }
     
-    componentDidMount() {
-        const rootRef = firebase.database().ref();
-        const queryRef = rootRef.child('react');
+    firebaseSearch() {
+        const rootRef = firebase.database().ref("users");
+        let item = this.state.query.toString()
+        console.log(item, 'item')
+        const queryRef = rootRef.child(item);
+        console.log(queryRef, 'queryRef')
 
         queryRef.once("value", snap => {
             let queriedItem = []
@@ -32,13 +42,18 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <form>
+            <form id='queryForm' onSubmit={this.onSubmit}>
                 <input
                 placeholder="Search for..."
                 ref={input => this.search = input}
                 onChange={this.handleInputChange}
                 />
                 <p>{this.state.query}</p>
+                <div className="input-field">
+                    <button className='querySubmit'>
+                        Update
+                    </button>
+                </div>
             </form>
         )
     }

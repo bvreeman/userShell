@@ -12,8 +12,11 @@ const ProfileSummary = ({profile}) => {
                 <img className='businessProfileSummaryImage' src={profile.imageURL} alt={profile.businessName} />
                 :
                 <img className='businessProfileSummaryImage' src={noPhoto} alt={profile.businessName} />
-            }   
+            }
+            <h4 className='summaryTitle'>Who we are:</h4>
             <p className='businessProfileSummaryDescription'>{profile.businessDescription}</p>
+            <h4 className='summaryTitle'>Type Of Consulting:</h4>
+            <p className='businessProfileSummaryConsultingTypes'>{profile.typeOfConsulting.join(', ')}</p>
         </div>
     )
 }
