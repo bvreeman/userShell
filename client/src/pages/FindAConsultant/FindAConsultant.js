@@ -5,6 +5,7 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import ProfilesList from '../../components/ProfilesList'
+import SearchBar from '../../components/SearchBar'
   
 class FindAConsultant extends React.PureComponent {
   render() {
@@ -13,6 +14,7 @@ class FindAConsultant extends React.PureComponent {
     if (!auth.uid) return <Redirect to='/signin' />
     return (
       <div>
+        < SearchBar />
         < ProfilesList users={ users } auth={ auth } />
       </div>
     )

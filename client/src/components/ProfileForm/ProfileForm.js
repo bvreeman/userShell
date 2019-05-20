@@ -50,15 +50,6 @@ const consultingOptions = [
 //         'Change Management',
 //       ];
 
-    //   function getStyles(typeOfConsulting, that) {
-    //     return {
-    //       fontWeight:
-    //         that.state.typeOfConsulting.indexOf(typeOfConsulting) === -1
-    //           ? that.props.theme.typography.fontWeightRegular
-    //           : that.props.theme.typography.fontWeightMedium,
-    //     };
-    //   }
-
   let consultingChoices;
 
 class ProfileForm extends Component {
@@ -78,15 +69,15 @@ class ProfileForm extends Component {
             progress: 0,
             imageURL: '',
             isEditing: true,
-            consultingStuff: '',
             interimTypeOfConsulting: [],
+            chosenConsultingOption: [],
         }
     };
+
 
     static getDerivedStateFromProps(props, state) {
         if ((props.profile.firstName !== state.firstName)) {
             // console.log(props.profile.typeOfConsulting)
-            console.log(props.profile, 'props profile')
             return {
                 firstName: props.profile.firstName,
                 lastName: props.profile.lastName,
@@ -99,6 +90,7 @@ class ProfileForm extends Component {
                 imageURL: props.profile.imagURL,
                 // interimTypeOfConsulting: state.interimTypeOfConsulting,
                 interimTypeOfConsulting: props.profile.typeOfConsulting,
+                chosenConsultingOption: props.profile.chosenConsultingOption,
             };
         }
         return null; 
@@ -140,34 +132,18 @@ class ProfileForm extends Component {
         })
     }
 
-    // handleChangeMultiple = e => {
-    //     const { options } = e.target;
-    //     const value = [];
-    //     for (let i = 0, l = options.length; i < l; i += 1) {
-    //       if (options[i].selected) {
-    //         value.push(options[i].value);
-    //       }
-    //     }
-    //     this.setState({
-    //         [e.target.id]: value,
-    //     });
-    //   };
-
-    componentDidUpdate = () => {
+    componentDidUpdate = (individualItem) => {
         if (consultingChoices !==undefined) {
             consultingChoices = this.state.typeOfConsulting.map((consulting) =>  consulting.value)
-            console.log(consultingChoices.join(', '), 'consulting choices')
         }
+        
     }
 
-    // handleMultiSelectChange = (interimTypeOfConsulting) => {
-    //     this.setState({ interimTypeOfConsulting });
-    //     console.log(this.state.interimTypeOfConsulting)
-    //   }
-
-    handleMultiSelectChange = (typeOfConsulting) => {
-        this.setState({ typeOfConsulting });
-        console.log(this.state.typeOfConsulting)
+    handleMultiSelectChange = (interimTypeOfConsulting) => {
+        this.setState({ 
+            interimTypeOfConsulting: interimTypeOfConsulting,
+            chosenConsultingOption: interimTypeOfConsulting,
+         });
       }
 
       toggleEditing = () => {
@@ -177,28 +153,22 @@ class ProfileForm extends Component {
     }
 
     onSubmit = (e) => {
-        // let choices = [];
         e.preventDefault();
-        // console.log(this.state.typeOfConsulting, 'typeOfConsulting after Submit')
         this.setState({
-            typeOfConsulting: []
+            typeOfConsulting: [],
+            chosenConsultingOption: this.state.chosenConsultingOption
         })
         Object.values(this.state.interimTypeOfConsulting).map((consultingType) => {
             this.state.typeOfConsulting.push(consultingType.value);
         })
-        console.log(this.state, 'state after setstate of typeOfConsulting: choices')
-        // this.state.typeOfConsulting.push(choices)
         this.props.updateProfile(this.state)
         document.getElementById("profileForm").reset();
-        // this.props.history.push('/ProfileForm')
         this.toggleEditing()
     }
 
       render() {
         const { profile, auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
-        // console.log(profile.typeOfConsulting, 'profile.typeOfConsulting')
-        // console.log(profile.typeOfConsulting, 'typeOfConsulting in render')
         return (
             <div className='row'>
                 <div className=' profile-image-container'>  
@@ -207,7 +177,8 @@ class ProfileForm extends Component {
                         <img className='profileFormImage' src={profile.imageURL} alt={profile.businessName} />
                         :
                         <img className='profileFormImage' src={noPhoto} alt={profile.businessName} />
-                    }                        { this.state.isEditing ? 
+                    }                        
+                    { this.state.isEditing ? 
                     <div className="profile-static-container">
                         <h1> {this.state.firstName}  {this.state.lastName} </h1>
                         <p> Business Name: {this.state.businessName}</p>
@@ -219,7 +190,7 @@ class ProfileForm extends Component {
                         {profile.typeOfConsulting ?
                             <p> Type Of Consulting: {profile.typeOfConsulting.join(', ')}</p>
                             :
-                            <p></p>
+                            <p> Type of Consulting: None Chosen</p>
                         }
                         <button className={this.state.isEditing ? "btn btn-edit " :"btn btn-edit btn-edit-active"}  onClick={() => this.toggleEditing()} > Edit </button>
                     </div>
@@ -291,11 +262,17 @@ class ProfileForm extends Component {
                             {/* <CreatableSelect could work here, but it sends an underscore
                             which doesn't work sending through DocumentTreference.update()
                             for firebase. Document fields cannot begin and end with _*/}
-                            {/* {console.log(this.state.interimTypeOfConsulting, 'interimTypeOfConsulting in the html')}
-                            {console.log(Object.keys(this.state.interimTypeOfConsulting), 'keys?')} */}
+                            {/* {console.log(this.state.interimTypeOfConsulting, 'interimTypeOfConsulting in the html')} */}
+                            {/* {this.state.interimTypeOfConsulting.forEach((item, key) => {
+                                individualItem = {[key]: item}
+                            })}
+                            {this.state.interimTypeOfConsulting.push(individualItem)}
+                            {console.log(this.state.interimTypeOfConsulting, 'here??')} */}
+                            {/* {console.log(this.state.interimTypeOfConsulting, 'here??')} */}
+                            {console.log(this.state, 'state in render')}
                             < Select
                                 id='interimTypeOfConsulting'
-                                defaultValue={this.state.interimTypeOfConsulting}
+                                defaultValue={this.state.chosenConsultingOption}
                                 onChange={this.handleMultiSelectChange}
                                 options={consultingOptions}
                                 isMulti='true'

@@ -7,7 +7,9 @@ const initState = {
         twitter: 'www.twitter.com',
         instagramHandle: 'www.instagram.com',
         consultingType: 'Construction, Solar, Environmental',
-        typeOfConsultant: []}
+        typeOfConsultant: [],
+        chosenConsultingOption: [],
+        }
     ]
 }
 
