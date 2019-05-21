@@ -38,6 +38,17 @@ const ProfileDetails = (props) => {
                         <div className='row'>
                             <div className='col-md-4 col-xs-12'>
                                 <h5 className='businessProfileLabel'>
+                                    Types of Consulting We Perform:
+                                </h5>
+                            </div>
+                            <div className='col-md-8 col-xs-12'>
+                                <p className='businessProfileInfo'>{profile.typeOfConsulting.join(', ')}</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className='row'>
+                            <div className='col-md-4 col-xs-12'>
+                                <h5 className='businessProfileLabel'>
                                     Our Website:
                                 </h5>
                             </div>

@@ -21,6 +21,7 @@
 .businessProfileSummaryDescription,
 .businessProfileSummaryConsultingTypes {
     padding: 0 20px 0 20px;
+    font-size: 16px;
 }
 
 .summaryTitle {
