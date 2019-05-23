@@ -12,43 +12,13 @@ import { firestoreConnect } from 'react-redux-firebase'
 import Select from 'react-select';
 // import CreatableSelect from 'react-select/lib/Creatable';
 import noPhoto from '../../images/noPhoto.png'
+import consultingOptions from './ConsultingTypesList'
+
 
 import firebase from "firebase/app";
 import 'firebase/storage';
 
 import FileUploader from "react-firebase-file-uploader";
-
-const consultingOptions = [
-    { value: 'Organizational Change Management', label: 'Organizational Change Management' },
-    { value: 'Leadership Development', label: 'Leadership Development' },
-    { value: 'Culture Change', label: 'Culture Change' },
-    { value: 'Business Analysis', label: 'Business Analysis' },
-    { value: 'Financial Advisory', label: 'Financial Advisory' },
-    { value: 'Risk and Compliance', label: 'Risk and Compliance' },
-    { value: 'Management', label: 'Management' },
-    { value: 'Strategy', label: 'Strategy' },
-    { value: 'Operations', label: 'Operations' },
-    { value: 'Human Resources', label: 'Human Resources' },
-    { value: 'IT', label: 'IT' },
-    { value: 'Environment', label: 'Environment' },
-    { value: 'Change Management', label: 'Change Management' }
-  ];
-
-// const consultingOptions = [
-//         'Organizational Change Management',
-//         'Leadership Development',
-//         'Culture Change',
-//         'Business Analysis',
-//         'Financial Advisory',
-//         'Risk and Compliance',
-//         'Management',
-//         'Strategy',
-//         'Operations',
-//         'Human Resources',
-//         'IT',
-//         'Environment',
-//         'Change Management',
-//       ];
 
   let consultingChoices;
 
@@ -261,15 +231,7 @@ class ProfileForm extends Component {
                             </div>
                             {/* <CreatableSelect could work here, but it sends an underscore
                             which doesn't work sending through DocumentTreference.update()
-                            for firebase. Document fields cannot begin and end with _*/}
-                            {/* {console.log(this.state.interimTypeOfConsulting, 'interimTypeOfConsulting in the html')} */}
-                            {/* {this.state.interimTypeOfConsulting.forEach((item, key) => {
-                                individualItem = {[key]: item}
-                            })}
-                            {this.state.interimTypeOfConsulting.push(individualItem)}
-                            {console.log(this.state.interimTypeOfConsulting, 'here??')} */}
-                            {/* {console.log(this.state.interimTypeOfConsulting, 'here??')} */}
-                            {console.log(this.state, 'state in render')}
+                            for firebase. Document fields cannot begin and end with _*/}     
                             < Select
                                 id='interimTypeOfConsulting'
                                 defaultValue={this.state.chosenConsultingOption}
