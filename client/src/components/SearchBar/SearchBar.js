@@ -20,37 +20,36 @@ class SearchBar extends Component {
         this.setState(state => ({ isSearchable: !state.isSearchable }));
 
     handleChange = (selectedOption) => {
-        console.log(selectedOption)
-        this.setState({ selectedOption: selectedOption.value })
+        this.setState({ selectedOption: selectedOption })
       }
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        console.log(this.state.selectedOption, 'state in change')
-        console.group(this.state, 'state in submit')
-        // this.firebaseSearch();
-        // console.log(this.state.query, 'query')
-        document.getElementById("findAConsultantQuery").reset();
-
-    }
     
     firebaseSearch() {
-        const rootRef = firebase.database().ref("users/");
-        let item = this.state.query.toString()
-        console.log(item, 'item')
-        const queryRef = rootRef.orderByChild("typeOfConsulting").equalTo(item);
+        const rootRef = firebase.database().ref("users");
+        let item = this.state.selectedOption.value
+        let queryRef = rootRef.orderByChild("typeOfConsulting").equalTo(item);
         console.log(queryRef, 'queryRef')
-
-        queryRef.once("value", snap => {
+        queryRef.on("child_added", snap => {
+            console.log(snap.val(), 'snap')
             let queriedItem = []
             snap.forEach(child => {
                 console.log('queriedItem', child.val());
-                // queriedItem.push(child.val())
-            });
+                queriedItem.push(child.val())
+                console.log(queriedItem, 'something?')
+            }).catch(error => {
+                console.log('error', error)
+            })
             this.setState({
-                query: queriedItem
+                queriedConsultants: queriedItem
             })
         })
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        this.firebaseSearch();
+        // console.log(this.state.query, 'query')
+        document.getElementById("findAConsultantQuery").reset();
     }
 
     render() {
