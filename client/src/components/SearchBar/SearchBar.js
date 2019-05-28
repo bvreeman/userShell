@@ -27,7 +27,7 @@ class SearchBar extends Component {
     firebaseSearch() {
         const rootRef = firebase.database().ref('users/');
         console.log(rootRef, 'rootRef')
-        let item = this.state.selectedOption.value.toString();
+        let item = this.state.selectedOption.value;
         console.log(item, 'item')
         let queryRef = rootRef.orderByChild("typeOfConsulting").equalTo(item);
         console.log(queryRef, 'queryRef')
