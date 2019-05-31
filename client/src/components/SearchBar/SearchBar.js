@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './SearchBar.css'
-import firebase from "firebase/app";
+import * as firebase from "firebase/app";
+import * as admin from 'firebase-admin';
 import 'firebase/database';
 import consultingOptions from '../ProfileForm/ConsultingTypesList'
 import Select from 'react-select';
@@ -25,37 +26,19 @@ class SearchBar extends Component {
 
     
     firebaseSearch() {
-        const rootRef = firebase.database().ref.child('users/');
-        console.log(rootRef, 'rootRef')
         let item = this.state.selectedOption.value;
-        console.log(item, 'item')
-        let queryRef = rootRef.orderByKey().on('child_added', function(snapshot) {
-            console.log(snapshot.key());
-        });
-
-        // let queryRef = rootRef.orderByKey("typeOfConsulting").equalTo(item);
-        console.log(queryRef, 'queryRef')
-        queryRef.on("child_added", snap => {
-            console.log(snap.val(), 'snap')
-            let queriedItem = []
-            snap.forEach(child => {
-                console.log('queriedItem', child.val());
-                queriedItem.push(child.val())
-                console.log(queriedItem, 'something?')
-            }).catch(error => {
-                console.log('error', error)
-            })
-            this.setState({
-                queriedConsultants: queriedItem
-            })
-        })
+        const db = 
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.firebaseSearch();
-        // console.log(this.state.query, 'query')
-        document.getElementById("findAConsultantQuery").reset();
+        if ( this.state.selectedOption !== null ) {
+            this.firebaseSearch();
+            // console.log(this.state.query, 'query')
+            document.getElementById("findAConsultantQuery").reset();
+        } else {
+            alert("Please enter a value before hitting Search")
+        }
     }
 
     render() {
@@ -84,7 +67,7 @@ class SearchBar extends Component {
                 <p>{this.state.query}</p> */}
                 <div className="input-field">
                     <button className='querySubmit'>
-                        Update
+                        Search
                     </button>
                 </div>
             </form>
