@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
 import './SearchBar.css'
-import * as firebase from "firebase/app";
-import * as admin from 'firebase-admin';
-import 'firebase/database';
+import firebase from "firebase/app";
+import 'firebase/firestore';
 import consultingOptions from '../ProfileForm/ConsultingTypesList'
 import Select from 'react-select';
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+
 
 class SearchBar extends Component {
-    state = {
-        isClearable: true,
-        isSearchable: true,
-        selectedOption: null,
-        consultantQuery: [],
-        queriedConsultants: [],
+    constructor(props) {
+        super(props);
+            this.state = {
+                isClearable: true,
+                isSearchable: true,
+                selectedOption: null,
+                consultantQuery: [],
+                queriedConsultants: [],
+            }
+            console.log(props, 'props')
     }
+
 
     toggleClearable = () =>
         this.setState(state => ({ isClearable: !state.isClearable }));
@@ -27,7 +35,12 @@ class SearchBar extends Component {
     
     firebaseSearch() {
         let item = this.state.selectedOption.value;
-        const db = 
+        const ref = firebase.database().ref('users');
+        console.log(item, 'item')
+        console.log(ref, 'ref');
+        ref.on('value', snap => {
+            console.log(snap.val(), 'snap')
+        })
     }
 
     onSubmit = (e) => {
@@ -75,4 +88,16 @@ class SearchBar extends Component {
     }
 }
 
-export default SearchBar;
+const mapStateToProps = (state, ownProps) => {
+
+    return{
+        auth: state.firebase.auth
+    }
+}
+
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'users'}
+    ])
+)(SearchBar)
