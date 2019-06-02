@@ -16,7 +16,11 @@ const ProfileSummary = ({profile}) => {
             <h4 className='summaryTitle'>Who we are:</h4>
             <p className='businessProfileSummaryDescription'>{profile.businessDescription}</p>
             <h4 className='summaryTitle'>Type Of Consulting:</h4>
-            <p className='businessProfileSummaryConsultingTypes'>{profile.typeOfConsulting.join(', ')}</p>
+            {profile.typeOfConsulting ?
+                <p className='businessProfileSummaryConsultingTypes'>{profile.typeOfConsulting.join(', ')}</p>
+                :
+                <p className='businessProfileSummaryConsultingTypes'>No Consulting Types Chosen</p>
+            }
         </div>
     )
 }

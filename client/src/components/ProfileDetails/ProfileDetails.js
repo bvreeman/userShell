@@ -42,7 +42,11 @@ const ProfileDetails = (props) => {
                                 </h5>
                             </div>
                             <div className='col-md-8 col-xs-12'>
-                                <p className='businessProfileInfo'>{profile.typeOfConsulting.join(', ')}</p>
+                                {profile.typeOfConsulting ?
+                                    <p className='businessProfileSummaryConsultingTypes'>{profile.typeOfConsulting.join(', ')}</p>
+                                    :
+                                    <p className='businessProfileSummaryConsultingTypes'>No Consulting Types Chosen</p>
+                                }
                             </div>
                         </div>
                         <hr />
