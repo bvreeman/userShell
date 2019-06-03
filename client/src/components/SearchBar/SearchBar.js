@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './SearchBar.css'
-import firebase from "firebase/app";
-import 'firebase/firestore';
 import consultingOptions from '../ProfileForm/ConsultingTypesList'
 import Select from 'react-select';
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+
+
+let businesses;
 
 class SearchBar extends Component {
     constructor(props) {
@@ -18,10 +19,9 @@ class SearchBar extends Component {
                 selectedOption: null,
                 consultantQuery: [],
                 queriedConsultants: [],
+                matchingBusinessName: [],
             }
-            console.log(props, 'props.firestore')
     }
-
 
     toggleClearable = () =>
         this.setState(state => ({ isClearable: !state.isClearable }));
@@ -36,10 +36,13 @@ class SearchBar extends Component {
     UserSearch() {
         let item = this.state.selectedOption.value;
         this.props.users.forEach((userProfile) => {
-            console.log(userProfile, 'userProfile')
-            // userProfile.forEach((consultingType) => {
-            //     console.log(consultingType, 'consulting type')
-            // })
+            userProfile.typeOfConsulting.forEach((consultingType) => {
+                if ( item === consultingType ) {
+                    console.log(userProfile.businessName)
+                    this.state.matchingBusinessName.push(userProfile.businessName)
+                    businesses = this.state.matchingBusinessName.join(', ')
+                }
+            })
             
         })
 
@@ -47,6 +50,10 @@ class SearchBar extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        this.setState({
+            matchingBusinessName: [],
+        })
+        businesses = ''
         if ( this.state.selectedOption !== null ) {
             this.UserSearch();
             // console.log(this.state.query, 'query')
@@ -74,6 +81,9 @@ class SearchBar extends Component {
                     isClearable={isClearable}
                     isSearchable={isSearchable}
                 />
+
+                <p>{businesses}</p>
+
                 {/* <input
                 placeholder="Search for..."
                 ref={input => this.search = input}
