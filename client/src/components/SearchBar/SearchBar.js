@@ -6,10 +6,24 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Link } from 'react-router-dom'
+import ProfileSummary from '../ProfileSummary'
 
 
 let businesses;
 
+export const ConsultantInfo = ({ users }) => {
+    return(
+        <div className="project-list section">
+            { users && users.map(profile => {
+                return (
+                    <Link to={'/businessProfile/' + profile.id} key={profile.id}>
+                        <ProfileSummary profile={profile} />
+                    </Link>
+                )
+            })}
+        </div>
+    )
+}
 class SearchBar extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +33,7 @@ class SearchBar extends Component {
                 selectedOption: null,
                 consultantQuery: [],
                 queriedConsultants: [],
-                matchingBusinessName: [],
+                matchingBusiness: [],
             }
     }
 
@@ -38,9 +52,12 @@ class SearchBar extends Component {
         this.props.users.forEach((userProfile) => {
             userProfile.typeOfConsulting.forEach((consultingType) => {
                 if ( item === consultingType ) {
-                    console.log(userProfile.businessName)
-                    this.state.matchingBusinessName.push(userProfile.businessName)
-                    businesses = this.state.matchingBusinessName.join(', ')
+                    this.setState({
+                        matchingBusiness: [],
+                    })
+                    this.state.matchingBusiness.push(userProfile)
+                    // businesses = this.state.matchingBusinessName.join(', ')
+                    businesses = < ConsultantInfo users={ this.state.matchingBusiness } />
                 }
             })
             
@@ -50,17 +67,17 @@ class SearchBar extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        businesses = ''
         this.setState({
             matchingBusinessName: [],
         })
-        businesses = ''
         if ( this.state.selectedOption !== null ) {
             this.UserSearch();
             // console.log(this.state.query, 'query')
-            document.getElementById("findAConsultantQuery").reset();
         } else {
             alert("Please enter a value before hitting Search")
         }
+        document.getElementById("findAConsultantQuery").reset();
     }
 
     render() {
@@ -81,20 +98,12 @@ class SearchBar extends Component {
                     isClearable={isClearable}
                     isSearchable={isSearchable}
                 />
-
-                <p>{businesses}</p>
-
-                {/* <input
-                placeholder="Search for..."
-                ref={input => this.search = input}
-                onChange={this.handleInputChange}
-                />
-                <p>{this.state.query}</p> */}
                 <div className="input-field">
                     <button className='querySubmit'>
                         Search
                     </button>
                 </div>
+                <div>{businesses}</div>
             </form>
         )
     }
