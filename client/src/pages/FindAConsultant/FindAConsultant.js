@@ -14,7 +14,7 @@ class FindAConsultant extends React.PureComponent {
     if (!auth.uid) return <Redirect to='/signin' />
     return (
       <div>
-        < SearchBar />
+        < SearchBar users={ users } auth={ auth } />
         < ProfilesList users={ users } auth={ auth } />
       </div>
     )

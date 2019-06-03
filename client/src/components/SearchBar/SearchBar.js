@@ -7,7 +7,7 @@ import Select from 'react-select';
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-
+import PropTypes from 'prop-types'
 
 class SearchBar extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class SearchBar extends Component {
                 consultantQuery: [],
                 queriedConsultants: [],
             }
-            console.log(props, 'props')
+            console.log(props, 'props.firestore')
     }
 
 
@@ -33,20 +33,22 @@ class SearchBar extends Component {
       }
 
     
-    firebaseSearch() {
+    UserSearch() {
         let item = this.state.selectedOption.value;
-        const ref = firebase.database().ref('users');
-        console.log(item, 'item')
-        console.log(ref, 'ref');
-        ref.on('value', snap => {
-            console.log(snap.val(), 'snap')
+        this.props.users.forEach((userProfile) => {
+            console.log(userProfile, 'userProfile')
+            // userProfile.forEach((consultingType) => {
+            //     console.log(consultingType, 'consulting type')
+            // })
+            
         })
+
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         if ( this.state.selectedOption !== null ) {
-            this.firebaseSearch();
+            this.UserSearch();
             // console.log(this.state.query, 'query')
             document.getElementById("findAConsultantQuery").reset();
         } else {
