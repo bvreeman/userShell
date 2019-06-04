@@ -8,3 +8,15 @@
 .consultantsDiv {
     width: 100%;
 }
+
+.homePageContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.homePageFeaturedConsultants {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}

@@ -14,6 +14,7 @@ let businesses;
 export const ConsultantInfo = ({ users }) => {
     return(
         <div className="project-list section">
+            <h2>Your Search Results:</h2>
             { users && users.map(profile => {
                 return (
                     <Link to={'/businessProfile/' + profile.id} key={profile.id}>
@@ -58,6 +59,8 @@ class SearchBar extends Component {
                     this.state.matchingBusiness.push(userProfile)
                     // businesses = this.state.matchingBusinessName.join(', ')
                     businesses = < ConsultantInfo users={ this.state.matchingBusiness } />
+                } else {
+                    businesses = <h4>No Consultants of that Type at this time</h4>
                 }
             })
             
