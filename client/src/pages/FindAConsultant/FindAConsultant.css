@@ -15,8 +15,19 @@
 }
 
 .homePageFeaturedConsultants {
+    text-align: center;
+}
+
+.FeaturedConsultantsProfilesList div.project-list {
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-list div.businessSearchProfiles {
+    /* display: flex;
+    justify-content: center;
+    flex-direction: row; */
     text-align: center;
 }

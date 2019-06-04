@@ -17,9 +17,11 @@ export const ConsultantInfo = ({ users }) => {
             <h2>Your Search Results:</h2>
             { users && users.map(profile => {
                 return (
-                    <Link to={'/businessProfile/' + profile.id} key={profile.id}>
-                        <ProfileSummary profile={profile} />
-                    </Link>
+                    <div className='businessSearchProfiles'>
+                        <Link to={'/businessProfile/' + profile.id} key={profile.id}>
+                            <ProfileSummary profile={profile} />
+                        </Link>
+                    </div>
                 )
             })}
         </div>

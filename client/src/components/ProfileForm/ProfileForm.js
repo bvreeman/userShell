@@ -124,13 +124,15 @@ class ProfileForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.setState({
-            typeOfConsulting: [],
-            chosenConsultingOption: this.state.chosenConsultingOption
-        })
-        Object.values(this.state.interimTypeOfConsulting).map((consultingType) => {
-            this.state.typeOfConsulting.push(consultingType.value);
-        })
+        if (this.state.chosenConsultingOption !== null || this.state.chosenConsultingOption !== undefined) {
+            this.setState({
+                typeOfConsulting: [],
+                chosenConsultingOption: this.state.chosenConsultingOption
+            })
+            Object.values(this.state.interimTypeOfConsulting).map((consultingType) => {
+                this.state.typeOfConsulting.push(consultingType.value);
+            })
+        }
         this.props.updateProfile(this.state)
         document.getElementById("profileForm").reset();
         this.toggleEditing()
