@@ -10,7 +10,10 @@ const initState = {
         typeOfConsultant: [],
         chosenConsultingOption: [],
         }
-    ]
+    ],
+    users: [],
+    loading: false,
+    error: null
 }
 
 const businessProfileReducter = (state = initState, action) => {
@@ -25,6 +28,7 @@ const businessProfileReducter = (state = initState, action) => {
             return state;
     }
 }
+
 
 
 export default businessProfileReducter;
