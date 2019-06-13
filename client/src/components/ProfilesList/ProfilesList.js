@@ -61,6 +61,7 @@ const ProfilesList = ({users, auth}) => {
       
     return (
         <div className="project-list section">
+            {console.log(users, 'users in return')}
             { users && users.map(profile => {
                 return (
                     <Link to={'/businessProfile/' + profile.id} key={profile.id}>
