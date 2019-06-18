@@ -124,13 +124,14 @@ class ProfileForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        if (this.state.chosenConsultingOption !== null || this.state.chosenConsultingOption !== undefined) {
+        if (this.state.chosenConsultingOption !== undefined) {
             this.setState({
                 typeOfConsulting: [],
                 chosenConsultingOption: this.state.chosenConsultingOption
             })
             Object.values(this.state.interimTypeOfConsulting).map((consultingType) => {
                 this.state.typeOfConsulting.push(consultingType.value);
+                return consultingType.value
             })
         }
         this.props.updateProfile(this.state)

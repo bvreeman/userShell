@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './SearchBar.css'
-import consultingOptions from '../ProfileForm/ConsultingTypesList'
+import consultingOptions from '../../pages/ProfileForm/ConsultingTypesList'
 import Select from 'react-select';
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'

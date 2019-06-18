@@ -18,6 +18,7 @@ class ProfilesList extends React.PureComponent {
     }
 
     shuffleArray = (array) => {
+        if (array.length > 2) {
         let currentIndex = array.length;
         let temporaryValue, randomIndex;
 
@@ -30,6 +31,7 @@ class ProfilesList extends React.PureComponent {
             array[randomIndex] = temporaryValue;
         }
         return array;
+        }
     }
     render() { 
         this.shuffleArray(this.state.newArray)      

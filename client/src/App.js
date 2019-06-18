@@ -9,7 +9,7 @@ import ContactUsPage from './pages/ContactUsPage'
 import FindAConsultant from './pages/FindAConsultant'
 import SignIn from './components/Auth/SignIn'
 import SignUp from './components/Auth/SignUp'
-import ProfileForm from './components/ProfileForm';
+import ProfileForm from './pages/ProfileForm';
 import ProfileDetails from './components/ProfileDetails';
 import SearchResults from './pages/SearchResults';
 
