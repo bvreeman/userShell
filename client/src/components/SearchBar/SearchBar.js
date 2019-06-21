@@ -8,17 +8,18 @@ import { compose } from 'redux'
 import { Link } from 'react-router-dom'
 import ProfileSummary from '../ProfileSummary'
 
-
 let businesses;
 
 export const ConsultantInfo = ({ users }) => {
+    console.log(users, 'users')
     return(
         <div className="project-list section">
             <h2>Your Search Results:</h2>
+        {    console.log(users, 'users in SearchBar')}
             { users && users.map(profile => {
                 return (
-                    <div className='businessSearchProfiles'>
-                        <Link to={'/businessProfile/' + profile.id} key={profile.id}>
+                    <div className='businessSearchProfiles' key={profile.id}>
+                        <Link to={'/businessProfile/' + profile.id}>
                             <ProfileSummary profile={profile} />
                         </Link>
                     </div>
@@ -61,24 +62,22 @@ class SearchBar extends Component {
                     this.state.matchingBusiness.push(userProfile)
                     // businesses = this.state.matchingBusinessName.join(', ')
                     businesses = < ConsultantInfo users={ this.state.matchingBusiness } />
-                } else {
+                } else if ( businesses === undefined || businesses === '') {
                     businesses = <h4>No Consultants of that Type at this time</h4>
                 }
             })
             
         })
-
     }
 
     onSubmit = (e) => {
         e.preventDefault();
         businesses = ''
         this.setState({
-            matchingBusinessName: [],
+            matchingBusiness: [],
         })
         if ( this.state.selectedOption !== null ) {
             this.UserSearch();
-            // console.log(this.state.query, 'query')
         } else {
             alert("Please enter a value before hitting Search")
         }

@@ -14,7 +14,6 @@ import Select from 'react-select';
 import noPhoto from '../../images/noPhoto.png'
 import consultingOptions from './ConsultingTypesList'
 
-
 import firebase from "firebase/app";
 import 'firebase/storage';
 
