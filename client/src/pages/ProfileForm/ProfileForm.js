@@ -65,6 +65,9 @@ class ProfileForm extends Component {
         return null; 
       }
 
+    // Start of the photo uploader
+
+    // This Function handles the counter for uploading progress
     handleUploadStart = () => {
         console.log('started upload')
         this.setState({ isUploading: true, progress: 0 })
@@ -76,20 +79,28 @@ class ProfileForm extends Component {
         console.error(error);
     };
 
+    // If there's a successful upload this function fires.
     handleUploadSuccess = filename => {
         console.log('success')
         this.setState({ generatedName: filename, progress: 100, isUploading: false });
+        console.log(this.props.auth.uid, 'logging props to see if I have access to auth')
+        const userID = firebase.auth().currentUser
+
+        // Sends the image to firebase storage
         firebase
             .storage()
+            // .ref(`users/${userID}`)
             .ref("users")
+            // .child(userID)
             .child(filename)
             .getDownloadURL()
+            // Sets the Image URL into state along with the filename so it can be sent through the redux store to Firestore
             .then(url => {
                 this.setState({ 
                     imageURL: url,
                     generatedName: filename,
                 })
-                // console.log(this.state, 'state inside of upload')
+                // Sends the state above through the redux store to Firestore
                 this.props.updatePhoto(this.state)
                 document.getElementById("pictureForm").reset();
             })
@@ -102,13 +113,16 @@ class ProfileForm extends Component {
     }
 
     componentDidUpdate = (individualItem) => {
-        if (consultingChoices !==undefined) {
+        if ( consultingChoices !== undefined ) {
             consultingChoices = this.state.typeOfConsulting.map((consulting) =>  consulting.value)
         }
         
     }
 
     handleMultiSelectChange = (interimTypeOfConsulting) => {
+        // Doubling up states of same item because I need it to be in a specific form in order for the Multi
+        // Select form to read it properly. I also wanted it in a standard array to better display the items
+        // on the un-editable screen
         this.setState({ 
             interimTypeOfConsulting: interimTypeOfConsulting,
             chosenConsultingOption: interimTypeOfConsulting,
@@ -123,16 +137,23 @@ class ProfileForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        // if statement protects against a blank form submit.
         if (this.state.chosenConsultingOption !== undefined) {
             this.setState({
+                // emptying typeOfConsulting because I use a push for the newly selected items. If I don't
+                // it just adds to the items.
                 typeOfConsulting: [],
+                // 
                 chosenConsultingOption: this.state.chosenConsultingOption
             })
+            // using this to pull the items out of the one array in order to make it easier to display
+            // on the non-editable screen.
             Object.values(this.state.interimTypeOfConsulting).map((consultingType) => {
                 this.state.typeOfConsulting.push(consultingType.value);
                 return consultingType.value
             })
         }
+        // sending state to the redux store for Firestore
         this.props.updateProfile(this.state)
         document.getElementById("profileForm").reset();
         this.toggleEditing()
