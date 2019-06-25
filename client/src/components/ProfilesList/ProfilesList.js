@@ -36,7 +36,7 @@ class ProfilesList extends React.PureComponent {
     render() { 
         this.shuffleArray(this.state.newArray)      
     return (
-        <div className="project-list section">
+        <div className="featuredConsultantListContainer">
             { this.state.newArray && this.state.newArray.map(profile => {
                 return (
                     <Link to={'/businessProfile/' + profile.id} key={profile.id}>

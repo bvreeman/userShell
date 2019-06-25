@@ -19,7 +19,7 @@ class ContactForQuote extends React.PureComponent {
             Email: '',
             CustomerMessage: '',
             // reCAPTCHAvalue: false,
-            submitted: false
+            submitted: false,
         }
         this.handleChange = this.handleChange.bind(this);
         // this.handleSubmit = this.handleSubmit.bind(this);
@@ -81,7 +81,7 @@ class ContactForQuote extends React.PureComponent {
         else {
             return(
                 <div className='contactForQuote'>
-                    <h3 className='contactForQuoteHeading'><span>Contact Us</span> for a Quote</h3>
+                    <h2 className='contactForQuoteHeading'>Have a question or comment? <span>Contact Us</span></h2>
                         <form id="contact-form" className='contactForm col-md-5 col-xs-12' onSubmit={this.handleSubmit.bind(this)} method="POST">
                             <div className='col-md-12 col-xs-12 contactUsForm'>
                                 <div className="form-group">

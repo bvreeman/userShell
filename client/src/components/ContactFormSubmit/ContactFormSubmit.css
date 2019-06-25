@@ -3,15 +3,15 @@
 }
 
 .ContactFormSubmit{
-    background-color: #DFDFDF;
+    background-color: #0066cc;
+    border-radius: 20px;
     text-align: center;
     width: 75%;
     margin:0 auto;
-    border: 1px;
-    border-color: #333333;
-    border-style: solid;
+    border: 1px solid #333;
     margin-top: 20px;
-    padding: 0px 30px 30px 30px;
+    padding: 30px;
+    color: white;
 }
 
 .contactSubmitParagraph {
@@ -36,4 +36,32 @@
     display:block;
     margin:auto;
     top: 10%;
+}
+
+.returnToFindAConsultantCallToAction {
+    margin-top: 20px;
+}
+
+.returnToFindAConsultant {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.returnToFindAConsultant h3 {
+    margin: 10px;
+}
+
+.returnToFindAConsultant button {
+    margin: 10px;
+    background-color: #0066cc;
+    color: white;
+    border: 1px solid #333;
+    font-size: 20px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.returnToFindAConsultant button:hover {
+    cursor: pointer;
 }
