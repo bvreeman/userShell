@@ -114,34 +114,8 @@ class ProfileForm extends Component {
           }));
     }
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        console.log(this.state, 'state in submit')
-        // if statement protects against a blank form submit.
-        if (this.state.chosenConsultingOption !== undefined) {
-            this.setState({
-                // emptying typeOfConsulting because I use a push for the newly selected items. If I don't
-                // it just adds to the items.
-                typeOfConsulting: [],
-                // 
-                chosenConsultingOption: this.state.chosenConsultingOption
-            })
-            // using this to pull the items out of the one array in order to make it easier to display
-            // on the non-editable screen.
-            Object.values(this.state.interimTypeOfConsulting).map((consultingType) => {
-                this.state.typeOfConsulting.push(consultingType.value);
-                return consultingType.value
-            })
-        }
-        // sending state to the redux store for Firestore
-        this.props.updateProfile(this.state)
-        document.getElementById("profileForm").reset();
-        this.toggleEditing()
-    }
-
     static getDerivedStateFromProps(props, state) {
         if ((props.profile.firstName !== state.firstName)) {
-            console.log(props.profile.typeOfConsulting)
             if (props.profile.imageURL === undefined) {
                 return {
                     firstName: props.profile.firstName,
@@ -182,10 +156,42 @@ class ProfileForm extends Component {
         return null; 
       }
 
+    onSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state, 'state in submit')
+        // if statement protects against a blank form submit.
+        if (this.state.typeOfConsulting === undefined) {
+            this.setState({
+                typeOfConsulting: []
+            })
+        }
+        if (this.state.chosenConsultingOption !== undefined) {
+            this.setState({
+                // emptying typeOfConsulting because I use a push for the newly selected items. If I don't
+                // it just adds to the items.
+                typeOfConsulting: [],
+                // 
+                chosenConsultingOption: this.state.chosenConsultingOption
+            })
+            // using this to pull the items out of the one array in order to make it easier to display
+            // on the non-editable screen.
+            Object.values(this.state.interimTypeOfConsulting).map((consultingType) => {
+                console.log(consultingType, 'consultingType')
+                // this.setState({ typeOfConsulting: consultingType.value})
+                this.state.typeOfConsulting.push(consultingType.value);
+                return consultingType;
+            })
+        }
+        // sending state to the redux store for Firestore
+        this.props.updateProfile(this.state)
+        document.getElementById("profileForm").reset();
+        this.toggleEditing()
+    }
+
       render() {
-          console.log('state in render', this.state)
         const { profile, auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
+        console.log(profile, 'profile in render')
         return (
             <div className='row'>
                 <div className=' profile-image-container'>  
