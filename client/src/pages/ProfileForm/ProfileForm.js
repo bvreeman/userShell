@@ -29,6 +29,7 @@ class ProfileForm extends Component {
             lastName: '',
             twitter: '',
             facebook: '',
+            instagram: '',
             businessName: '',
             businessDescription: '',
             website: '',
@@ -52,6 +53,7 @@ class ProfileForm extends Component {
                 lastName: props.profile.lastName,
                 twitter: props.profile.twitter,
                 facebook: props.profile.facebook,
+                instagram: props.profile.instagram,
                 businessName: props.profile.businessName,
                 businessDescription: props.profile.businessDescription,
                 website: props.profile.website,
@@ -177,8 +179,10 @@ class ProfileForm extends Component {
                         <p> Business Name: {this.state.businessName}</p>
                         <p> Business Description: {this.state.businessDescription}</p>
                         <p> Website: <a href={`http://${this.state.website}`} target="_blank" rel="noopener noreferrer">{this.state.website}</a></p>
+                        <p> LinkedIn: <a href={`http://${this.state.linkedIn}`} target="_blank" rel="noopener noreferrer">{this.state.linkedIn}</a> </p>
                         <p> Twitter: <a href={`http://${this.state.twitter}`} target="_blank" rel="noopener noreferrer">{this.state.twitter}</a></p>
                         <p> Facebook: <a href={`http://${this.state.facebook}`} target="_blank" rel="noopener noreferrer">{this.state.facebook}</a> </p>
+                        <p> Instagram: <a href={`http://${this.state.instagram}`} target="_blank" rel="noopener noreferrer">{this.state.instagram}</a> </p>
                         {/* {console.log(this.state.typeOfConsulting, 'typeOfConsulting inside of return')} */}
                         {profile.typeOfConsulting ?
                             <p> Type Of Consulting: {profile.typeOfConsulting.join(', ')}</p>

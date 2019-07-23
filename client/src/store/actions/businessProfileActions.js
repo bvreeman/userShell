@@ -33,7 +33,9 @@ export const updateProfile = (users) => {
                 businessDescription: users.businessDescription,
                 website: users.website,
                 facebook: users.facebook,
+                linkedIn: users.linkedIn,
                 twitter: users.twitter,
+                instagram: users.instagram,
                 typeOfConsulting: users.typeOfConsulting,
                 chosenConsultingOption: users.chosenConsultingOption
             }).then(() => {

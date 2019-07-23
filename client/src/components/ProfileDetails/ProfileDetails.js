@@ -82,6 +82,28 @@ const ProfileDetails = (props) => {
                                 <a href={`http://${profile.twitter}`} target="_blank" rel="noopener noreferrer">{profile.twitter}</a>
                             </div>
                         </div>
+                        <hr />
+                        <div className='row'>
+                            <div className='col-md-4 col-xs-12'>
+                                <h5 className='businessProfileLabel'>
+                                    Our Instagram Handle:
+                                </h5>
+                            </div>
+                            <div className='col-md-8 col-xs-12'>
+                                <a href={`http://${profile.instagram}`} target="_blank" rel="noopener noreferrer">{profile.instagram}</a>
+                            </div>
+                        </div>
+                        <hr />
+                        <div className='row'>
+                            <div className='col-md-4 col-xs-12'>
+                                <h5 className='businessProfileLabel'>
+                                    Our LinkedIn Account:
+                                </h5>
+                            </div>
+                            <div className='col-md-8 col-xs-12'>
+                                <a href={`http://${profile.linkedIn}`} target="_blank" rel="noopener noreferrer">{profile.linkedIn}</a>
+                            </div>
+                        </div>
                     </div>  
                 </div>
             </div>
