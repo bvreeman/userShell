@@ -268,6 +268,15 @@ class ProfileForm extends Component {
                                 isSearchable='true'
                             />
                             <div className="input-field">
+                                <label htmlFor="linkedIn">LinkedIn Link</label>
+                                <input 
+                                    type="text" 
+                                    id='linkedIn'
+                                    value={this.state.linkedIn}
+                                    onChange={this.handleChange} 
+                                />
+                            </div>
+                            <div className="input-field">
                                 <label htmlFor="facebook">Facebook </label>
                                 <input 
                                     type="text" 
@@ -282,6 +291,15 @@ class ProfileForm extends Component {
                                     type="text" 
                                     id='twitter' 
                                     value={this.state.twitter}
+                                    onChange={this.handleChange} 
+                                />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="instagram">Instagram </label>
+                                <input 
+                                    type="text" 
+                                    id='instagram' 
+                                    value={this.state.instagram}
                                     onChange={this.handleChange} 
                                 />
                             </div>

@@ -101,7 +101,7 @@ const ProfileDetails = (props) => {
                                 </h5>
                             </div>
                             <div className='col-md-8 col-xs-12'>
-                                <a href={`http://${profile.linkedIn}`} target="_blank" rel="noopener noreferrer">{profile.linkedIn}</a>
+                                <a href={`${profile.linkedIn}`} target="_blank" rel="noopener noreferrer">{profile.linkedIn}</a>
                             </div>
                         </div>
                     </div>  
