@@ -15,12 +15,12 @@ class FindAConsultant extends React.PureComponent {
     return (
       <div>
         <div className='row'>
-          <div className='homePageContainer col-lg-9 col-md-12 col-xs-12'>
+          <div className='homePageContainer col-lg-9 col-md-9 col-xs-12'>
             <div className='searchBarContainer'> 
               < SearchBar users={ users } auth={ auth } />
             </div>
           </div>
-          <div className='homePageFeaturedConsultants col-lg-3 col-md-12 col-xs-12'>
+          <div className='homePageFeaturedConsultants col-lg-3 col-md-3 col-xs-12'>
             <h2>Featured Consultants:</h2>
             <div className='FeaturedConsultantsProfilesList'>
               < ProfilesList users={ users } auth={ auth } />

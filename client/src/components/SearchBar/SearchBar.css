@@ -1,0 +1,19 @@
+.searchedBusinesses {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.searchedBusinessProfiles {
+    text-align: center;
+}
+
+.project-list.section h2 {
+    text-align: center;
+}
+
+.project-list.section div.searchedBusinessProfiles div.profileCard{
+    width: 30%;
+    margin: 10px;
+}

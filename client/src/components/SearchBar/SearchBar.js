@@ -11,14 +11,12 @@ import ProfileSummary from '../ProfileSummary'
 let businesses;
 
 export const ConsultantInfo = ({ users }) => {
-    console.log(users, 'users')
     return(
         <div className="project-list section">
             <h2>Your Search Results:</h2>
-        {    console.log(users, 'users in SearchBar')}
             { users && users.map(profile => {
                 return (
-                    <div className='businessSearchProfiles' key={profile.id}>
+                    <div className='searchedBusinessProfiles' key={profile.id}>
                         <Link to={'/businessProfile/' + profile.id}>
                             <ProfileSummary profile={profile} />
                         </Link>
@@ -107,7 +105,9 @@ class SearchBar extends Component {
                         Search
                     </button>
                 </div>
-                <div>{businesses}</div>
+                <div className='row searchedBusinessesContainer'>
+                    <div className='searchedBusinesses'>{businesses}</div>
+                </div>
             </form>
         )
     }

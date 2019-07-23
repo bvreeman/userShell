@@ -26,8 +26,5 @@
 }
 
 .project-list div.businessSearchProfiles {
-    /* display: flex;
-    justify-content: center;
-    flex-direction: row; */
     text-align: center;
 }
