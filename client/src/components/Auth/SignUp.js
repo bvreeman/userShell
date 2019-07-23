@@ -59,7 +59,7 @@ class SignUp extends Component {
             </div>
             <div className="input-field">
                 <label htmlFor="website">Website</label>
-                <input type="text" id='website' required onChange={this.handleChange} />
+                <input type="text" id='website' onChange={this.handleChange} />
             </div>
             <div className="input-field">
                 <label htmlFor="facebook">Facebook Page</label>

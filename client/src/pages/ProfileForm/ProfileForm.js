@@ -31,6 +31,7 @@ class ProfileForm extends Component {
             facebook: '',
             instagram: '',
             businessName: '',
+            linkedIn: '',
             businessDescription: '',
             website: '',
             typeOfConsulting: [],
@@ -43,29 +44,6 @@ class ProfileForm extends Component {
             chosenConsultingOption: [],
         }
     };
-
-
-    static getDerivedStateFromProps(props, state) {
-        if ((props.profile.firstName !== state.firstName)) {
-            // console.log(props.profile.typeOfConsulting)
-            return {
-                firstName: props.profile.firstName,
-                lastName: props.profile.lastName,
-                twitter: props.profile.twitter,
-                facebook: props.profile.facebook,
-                instagram: props.profile.instagram,
-                businessName: props.profile.businessName,
-                businessDescription: props.profile.businessDescription,
-                website: props.profile.website,
-                // typeOfConsulting: props.profile.typeOfConsulting,
-                imageURL: props.profile.imagURL,
-                // interimTypeOfConsulting: state.interimTypeOfConsulting,
-                interimTypeOfConsulting: props.profile.typeOfConsulting,
-                chosenConsultingOption: props.profile.chosenConsultingOption,
-            };
-        }
-        return null; 
-      }
 
     // Start of the photo uploader
 
@@ -86,7 +64,7 @@ class ProfileForm extends Component {
         console.log('success')
         this.setState({ generatedName: filename, progress: 100, isUploading: false });
         console.log(this.props.auth.uid, 'logging props to see if I have access to auth')
-        const userID = firebase.auth().currentUser
+        // const userID = firebase.auth().currentUser
 
         // Sends the image to firebase storage
         firebase
@@ -118,7 +96,6 @@ class ProfileForm extends Component {
         if ( consultingChoices !== undefined ) {
             consultingChoices = this.state.typeOfConsulting.map((consulting) =>  consulting.value)
         }
-        
     }
 
     handleMultiSelectChange = (interimTypeOfConsulting) => {
@@ -139,6 +116,7 @@ class ProfileForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        console.log(this.state, 'state in submit')
         // if statement protects against a blank form submit.
         if (this.state.chosenConsultingOption !== undefined) {
             this.setState({
@@ -161,7 +139,51 @@ class ProfileForm extends Component {
         this.toggleEditing()
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if ((props.profile.firstName !== state.firstName)) {
+            console.log(props.profile.typeOfConsulting)
+            if (props.profile.imageURL === undefined) {
+                return {
+                    firstName: props.profile.firstName,
+                    lastName: props.profile.lastName,
+                    twitter: props.profile.twitter,
+                    facebook: props.profile.facebook,
+                    instagram: props.profile.instagram,
+                    businessName: props.profile.businessName,
+                    businessDescription: props.profile.businessDescription,
+                    website: props.profile.website,
+                    linkedIn: props.profile.linkedIn,
+                    // typeOfConsulting: props.profile.typeOfConsulting,
+                    imageURL: null,
+                    // interimTypeOfConsulting: state.interimTypeOfConsulting,
+                    interimTypeOfConsulting: props.profile.typeOfConsulting,
+                    chosenConsultingOption: props.profile.chosenConsultingOption,
+                }
+            } else {
+                return {
+                    firstName: props.profile.firstName,
+                    lastName: props.profile.lastName,
+                    twitter: props.profile.twitter,
+                    facebook: props.profile.facebook,
+                    instagram: props.profile.instagram,
+                    businessName: props.profile.businessName,
+                    businessDescription: props.profile.businessDescription,
+                    website: props.profile.website,
+                    linkedIn: props.profile.linkedIn,
+                    // typeOfConsulting: props.profile.typeOfConsulting,
+                    imageURL: props.profile.imageURL,
+                    // interimTypeOfConsulting: state.interimTypeOfConsulting,
+                    interimTypeOfConsulting: props.profile.typeOfConsulting,
+                    chosenConsultingOption: props.profile.chosenConsultingOption,
+                };
+            }
+        }
+
+        return null; 
+      }
+
       render() {
+          console.log('state in render', this.state)
         const { profile, auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
         return (
@@ -178,11 +200,11 @@ class ProfileForm extends Component {
                         <h1> {this.state.firstName}  {this.state.lastName} </h1>
                         <p> Business Name: {this.state.businessName}</p>
                         <p> Business Description: {this.state.businessDescription}</p>
-                        <p> Website: <a href={`http://${this.state.website}`} target="_blank" rel="noopener noreferrer">{this.state.website}</a></p>
-                        <p> LinkedIn: <a href={`http://${this.state.linkedIn}`} target="_blank" rel="noopener noreferrer">{this.state.linkedIn}</a> </p>
-                        <p> Twitter: <a href={`http://${this.state.twitter}`} target="_blank" rel="noopener noreferrer">{this.state.twitter}</a></p>
-                        <p> Facebook: <a href={`http://${this.state.facebook}`} target="_blank" rel="noopener noreferrer">{this.state.facebook}</a> </p>
-                        <p> Instagram: <a href={`http://${this.state.instagram}`} target="_blank" rel="noopener noreferrer">{this.state.instagram}</a> </p>
+                        <p> Website: <a href={`${this.state.website}`} target="_blank" rel="noopener noreferrer">{this.state.website}</a></p>
+                        <p> LinkedIn: <a href={`${this.state.linkedIn}`} target="_blank" rel="noopener noreferrer">{this.state.linkedIn}</a> </p>
+                        <p> Twitter: <a href={`${this.state.twitter}`} target="_blank" rel="noopener noreferrer">{this.state.twitter}</a></p>
+                        <p> Facebook: <a href={`${this.state.facebook}`} target="_blank" rel="noopener noreferrer">{this.state.facebook}</a> </p>
+                        <p> Instagram: <a href={`${this.state.instagram}`} target="_blank" rel="noopener noreferrer">{this.state.instagram}</a> </p>
                         {/* {console.log(this.state.typeOfConsulting, 'typeOfConsulting inside of return')} */}
                         {profile.typeOfConsulting ?
                             <p> Type Of Consulting: {profile.typeOfConsulting.join(', ')}</p>
@@ -245,16 +267,17 @@ class ProfileForm extends Component {
                                 />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="website">Website </label>
+                                <label htmlFor="website">Website (include http:// or https://)</label>
                                 <input 
-                                    type="text" 
+                                    type="url" 
                                     id='website' 
+                                    pattern='https?://.*'
                                     value={this.state.website}
                                     onChange={this.handleChange} 
                                 />
                             </div>
                             <div className='input-field'>
-                                <label htmlFor="interimTypeOfConsulting">Type of Consulting</label>
+                                <label htmlFor="interimTypeOfConsulting">Type of Consulting </label>
                             </div>
                             {/* <CreatableSelect could work here, but it sends an underscore
                             which doesn't work sending through DocumentTreference.update()
@@ -268,37 +291,41 @@ class ProfileForm extends Component {
                                 isSearchable='true'
                             />
                             <div className="input-field">
-                                <label htmlFor="linkedIn">LinkedIn Link</label>
+                                <label htmlFor="linkedIn">LinkedIn (include http:// or https://)</label>
                                 <input 
-                                    type="text" 
+                                    type="url" 
                                     id='linkedIn'
+                                    pattern='https?://.*'
                                     value={this.state.linkedIn}
                                     onChange={this.handleChange} 
                                 />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="facebook">Facebook </label>
+                                <label htmlFor="facebook">Facebook (include http:// or https://)</label>
                                 <input 
-                                    type="text" 
+                                    type="url" 
                                     id='facebook'
+                                    pattern='https?://.*'
                                     value={this.state.facebook}
                                     onChange={this.handleChange} 
                                 />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="twitter">Twitter </label>
+                                <label htmlFor="twitter">Twitter (include http:// or https://)</label>
                                 <input 
-                                    type="text" 
+                                    type="url" 
                                     id='twitter' 
+                                    pattern='https?://.*'
                                     value={this.state.twitter}
                                     onChange={this.handleChange} 
                                 />
                             </div>
                             <div className="input-field">
-                                <label htmlFor="instagram">Instagram </label>
+                                <label htmlFor="instagram">Instagram (include http:// or https://)</label>
                                 <input 
-                                    type="text" 
+                                    type="url" 
                                     id='instagram' 
+                                    pattern='https?://.*'
                                     value={this.state.instagram}
                                     onChange={this.handleChange} 
                                 />
