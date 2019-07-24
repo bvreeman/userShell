@@ -117,6 +117,27 @@ class ProfileForm extends Component {
     static getDerivedStateFromProps(props, state) {
         if ((props.profile.firstName !== state.firstName)) {
             if (props.profile.imageURL === undefined) {
+                // Object.keys(props.profile).forEach((item) => {
+                //     console.log(item, 'item in Object.keys')
+                //     console.log(props.profile[item], 'value in Object.keys')
+                //     if (props.profile[item] === '') {
+                //         console.log(item, 'this item is undefined')
+                //         props.profile[item] = ' '
+                //     }
+                // })
+                if (props.profile.website === undefined) {
+                    props.profile.website = null
+                } if (props.profile.twitter === undefined) {
+                    props.profile.twitter = null
+                } if (props.profile.instagram === undefined) {
+                    props.profile.instagram = null
+                } if (props.profile.facebook === undefined) {
+                    props.profile.facebook = null
+                } if (props.profile.linkedIn === undefined) {
+                    props.profile.linkedIn = null
+                } if (props.profile.typeOfConsulting === undefined) {
+                    props.profile.typeOfConsulting = []
+                }
                 return {
                     firstName: props.profile.firstName,
                     lastName: props.profile.lastName,
@@ -134,6 +155,19 @@ class ProfileForm extends Component {
                     chosenConsultingOption: props.profile.chosenConsultingOption,
                 }
             } else {
+                if (props.profile.website === undefined) {
+                    props.profile.website = null
+                } if (props.profile.twitter === undefined) {
+                    props.profile.twitter = null
+                } if (props.profile.instagram === undefined) {
+                    props.profile.instagram = null
+                } if (props.profile.facebook === undefined) {
+                    props.profile.facebook = null
+                } if (props.profile.linkedIn === undefined) {
+                    props.profile.linkedIn = null
+                } if (props.profile.typeOfConsulting === undefined) {
+                    props.profile.typeOfConsulting = []
+                }
                 return {
                     firstName: props.profile.firstName,
                     lastName: props.profile.lastName,
@@ -191,7 +225,6 @@ class ProfileForm extends Component {
       render() {
         const { profile, auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
-        console.log(profile, 'profile in render')
         return (
             <div className='row'>
                 <div className=' profile-image-container'>  
