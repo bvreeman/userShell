@@ -1,5 +1,9 @@
 .App {
-
+  background-image: url("./images/cityScape.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom;
+  background-size: cover;
 }
 
 .row {
