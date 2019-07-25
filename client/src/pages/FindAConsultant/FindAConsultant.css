@@ -28,3 +28,8 @@
 .project-list div.businessSearchProfiles {
     text-align: center;
 }
+
+.homePageFeaturedConsultants h2 {
+    color: white;
+    font-weight: bold;
+}

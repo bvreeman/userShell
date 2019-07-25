@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import {updateProfile, updatePhoto} from '../../store/actions/businessProfileActions'
 import './ProfileForm.css'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router-dom'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
@@ -226,31 +225,65 @@ class ProfileForm extends Component {
         const { profile, auth } = this.props;
         if (!auth.uid) return <Redirect to='/signin' />
         return (
-            <div className='row'>
-                <div className=' profile-image-container'>  
-                    {profile.imageURL ?
-
-                        <img className='profileFormImage' src={profile.imageURL} alt={profile.businessName} />
-                        :
-                        <img className='profileFormImage' src={noPhoto} alt={profile.businessName} />
-                    }                        
+            <div className='row accountInfo'>
+                <div className='accountFormCard'>
+                    <div className='row profileFormHeader'>
+                        <div className='col-md-6 col-xs-12 profileFormImageContainer'>
+                            {profile.imageURL ?
+                                <img className='profileFormImage' src={profile.imageURL} alt={profile.businessName} />
+                                :
+                                <img className='profileFormImage' src={noPhoto} alt={profile.businessName} />
+                            }  
+                        </div>
+                        { this.state.isEditing ?
+                            <div className='col-md-6 col-xs-12 profileFormHeaderInfo'>
+                                <h1 className='userNameNonEdit'> {this.state.firstName}  {this.state.lastName} </h1>
+                                <p className='businessNameNonEdit'> Business Name: {this.state.businessName}</p>
+                                <p className='businessDescNonEdit'> Business Description: {this.state.businessDescription}</p>
+                            </div>
+                            :
+                            <div></div>
+                        }
+                    </div>                      
                     { this.state.isEditing ? 
                     <div className="profile-static-container">
-                        <h1> {this.state.firstName}  {this.state.lastName} </h1>
-                        <p> Business Name: {this.state.businessName}</p>
-                        <p> Business Description: {this.state.businessDescription}</p>
-                        <p> Website: <a href={`${this.state.website}`} target="_blank" rel="noopener noreferrer">{this.state.website}</a></p>
-                        <p> LinkedIn: <a href={`${this.state.linkedIn}`} target="_blank" rel="noopener noreferrer">{this.state.linkedIn}</a> </p>
-                        <p> Twitter: <a href={`${this.state.twitter}`} target="_blank" rel="noopener noreferrer">{this.state.twitter}</a></p>
-                        <p> Facebook: <a href={`${this.state.facebook}`} target="_blank" rel="noopener noreferrer">{this.state.facebook}</a> </p>
-                        <p> Instagram: <a href={`${this.state.instagram}`} target="_blank" rel="noopener noreferrer">{this.state.instagram}</a> </p>
+                        {/* <h1 className='userNameEdit'> {this.state.firstName}  {this.state.lastName} </h1>
+                        <p className='businessNameEdit'> Business Name: {this.state.businessName}</p>
+                        <p className='businessDescEdit'> Business Description: {this.state.businessDescription}</p> */}
+                        <div className='row'>
+                            <div className='col-md-12 col-xs-12'>
+                                {profile.typeOfConsulting ?
+                                    <p> Type Of Consulting: {profile.typeOfConsulting.join(', ')}</p>
+                                    :
+                                    <p> Type of Consulting: None Chosen</p>
+                                }
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-6 col-xs-12'>
+                                <p> Website: <a href={`${this.state.website}`} target="_blank" rel="noopener noreferrer">{this.state.website}</a></p>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-6 col-xs-12'>
+                                <p> Facebook: <a href={`${this.state.facebook}`} target="_blank" rel="noopener noreferrer">{this.state.facebook}</a> </p>
+                            </div>
+                            <div className='col-md-6 col-xs-12'>
+                                <p> LinkedIn: <a href={`${this.state.linkedIn}`} target="_blank" rel="noopener noreferrer">{this.state.linkedIn}</a> </p>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-6 col-xs-12'>
+                                <p> Twitter: <a href={`${this.state.twitter}`} target="_blank" rel="noopener noreferrer">{this.state.twitter}</a></p>
+                            </div>
+                            <div className='col-md-6 col-xs-12'>
+                                <p> Instagram: <a href={`${this.state.instagram}`} target="_blank" rel="noopener noreferrer">{this.state.instagram}</a> </p>
+                            </div>
+                        </div>
+                        <div className='profileFormEditButton'>
+                            <button className={this.state.isEditing ? "btn btn-edit " :"btn btn-edit btn-edit-active"}  onClick={() => this.toggleEditing()} > Edit </button>
+                        </div>
                         {/* {console.log(this.state.typeOfConsulting, 'typeOfConsulting inside of return')} */}
-                        {profile.typeOfConsulting ?
-                            <p> Type Of Consulting: {profile.typeOfConsulting.join(', ')}</p>
-                            :
-                            <p> Type of Consulting: None Chosen</p>
-                        }
-                        <button className={this.state.isEditing ? "btn btn-edit " :"btn btn-edit btn-edit-active"}  onClick={() => this.toggleEditing()} > Edit </button>
                     </div>
                         :
                     <div className='col-md-6 col-xs-12'>
@@ -378,9 +411,6 @@ class ProfileForm extends Component {
                         <button className={this.state.isEditing ? "btn btn-edit " :"btn btn-edit btn-edit-active"}  onClick={() => this.toggleEditing()} > Cancel </button>
                     </div>
                     }
-                    <div className='col-md-12 col-xs-12 profileFormButtonsContainer'>
-                        <NavLink to='/' className='btn   btn-edit ProfileFormPageButton'>Home</NavLink>
-                    </div>
                 </div>
             </div>
         )

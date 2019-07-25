@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
-import ProfilesList from '../../components/ProfilesList'
+import FeaturedConsultantsList from '../../components/FeaturedConsultantsList'
 import SearchBar from '../../components/SearchBar'
   
 class FindAConsultant extends React.PureComponent {
@@ -23,7 +23,7 @@ class FindAConsultant extends React.PureComponent {
           <div className='homePageFeaturedConsultants col-lg-3 col-md-3 col-xs-12'>
             <h2>Featured Consultants:</h2>
             <div className='FeaturedConsultantsProfilesList'>
-              < ProfilesList users={ users } auth={ auth } />
+              < FeaturedConsultantsList users={ users } auth={ auth } />
             </div>
           </div>
         </div>
