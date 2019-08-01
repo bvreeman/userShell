@@ -30,6 +30,8 @@
     padding-top: 10px;
     width: 100%;
     z-index: 1;
+    display: flex;
+    flex-direction: row;
 }
 
 .navbarTitle {
@@ -149,5 +151,15 @@
     .allMenuItems,
     .socialItems{
         display: none;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .mobileNavbarCenter,
+    .mobileAllMenuItems,
+    .signInLinks,
+    .signedOutLinks {
+        display: flex;
+        flex-direction: column;
     }
 }

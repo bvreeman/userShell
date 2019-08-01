@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 
 const SignedInLinks = (props) => {
     return (
-        <div className="row">
+        <div className="row signInLinks">
             <NavLink to='/ProfileForm' className="navbar-brand">My Account</NavLink>
             <a href='/' onClick={props.signOut} className='navbar-brand'>Log Out</a> 
         </div>
