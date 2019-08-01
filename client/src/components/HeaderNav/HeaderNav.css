@@ -4,8 +4,17 @@
 }
 
 .navbarCenter {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
     text-align: center;
     line-height: 50px;
+}
+
+.navbarLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbarRight {
@@ -38,9 +47,44 @@
     color: white;
     /* margin-right: 10px; */
     line-height: 50px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
     font-size: 20px;
+}
+
+.hamburgerMenuDiv {
+    display: none;
+}
+
+.mobileMenu {
+    transition: transform 400ms ease-in;
+}
+
+.mobileNavbarCenter {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 50px;
+}
+
+.mobile-navbar-brand {
+    text-decoration: none;
+    color: white;
+    /* margin-right: 10px; */
+    line-height: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 18px;
+    margin: 5px;
+}
+
+.mobileSocialItems {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 50px;
 }
 
 /* .headerContainer{
@@ -66,8 +110,44 @@
     line-height: 50px;
 }
 
+@media only screen and (max-width: 1339px) {
+    .navbarTitle {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 1095px) {
+    .navbarTitle {
+        font-size: 20px;
+    }
+    .navbar-brand {
+        font-size: 16px;
+    }
+}
+
 @media only screen and (max-width: 991px) {
     .navbarRight {
         margin-right: 10px;
+    }
+}
+
+@media only screen and (max-width: 933px) {
+    .navbarTitle {
+        font-size: 18px;
+    }
+    .navbar-brand {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 852px) {
+    .hamburgerMenuDiv {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+    }
+    .allMenuItems,
+    .socialItems{
+        display: none;
     }
 }

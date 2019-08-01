@@ -1,3 +1,27 @@
+.noConsultantDiv {
+    width: 40%;
+    background-color: white;
+    border: solid 4px #0066cc;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.noConsultanth4 {
+    color: #0066cc;
+    text-align: center;
+    margin: 20px;
+    font-weight: bold;
+}
+
+.searchLabel {
+    display: flex;
+    justify-content: center;
+}
+
+.searchLabel h1 {
+    color: #ffffff;
+}
+
 .searchedBusinesses {
     width: 100%;
     display: flex;
@@ -12,9 +36,38 @@
 
 .project-list.section h2 {
     text-align: center;
+    color: white;
 }
 
 .project-list.section div.searchedBusinessProfiles div.profileCard{
     width: 30%;
     margin: 10px;
 }
+
+.querySubmit {
+    background-color: #0066cc;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 465px) {
+    .noConsultanth4 {
+        font-size: 20px;
+    }
+  }
+
+  @media only screen and (max-width: 415px) {
+    .noConsultanth4 {
+        font-size: 16px;
+    }
+  }
+
+  @media only screen and (max-width: 367px) {
+    .noConsultanth4 {
+        font-size: 12px;
+    }
+  }

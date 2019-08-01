@@ -11,18 +11,19 @@ class FindAConsultant extends React.PureComponent {
   render() {
     // console.log('this.props', this.props)
     const { users, auth } = this.props
+    console.log(users, 'users in render')
     if (!auth.uid) return <Redirect to='/signin' />
     return (
       <div>
         <div className='row'>
-          <div className='homePageContainer col-lg-9 col-md-9 col-xs-12'>
+          <div className='homePageContainer col-lg-12 col-md-12 col-xs-12'>
             <div className='searchBarContainer'> 
               < SearchBar users={ users } auth={ auth } />
             </div>
           </div>
-          <div className='homePageFeaturedConsultants col-lg-3 col-md-3 col-xs-12'>
+          <div className='homePageFeaturedConsultants col-lg-12 col-md-12 col-xs-12'>
             <h2>Featured Consultants:</h2>
-            <div className='FeaturedConsultantsProfilesList'>
+            <div className='featuredConsultantsProfilesList'>
               < FeaturedConsultantsList users={ users } auth={ auth } />
             </div>
           </div>

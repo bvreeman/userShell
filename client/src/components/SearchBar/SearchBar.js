@@ -61,7 +61,10 @@ class SearchBar extends Component {
                     // businesses = this.state.matchingBusinessName.join(', ')
                     businesses = < ConsultantInfo users={ this.state.matchingBusiness } />
                 } else if ( businesses === undefined || businesses === '') {
-                    businesses = <h4>No Consultants of that Type at this time</h4>
+                    businesses = 
+                        <div className='noConsultantDiv'>
+                            <h4 className='noConsultanth4'>No Consultants of that Type at this time</h4>
+                        </div>
                 }
             })
             
@@ -91,7 +94,7 @@ class SearchBar extends Component {
         return (
             <form id='findAConsultantQuery' onSubmit={this.onSubmit}>
                 <div className='input-field'>
-                    <label htmlFor="consultingQuery">Type of Consulting</label>
+                    <label className='searchLabel' htmlFor="consultingQuery"><h1>Search for a consulting type</h1></label>
                 </div>
                 < Select
                     value={selectedOption}

@@ -18,7 +18,7 @@
     text-align: center;
 }
 
-.FeaturedConsultantsProfilesList div.project-list {
+.featuredConsultantsProfilesList div.project-list {
     display: flex;
     flex-direction: column;
     justify-content: center;
