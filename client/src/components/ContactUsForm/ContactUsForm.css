@@ -1,18 +1,24 @@
+.contactForQuote {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .contactForQuoteHeading span {
     color: #0066cc;
 }
 
 .contactForm {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contactForQuoteHeading {
-    margin-top: 20px;
     font-weight: bold;
     text-align: center;
+    color: white;
     margin-bottom: 20px;
 }
 

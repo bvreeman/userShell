@@ -1,0 +1,37 @@
+.logInContainer {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.signInHeader {
+    color: white;
+    margin: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.inputLabel {
+    color: white;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.signInInputField {
+    float: right;
+}
+
+.signInButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.logInButton {
+    background-color: #0066cc;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px 10px 20px;
+    font-size: 18px;
+    margin-top: 10px;
+}

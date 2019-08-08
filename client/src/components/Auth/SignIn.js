@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './SignIn.css'
 import { connect } from 'react-redux'
 import { signIn } from '../../store/actions/authActions'
 import { Redirect } from 'react-router-dom'
@@ -25,19 +26,19 @@ class SignIn extends Component {
     if (auth.uid) return <Redirect to='/' />
 
     return (
-      <div className='container'>
+      <div className='container logInContainer'>
         <form onSubmit={this.handleSubmit} className="white">
-            <h5 className="grey-text text-darken-3">Sign In</h5>
+            <h5 className="signInHeader">Sign In</h5>
             <div className="input-field">
-                <label htmlFor="email">Email</label>
-                <input type="email" id='email' onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="email">Email:</label>
+                <input type="email" id='email' className='signInInputField' onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="password">Password</label>
-                <input type="password" id='password' onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="password">Password:</label>
+                <input type="password" id='password' className='signInInputField' onChange={this.handleChange} />
             </div>
-            <div className="input-field">
-                <button className="btn pink lighten-1 z-depth-0">Log In</button>
+            <div className="input-field signInButtonContainer">
+                <button className="btn logInButton">Log In</button>
                 <div className="red-text center">
                     { authError ? <p>{authError}</p> : null }
                 </div>
