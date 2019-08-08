@@ -1,5 +1,5 @@
 .profileCard {
-    width: 90%;
+    width: 360px;
     /* margin: 20px; */
     padding: 5px;
     float: left;
@@ -17,7 +17,9 @@
 }
 
 .businessProfileSummaryImage {
-    width: 100%;
+    max-height: 300px;
+    width: auto;
+    max-width: 100%;
     padding: 5px 20px 5px 20px;
     border-radius: 40px;
 }
@@ -37,4 +39,46 @@
     text-decoration: underline;
     font-size: 20px;
     padding: 10px;
+}
+
+@media only screen and (max-width: 1160px) {
+    .profileCard {
+        width: 330px;
+    }
+}
+
+@media only screen and (max-width: 1070px) {
+    .profileCard {
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 970px) {
+    .profileCard {
+        width: 270px;
+    }
+}
+
+@media only screen and (max-width: 880px) {
+    .profileCard {
+        width: 250px;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+    .profileCard {
+        width: 220px;
+    }
+}
+
+@media only screen and (max-width: 730px) {
+    .profileCard {
+        width: 210px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .profileCard {
+        width: 275px;
+    }
 }

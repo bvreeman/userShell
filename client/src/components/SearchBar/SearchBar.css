@@ -54,6 +54,16 @@
     font-size: 18px;
 }
 
+#searchBar {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.searchBarContainer {
+    display: flex;
+    justify-content: center;
+}
+
 @media only screen and (max-width: 465px) {
     .noConsultanth4 {
         font-size: 20px;

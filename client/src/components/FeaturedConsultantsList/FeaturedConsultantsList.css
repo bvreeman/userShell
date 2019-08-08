@@ -1,6 +1,6 @@
 .featuredConsultantListContainer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 95%;
     margin: auto;
 }

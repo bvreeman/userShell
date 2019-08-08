@@ -45,7 +45,13 @@ class SearchBar extends Component {
         this.setState(state => ({ isSearchable: !state.isSearchable }));
 
     handleChange = (selectedOption) => {
-        this.setState({ selectedOption: selectedOption })
+        businesses = ''
+        this.setState({ 
+            selectedOption: selectedOption, 
+            matchingBusiness: [],
+        }, () => {
+            this.UserSearch()
+        })
       }
 
     
@@ -96,18 +102,21 @@ class SearchBar extends Component {
                 <div className='input-field'>
                     <label className='searchLabel' htmlFor="consultingQuery"><h1>Search for a consulting type</h1></label>
                 </div>
-                < Select
-                    value={selectedOption}
-                    onChange={this.handleChange}
-                    options={consultingOptions}
-                    isClearable={isClearable}
-                    isSearchable={isSearchable}
-                />
-                <div className="input-field">
+                <div className='searchBarContainer'>
+                    < Select
+                        value={selectedOption}
+                        onChange={this.handleChange}
+                        options={consultingOptions}
+                        isClearable={isClearable}
+                        isSearchable={isSearchable}
+                        id={'searchBar'}
+                    />
+                </div>
+                {/* <div className="input-field">
                     <button className='querySubmit'>
                         Search
                     </button>
-                </div>
+                </div> */}
                 <div className='row searchedBusinessesContainer'>
                     <div className='searchedBusinesses'>{businesses}</div>
                 </div>
