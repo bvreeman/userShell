@@ -35,39 +35,39 @@ class SignUp extends Component {
         <form onSubmit={this.handleSubmit} className="white">
             <h5 className="signUpHeader">Sign Up</h5>
             <div className="input-field">
-                <label className='inputLabel' htmlFor="email">Email</label>
+                <label className='inputLabel' htmlFor="email">Email:</label>
                 <input type="email" id='email' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label className='inputLabel' htmlFor="password">Password</label>
+                <label className='inputLabel' htmlFor="password">Password:</label>
                 <input type="password" id='password' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label className='inputLabel' htmlFor="firstName">First Name</label>
+                <label className='inputLabel' htmlFor="firstName">First Name:</label>
                 <input type="text" id='firstName' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label className='inputLabel' htmlFor="lastName">Last Name</label>
+                <label className='inputLabel' htmlFor="lastName">Last Name:</label>
                 <input type="text" id='lastName' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label className='inputLabel' htmlFor="businessName">Business Name</label>
+                <label className='inputLabel' htmlFor="businessName">Business Name:</label>
                 <input type="text" id='businessName' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label className='inputLabel' htmlFor="businessDescription">Business Description</label>
+                <label className='inputLabel' htmlFor="businessDescription">Business Description:</label>
                 <input type="text" id='businessDescription' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label className='inputLabel' htmlFor="website">Website</label>
+                <label className='inputLabel' htmlFor="website">Website:</label>
                 <input type="text" id='website' className='signUpInputField' onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label className='inputLabel' htmlFor="facebook">Facebook Page</label>
+                <label className='inputLabel' htmlFor="facebook">Facebook Page:</label>
                 <input type="text" id='facebook' className='signUpInputField' onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label className='inputLabel' htmlFor="twitter">Twitter Page</label>
+                <label className='inputLabel' htmlFor="twitter">Twitter Page:</label>
                 <input type="text" id='twitter' className='signUpInputField' onChange={this.handleChange} />
             </div>
             <div className="input-field signUpButtonContainer">
