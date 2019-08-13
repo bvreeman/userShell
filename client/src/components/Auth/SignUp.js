@@ -31,47 +31,47 @@ class SignUp extends Component {
     const { auth, authError } = this.props
     if (auth.uid) return <Redirect to='/' />
     return (
-      <div className='container'>
+      <div className='container signUpContainer'>
         <form onSubmit={this.handleSubmit} className="white">
-            <h5 className="grey-text text-darken-3">Sign Up</h5>
+            <h5 className="signUpHeader">Sign Up</h5>
             <div className="input-field">
-                <label htmlFor="email">Email</label>
-                <input type="email" id='email' required onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="email">Email</label>
+                <input type="email" id='email' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="password">Password</label>
-                <input type="password" id='password' required onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="password">Password</label>
+                <input type="password" id='password' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="firstName">First Name</label>
-                <input type="text" id='firstName' required onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="firstName">First Name</label>
+                <input type="text" id='firstName' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="lastName">Last Name</label>
-                <input type="text" id='lastName' required onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="lastName">Last Name</label>
+                <input type="text" id='lastName' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="businessName">Business Name</label>
-                <input type="text" id='businessName' required onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="businessName">Business Name</label>
+                <input type="text" id='businessName' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="businessDescription">Business Description</label>
-                <input type="text" id='businessDescription' required onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="businessDescription">Business Description</label>
+                <input type="text" id='businessDescription' className='signUpInputField' required onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="website">Website</label>
-                <input type="text" id='website' onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="website">Website</label>
+                <input type="text" id='website' className='signUpInputField' onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="facebook">Facebook Page</label>
-                <input type="text" id='facebook' onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="facebook">Facebook Page</label>
+                <input type="text" id='facebook' className='signUpInputField' onChange={this.handleChange} />
             </div>
             <div className="input-field">
-                <label htmlFor="twitter">Twitter Page</label>
-                <input type="text" id='twitter' onChange={this.handleChange} />
+                <label className='inputLabel' htmlFor="twitter">Twitter Page</label>
+                <input type="text" id='twitter' className='signUpInputField' onChange={this.handleChange} />
             </div>
-            <div className="input-field">
-                <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
+            <div className="input-field signUpButtonContainer">
+                <button className="signUpButton">Sign Up</button>
                 <div className="red-text center">
                     { authError ? <p>{ authError }</p> : null } 
                 </div>
