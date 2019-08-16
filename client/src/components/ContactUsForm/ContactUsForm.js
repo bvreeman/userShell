@@ -82,27 +82,27 @@ class ContactForQuote extends React.PureComponent {
             return(
                 <div className='contactForQuote'>
                     <h2 className='contactForQuoteHeading'>Have a question or comment? <span>Contact Us</span></h2>
-                        <form id="contact-form" className='contactForm col-md-5 col-xs-12' onSubmit={this.handleSubmit.bind(this)} method="POST">
-                            <div className='col-md-12 col-xs-12 contactUsForm'>
-                                <div className="form-group">
-                                    <input required type="text" onChange={this.handleChange} className="form-control" value={this.state.FullName} name="FullName" id="FullName" placeholder="Full Name (required)" />
-                                </div>
-                                <div className="form-group">
-                                    <input type="text" onChange={this.handleChange} className="form-control" value={this.state.PhoneNumber} name='PhoneNumber' id="PhoneNumber" placeholder="Phone Number" />
-                                </div>
-                                <div className="form-group">
-                                <input required type='text' onChange={this.handleChange} className="form-control" value={this.state.Email} name='Email' id="Email" placeholder="Email (required)" />
-                                </div>
-                                <div className="form-group">
-                                <textarea required rows="4"  onChange={this.handleChange} className="form-control" value={this.state.CustomerMessage} name='CustomerMessage' id="CustomerMessage" placeholder="Message (required)" />
-                                </div>
-                                {/* <div className='contactFormReCaptcha'>
-                                    <div className="g-recaptcha" data-sitekey={process.env.REACT_APP_SITEKEY} value={this.state.reCAPTCHAvalue} onChange={this.handleReCAPTCHAchange}></div>
-                                    <ReCAPTCHAComponent />
-                                </div> */}
-                                <input type='submit' className='contactSubmitButton' onClick={this.handleSubmit} value='Submit' />
+                    <form id="contact-form" className='contactForm col-md-5 col-xs-12' onSubmit={this.handleSubmit.bind(this)} method="POST">
+                        <div className='col-md-12 col-xs-12 contactUsForm'>
+                            <div className="form-group">
+                                <input required type="text" onChange={this.handleChange} className="form-control" value={this.state.FullName} name="FullName" id="FullName" placeholder="Full Name (required)" />
                             </div>
-                        </form>
+                            <div className="form-group">
+                                <input type="text" onChange={this.handleChange} className="form-control" value={this.state.PhoneNumber} name='PhoneNumber' id="PhoneNumber" placeholder="Phone Number" />
+                            </div>
+                            <div className="form-group">
+                            <input required type='text' onChange={this.handleChange} className="form-control" value={this.state.Email} name='Email' id="Email" placeholder="Email (required)" />
+                            </div>
+                            <div className="form-group">
+                            <textarea required rows="4"  onChange={this.handleChange} className="form-control" value={this.state.CustomerMessage} name='CustomerMessage' id="CustomerMessage" placeholder="Message (required)" />
+                            </div>
+                            {/* <div className='contactFormReCaptcha'>
+                                <div className="g-recaptcha" data-sitekey={process.env.REACT_APP_SITEKEY} value={this.state.reCAPTCHAvalue} onChange={this.handleReCAPTCHAchange}></div>
+                                <ReCAPTCHAComponent />
+                            </div> */}
+                            <input type='submit' className='contactSubmitButton' onClick={this.handleSubmit} value='Submit' />
+                        </div>
+                    </form>
                 </div>                
             )
         }
