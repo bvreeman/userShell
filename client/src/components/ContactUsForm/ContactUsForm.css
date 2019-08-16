@@ -1,8 +1,10 @@
 .contactForQuote {
     height: 100vh;
+}
+
+#contact-form {
     display: flex;
     justify-content: center;
-    flex-direction: column;
 }
 
 .contactForQuoteHeading span {

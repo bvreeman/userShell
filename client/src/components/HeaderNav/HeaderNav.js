@@ -15,12 +15,17 @@ class HeaderNav extends React.PureComponent {
         this.setState({
             open: !this.state.open
         });
-        console.log(this.state.open, 'open')
+    }
+
+    passedClickHandler = () => {
+        this.setState({
+            open: !this.state.open
+        })
     }
 
     render() {
         const { auth, businessProfile } = this.props;
-        const links = auth.uid ? <SignedInLinks businessProfile={businessProfile} /> : <SignedOutLinks />        
+        const links = auth.uid ? <SignedInLinks businessProfile={businessProfile} passedClickHandler={this.passedClickHandler}/> : <SignedOutLinks passedClickHandler={this.passedClickHandler} />        
         return (
             <nav className="sticky navbar">
                 <div className="row navbar-header">
@@ -54,12 +59,12 @@ class HeaderNav extends React.PureComponent {
                             <div className="row navbar-header mobileMenu">
                                 <div className='col-md-12 col-xs-12 mobileNavbarCenter'>
                                     <div className='row mobileAllMenuItems'>
-                                        <NavLink to="/About" className="mobile-navbar-brand">About</NavLink>
-                                        <NavLink to='/ContactUsPage' className="mobile-navbar-brand">Contact Us</NavLink>
+                                        <NavLink to="/About" className="mobile-navbar-brand" onClick={this.handleClick.bind(this)}>About</NavLink>
+                                        <NavLink to='/ContactUsPage' className="mobile-navbar-brand" onClick={this.handleClick.bind(this)}>Contact Us</NavLink>
                                         { links }
                                     </div>
                                     <div className='col-md-1 col-xs-12 NavbarRight'>
-                                        <a className="mobileSocialItems" rel="noopener noreferrer" href="https://www.facebook.com/vreemanconsultingllc/" target="_blank"><i className="fa fa-facebook white-text mr-lg-4"></i></a>
+                                        <a className="mobileSocialItems" rel="noopener noreferrer" href="https://www.facebook.com/vreemanconsultingllc/" target="_blank" onClick={this.handleClick.bind(this)}><i className="fa fa-facebook white-text mr-lg-4"></i></a>
                                     </div>
                                 </div>
                             </div>
