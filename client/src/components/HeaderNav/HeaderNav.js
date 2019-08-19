@@ -4,6 +4,8 @@ import {NavLink} from 'react-router-dom';
 import { connect } from 'react-redux'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
+import SignedOutLinksHamburger from './HamburgerSignedOutLinks'
+
 import HamburgerMenu from 'react-hamburger-menu'
 
 class HeaderNav extends React.PureComponent {
@@ -26,6 +28,9 @@ class HeaderNav extends React.PureComponent {
     render() {
         const { auth, businessProfile } = this.props;
         const links = auth.uid ? <SignedInLinks businessProfile={businessProfile} passedClickHandler={this.passedClickHandler}/> : <SignedOutLinks passedClickHandler={this.passedClickHandler} />        
+        const hamburgerLinks = auth.uid ? <SignedInLinks businessProfile={businessProfile} passedClickHandler={this.passedClickHandler}/> : <SignedOutLinksHamburger passedClickHandler={this.passedClickHandler} />        
+
+        // const hamburgerLinks = <SignedOutLinks passedClickHandler={this.passedClickHandler} />
         return (
             <nav className="sticky navbar">
                 <div className="row navbar-header">
@@ -61,7 +66,7 @@ class HeaderNav extends React.PureComponent {
                                     <div className='row mobileAllMenuItems'>
                                         <NavLink to="/About" className="mobile-navbar-brand" onClick={this.handleClick.bind(this)}>About</NavLink>
                                         <NavLink to='/ContactUsPage' className="mobile-navbar-brand" onClick={this.handleClick.bind(this)}>Contact Us</NavLink>
-                                        { links }
+                                        { hamburgerLinks }
                                     </div>
                                     <div className='col-md-1 col-xs-12 NavbarRight'>
                                         <a className="mobileSocialItems" rel="noopener noreferrer" href="https://www.facebook.com/vreemanconsultingllc/" target="_blank" onClick={this.handleClick.bind(this)}><i className="fa fa-facebook white-text mr-lg-4"></i></a>

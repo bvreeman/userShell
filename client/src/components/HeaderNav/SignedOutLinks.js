@@ -6,8 +6,8 @@ import './HeaderNav.css';
 const SignedOutLinks = (props) => {
     return (
         <div className="col-md-6 col-xs-12 navbarCenter signedOutLinks">
-            <NavLink to='/signin' className="navbar-brand" onClick={props.passedClickHandler} >Sign In</NavLink>
-            <NavLink to='/signup' className="navbar-brand" onClick={props.passedClickHandler} >Sign Up</NavLink>
+            <NavLink to='/signin' className="navbar-brand" >Sign In</NavLink>
+            <NavLink to='/signup' className="navbar-brand" >Sign Up</NavLink>
         </div>
     )
 }

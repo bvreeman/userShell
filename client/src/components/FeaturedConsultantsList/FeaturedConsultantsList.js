@@ -35,7 +35,7 @@ class FeaturedConsultantsList extends React.PureComponent {
     }
     render() { 
         this.shuffleArray(this.state.newArray) 
-        console.log(this.state.newArray.slice(0, 3), 'newArray in render')
+        // console.log(this.state.newArray.slice(0, 3), 'newArray in render')
         this.state.newArray.slice(0, 3)     
     return (
         <div className="featuredConsultantListContainer">

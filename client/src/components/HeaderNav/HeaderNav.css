@@ -44,6 +44,10 @@
     eft; */
 }
 
+.navbarTitle:visited {
+    color: white;
+}
+
 .navbar-brand {
     text-decoration: none;
     color: white;
