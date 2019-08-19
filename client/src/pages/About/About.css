@@ -1,56 +1,20 @@
-.pageContentWidth h1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.aboutUsDiv{
+    height: 100vh;
 }
 
-.about-us-2 {
-    padding: 0px;
-}
-
-.about-image {
-    width: 100%;
-    height: auto;
-    padding: 0px;
-}
-
-.about-paragraph {
-    padding: 0px;
-    font-size: 20px;
-    width: 500px;
+.aboutUsHeader {
+    color: white;
     text-align: center;
+    margin: 20px;
 }
 
-.services-offerings {
-    background: url(https://i.imgur.com/GsSByhj.png);
-    padding: 0px !important
+.aboutParagraph {
+    color: white;
+    text-align: center;
+    font-size: 20px;
 }
 
-span.image-left {
-    display: block;
-    float: left;
-    margin: 5px 15px 0px 0px;
+.missionSpan {
+    font-size: 30px;
+    font-weight: bold;
 }
-
-span.image-right {
-    display: block;
-    float: right;
-    margin: 5px 0px 0px 15px;
-}
-
-.icon-img {
-    width: 40px;
-    height: auto;
-}
-
-.transbox {
-    background-color: #fff;
-    opacity: 0.9;
-    filter: alpha(opacity=60); /* For IE8 and earlier */
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    padding: 15px;
-}
-    
-    
