@@ -11,6 +11,7 @@ import About from './pages/About'
 import ContactUsPage from './pages/ContactUsPage'
 import FindAConsultant from './pages/FindAConsultant'
 import ProfileForm from './pages/ProfileForm';
+import ContactFormSubmit from './components/ContactFormSubmit';
 // import SearchResults from './pages/SearchResults';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
               <Route path='/signin' component={SignIn} />
               <Route path='/signup' component={SignUp} />
               <Route path='/businessProfile/:id' component={ProfileDetails} />
+              <Route path='/ContactFormSubmit' component={ContactFormSubmit} />
               {/* <Route path='/SearchResults' component = {SearchResults} /> */}
             </Switch>
         </div>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 class ContactFormSubmit extends React.PureComponent {
     render () {
         return (
-            <div>
+            <div className="ContactFormSubmittedPage">
                 <div className='ContactFormSubmit'>
                     <div className='row'>
                         <div className='col-md-12 col-xs-12 submittedFormDiv'>
@@ -24,7 +24,7 @@ class ContactFormSubmit extends React.PureComponent {
                         <h3>Return to Find A Consultant</h3>
                         <Link to="/">
                             <button type="button">
-                                Find a Consultant
+                                Return Home
                             </button>
                         </Link>
                     </div>

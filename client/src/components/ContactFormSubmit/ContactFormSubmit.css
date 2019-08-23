@@ -1,3 +1,10 @@
+.ContactFormSubmittedPage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .contactSubmitLogo{
     max-width: 90%;
 }
@@ -8,7 +15,8 @@
     text-align: center;
     width: 75%;
     margin:0 auto;
-    border: 1px solid #333;
+    /* border: 1px solid #333; */
+    box-shadow: 10px 10px 10px rgba(169, 169, 169, 0.5);
     margin-top: 20px;
     padding: 30px;
     color: white;
@@ -16,26 +24,23 @@
 
 .contactSubmitParagraph {
     font-size: 20px;
-    display:block;
+    /* display:block;
     margin:auto;
     position: relative;
     top: 10%;
+    margin-bottom: 20px; */
+    text-align: center;
 }
 
 .contactSubmitHeader {
     font-weight: bold;
     text-align: center; 
-    display:block;
+    padding: 0px;
+    margin: 20px;
+    /* display:block;
     margin:auto;
-    position: relative;
-    top: 10%;
-}
-
-.contactSubmitLogo {
-    position: relative;
-    display:block;
-    margin:auto;
-    top: 10%;
+    position: relative; */
+    /* top: 10%; */
 }
 
 .returnToFindAConsultantCallToAction {
@@ -46,6 +51,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
+    text-align: center;
 }
 
 .returnToFindAConsultant h3 {
@@ -64,4 +71,22 @@
 
 .returnToFindAConsultant button:hover {
     cursor: pointer;
+}
+
+@media only screen and (max-width: 420px) {
+    .contactSubmitHeader h1 {
+        font-size: 30px;
+      } 
+    .contactSubmitParagraph h2 {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .contactSubmitHeader h1 {
+        font-size: 25px;
+      } 
+    .contactSubmitParagraph h2 {
+        font-size: 20px;
+    }
 }

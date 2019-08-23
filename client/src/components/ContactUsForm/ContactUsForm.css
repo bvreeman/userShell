@@ -1,5 +1,5 @@
 .contactForQuote {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 #contact-form {
@@ -30,8 +30,10 @@
     width: 90%;
     /* margin-right: 30px; */
     background-color: #0066cc;
-    border-style: solid;
-    border-color: #333333;
+    /* border-style: solid;
+    border-color: #333333; */
+    /* box-shadow: 5px 10px #888888; */
+    box-shadow: 10px 10px 10px rgba(169, 169, 169, 0.5);
     padding: 20px;
     padding-bottom: 60px;
     border-radius: 20px;
