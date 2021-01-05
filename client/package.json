@@ -7,7 +7,7 @@
     "node": "8.11.1"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "dotenv": "^8.0.0",
     "firebase": "^6.2.4",
     "local-storage": "^2.0.0",
